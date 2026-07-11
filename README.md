@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/readme-hero.png" alt="AI Agent Skills hero banner">
+</p>
+
 # AI Agent Skills
 
 A reusable collection of agent skills for Claude Code and Codex.
@@ -70,9 +74,9 @@ The installer copies every folder under `skills/` into the matching skill
 directories for the selected install mode:
 
 - Claude Code user skills: `~/.claude/skills`
-- Codex user skills: `~/.agents/skills`
+- Codex user skills: `${CODEX_HOME:-~/.codex}/skills`
 - Project-local Claude skills: `.claude/skills`
-- Project-local Codex skills: `.agents/skills`
+- Project-local Codex skills: `.codex/skills`
 
 It also installs the `lead` builder and reviewer agents into the matching
 `.claude/agents` directory.
@@ -135,7 +139,7 @@ After installation, choose the wrapper for your agent:
 SP="$HOME/.claude/skills/session-profiler/scripts/sp"
 
 # Codex install
-SP="$HOME/.agents/skills/session-profiler/scripts/sp"
+SP="${CODEX_HOME:-$HOME/.codex}/skills/session-profiler/scripts/sp"
 ```
 
 Find and inspect sessions:
@@ -182,6 +186,8 @@ skills/
   session-profiler/         transcript parser, analyses, and trace exporter
   validate-market/          market validation audit workflow
   write-blog/               blog writing workflow and voice references
+assets/
+  readme-hero.png           README hero banner
 .claude/agents/             lead-builder and lead-reviewer agent definitions
 install.sh                  macOS/Linux installer
 install.ps1                 Windows installer
