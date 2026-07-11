@@ -1,0 +1,34 @@
+{
+  "//": "Provider registry for techlead-loop model routing. Edit this ONE file when a model generation ships or a CLI flag changes. `.lead/models.json` (repo) or `~/.lead/models.json` (user) can add or override providers without touching the skill.",
+  "providers": {
+    "claude": {
+      "cli": "claude",
+      "kind": "claude",
+      "default_model": "fable",
+      "default_effort": "xhigh",
+      "efforts": ["low", "medium", "high", "xhigh", "max"],
+      "models": {
+        "fable": "claude-fable-5",
+        "opus": "claude-opus-4-8",
+        "sonnet": "claude-sonnet-5",
+        "haiku": "claude-haiku-4-5"
+      },
+      "tier_down": {
+        "fable": "sonnet",
+        "opus": "sonnet",
+        "sonnet": "haiku"
+      }
+    },
+    "codex": {
+      "cli": "codex",
+      "kind": "codex",
+      "default_model": "best",
+      "default_effort": "xhigh",
+      "efforts": ["low", "medium", "high", "xhigh"],
+      "models": {
+        "best": "gpt-5.5"
+      },
+      "tier_down": {}
+    }
+  }
+}

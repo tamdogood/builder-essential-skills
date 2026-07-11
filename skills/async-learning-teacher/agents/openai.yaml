@@ -1,0 +1,4 @@
+interface:
+  display_name: "Async Learning Teacher"
+  short_description: "Turn saved resources into teaching notes"
+  default_prompt: "Use $async-learning-teacher to turn this link into an approachable teaching artifact for later study."
