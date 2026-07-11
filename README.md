@@ -46,6 +46,68 @@ builder/reviewer subagents that `lead` dispatches (`.claude/agents/`). After
 installing, the skills are available by name (e.g. `/lead`, `/validate-market`)
 in a new session.
 
+### Using `session-profiler`
+
+Ask the installed skill to find and profile a session directly:
+
+```text
+# Claude Code
+/session-profiler Profile my latest Claude Code session and explain where the time and tokens went.
+
+# Codex
+$session-profiler Profile my latest Codex session, including subagents, errors, cost, and a timeline.
+```
+
+For direct CLI access, point `SP` at the installed wrapper. It creates and
+manages its own Python environment on first use.
+
+```bash
+# Installed for Claude Code
+SP="$HOME/.claude/skills/session-profiler/scripts/sp"
+
+# Or installed for Codex
+SP="$HOME/.agents/skills/session-profiler/scripts/sp"
+```
+
+Discover and parse a Claude Code or Codex transcript:
+
+```bash
+$SP list --provider claude --n 20
+$SP list --provider codex --n 20
+$SP find <session-id-prefix>
+$SP info <session-id-or-jsonl-path>
+$SP parse <session-id-or-jsonl-path>
+```
+
+`parse` prints and remembers a work directory containing `events.parquet`,
+`events.csv`, and `agents.json`. Subsequent commands use that directory unless
+`--data-dir <dir>` or `SESSION_DATA_DIR` overrides it.
+
+```bash
+$SP agent-summary                 # time, tokens, and estimated cost per agent
+$SP costs                         # provider/model token and cost table
+$SP slowest-tools --n 20
+$SP tool-breakdown
+$SP errors
+$SP turns
+$SP events --agent main --grep rebase --n 30
+$SP timeline 2026-07-08T19:14:00Z --window 120
+```
+
+Generate orientation and improvement artifacts, then create a Perfetto trace:
+
+```bash
+$SP toc --dry-run                 # inspect the sanitized digest first
+$SP toc                           # uses Claude for Claude data, Codex for Codex data
+$SP review                        # writes reusable observations to review.md
+$SP trace                         # writes trace.json.gz
+$SP open                          # opens https://ui.perfetto.dev
+```
+
+Token costs are estimates from public API reference rates, not billing data.
+Transcripts and traces can contain prompts, code, paths, or sensitive text;
+review generated artifacts before sharing them.
+
 ### `lead` / `lead-research` model routing
 
 These two skills route roles (lead, builder, reviewer, researcher, scout,
