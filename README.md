@@ -1,145 +1,239 @@
-# skills
+# AI Agent Skills
 
-A central hub for the AI agent **skills** I use across projects. One repo, one
-install, and every skill is available in Claude Code (`~/.claude/skills`) and
-Codex (`~/.agents/skills`).
+A reusable collection of agent skills for Claude Code and Codex.
 
-This repo merges three former standalone repos into one place:
+This repository is designed to be copied, forked, and adapted. It gives you one
+place to keep reusable workflows, install them into your local agent tools, and
+share them with teammates or the community.
 
-- [`async_ai_learning`](https://github.com/tamdogood/async_ai_learning) → `async-learning-teacher`
-- [`techlead-loop`](https://github.com/tamdogood/techlead-loop) → `lead`, `lead-research`
-- [`parler-protocol`](https://github.com/tamdogood/parler-protocol) → `validate-market`, `write-blog`, `code-standards` (genericized so they work on any project)
+## What Is Included
 
-## Skills
-
-| Skill | What it does |
+| Skill | Use it when you want to... |
 | --- | --- |
-| **`lead`** | Autonomous build factory. Turn a goal into a spec-approved GitHub issue plan, freeze acceptance checks, dispatch parallel builder jobs, review against frozen checks, and close a run with one PR. The lead model judges; cheaper submodels type. |
-| **`lead-research`** | Discovery-scale research harness. A cheap scout maps the topic, the lead designs parallel researcher assignments from a source-class tactics library, verifies claims against sources, and writes a decision-oriented report. |
-| **`async-learning-teacher`** | Turn saved links, papers, articles, posts, and videos into approachable teaching artifacts for later study, or run an interactive tutor that validates understanding across sessions. |
-| **`validate-market`** | Honest market-fit and viability audit of any project or idea. Produces a decision doc (not code) with pre-committed pass/middle/kill criteria, a competitive field, an independent cold read, and a concrete week-1 assignment. |
-| **`write-blog`** | Write and ship a blog post that reads like a human wrote it and earns SEO traffic. Enforces a human voice (no em dashes), picks a non-cannibalizing angle, wires the post into your site, and runs a humanizer pass before shipping. |
-| **`code-standards`** | A disciplined, language-agnostic engineering-change workflow: orient → baseline → smallest change → test → verify → self-review, with hard gates for interfaces, dependencies, auth, and secrets. |
-| **`session-profiler`** | Profile Claude Code and Codex JSONL sessions: inspect subagents, query events, break down time/tokens/estimated cost, generate a hierarchical TOC and improvement review, and export a Perfetto trace. |
+| `lead` | Run an autonomous build loop: turn a goal into a reviewed plan, dispatch builder jobs, verify frozen acceptance checks, and finish with one pull request. |
+| `lead-research` | Run parallel, source-grounded research for technology choices, product decisions, market scans, or state-of-the-art reviews. |
+| `async-learning-teacher` | Turn papers, articles, links, videos, and saved references into clear teaching artifacts or interactive tutoring sessions. |
+| `validate-market` | Audit whether an idea or project has real market pull, competitive space, and a concrete next validation step. |
+| `write-blog` | Draft, improve, and wire in blog posts with a consistent voice, SEO angle, and publishing checklist. |
+| `code-standards` | Apply a disciplined engineering workflow before and during code changes: orient, baseline, implement, test, verify, and self-review. |
+| `session-profiler` | Inspect Claude Code or Codex JSONL sessions, including subagents, timing, errors, token usage, estimated cost, and Perfetto traces. |
 
-The three skills from `parler-protocol` were **genericized**: all project-,
-stack-, and brand-specific references were removed so they run on any repo.
+Each skill lives in `skills/<name>/SKILL.md`. Some skills also include scripts,
+reference material, or agent definitions used by the workflow.
 
-## Install
+## Requirements
 
-Install into Claude Code and Codex at the user level:
+- macOS, Linux, or Windows with PowerShell
+- Claude Code and/or Codex, depending on where you want to use the skills
+- Python 3 for the `lead` model-routing helper and the `session-profiler` tools
+- Optional: Codex CLI for `lead` builder jobs that use Codex as a backend
+
+Install Codex CLI if you want that optional builder backend:
 
 ```bash
-./install.sh          # ~/.claude/skills, ~/.agents/skills, ~/.claude/agents
-./install.sh -p       # install into the current repo only (.claude/, .agents/)
+npm i -g @openai/codex@latest
 ```
 
-On Windows:
+## Installation
+
+Clone or copy this repository, then run the installer from the repository root.
+
+### macOS and Linux
+
+Install for the current user:
+
+```bash
+./install.sh
+```
+
+Install only into the current project:
+
+```bash
+./install.sh --project
+```
+
+### Windows
+
+Install for the current user:
 
 ```powershell
-./install.ps1         # user level
+./install.ps1
+```
+
+Install only into the current project:
+
+```powershell
 ./install.ps1 -Project
 ```
 
-The installer copies every folder under `skills/` into place and installs the
-builder/reviewer subagents that `lead` dispatches (`.claude/agents/`). After
-installing, the skills are available by name (e.g. `/lead`, `/validate-market`)
-in a new session.
+The installer copies every folder under `skills/` into the matching skill
+directories for the selected install mode:
 
-### Using `session-profiler`
+- Claude Code user skills: `~/.claude/skills`
+- Codex user skills: `~/.agents/skills`
+- Project-local Claude skills: `.claude/skills`
+- Project-local Codex skills: `.agents/skills`
 
-Ask the installed skill to find and profile a session directly:
+It also installs the `lead` builder and reviewer agents into the matching
+`.claude/agents` directory.
+
+Restart your agent session after installing so the new skills are discovered.
+
+## Usage
+
+Invoke a skill by name from your agent session.
+
+Claude Code examples:
 
 ```text
-# Claude Code
-/session-profiler Profile my latest Claude Code session and explain where the time and tokens went.
-
-# Codex
-$session-profiler Profile my latest Codex session, including subagents, errors, cost, and a timeline.
+/lead Build the smallest version of this feature and open a PR.
+/validate-market Audit this project idea before I spend another week on it.
+/session-profiler Profile my latest Claude Code session and explain where the time went.
 ```
 
-For direct CLI access, point `SP` at the installed wrapper. It creates and
-manages its own Python environment on first use.
+Codex examples:
+
+```text
+$async-learning-teacher Teach me this paper step by step: https://arxiv.org/abs/...
+$code-standards Apply the project workflow while fixing this bug.
+$session-profiler Profile my latest Codex session, including subagents and cost.
+```
+
+You can also copy one skill folder by itself into your own skills directory if
+you do not want the full collection.
+
+## Model Routing For `lead`
+
+The `lead` and `lead-research` skills can route roles such as lead, builder,
+reviewer, researcher, scout, and critic to different models.
+
+Inspect the effective routing:
 
 ```bash
-# Installed for Claude Code
+python skills/lead/config.py
+python skills/lead/config.py --role builder
+python skills/lead/config.py --check
+```
+
+Defaults live in:
+
+- `skills/lead/config.py`
+- `skills/lead/models.json`
+
+Override routing per repository with `.lead/config` or globally with
+`~/.lead/config`.
+
+## Session Profiler CLI
+
+The `session-profiler` skill includes a command-line wrapper that creates and
+manages its own Python environment on first use.
+
+After installation, choose the wrapper for your agent:
+
+```bash
+# Claude Code install
 SP="$HOME/.claude/skills/session-profiler/scripts/sp"
 
-# Or installed for Codex
+# Codex install
 SP="$HOME/.agents/skills/session-profiler/scripts/sp"
 ```
 
-Discover and parse a Claude Code or Codex transcript:
+Find and inspect sessions:
 
 ```bash
 $SP list --provider claude --n 20
 $SP list --provider codex --n 20
 $SP find <session-id-prefix>
 $SP info <session-id-or-jsonl-path>
-$SP parse <session-id-or-jsonl-path>
 ```
 
-`parse` prints and remembers a work directory containing `events.parquet`,
-`events.csv`, and `agents.json`. Subsequent commands use that directory unless
-`--data-dir <dir>` or `SESSION_DATA_DIR` overrides it.
+Parse a session and run common analyses:
 
 ```bash
-$SP agent-summary                 # time, tokens, and estimated cost per agent
-$SP costs                         # provider/model token and cost table
+$SP parse <session-id-or-jsonl-path>
+$SP agent-summary
+$SP costs
 $SP slowest-tools --n 20
-$SP tool-breakdown
 $SP errors
 $SP turns
-$SP events --agent main --grep rebase --n 30
-$SP timeline 2026-07-08T19:14:00Z --window 120
 ```
 
-Generate orientation and improvement artifacts, then create a Perfetto trace:
+Generate richer artifacts:
 
 ```bash
-$SP toc --dry-run                 # inspect the sanitized digest first
-$SP toc                           # uses Claude for Claude data, Codex for Codex data
-$SP review                        # writes reusable observations to review.md
-$SP trace                         # writes trace.json.gz
-$SP open                          # opens https://ui.perfetto.dev
+$SP toc
+$SP review
+$SP trace
+$SP open
 ```
 
-Token costs are estimates from public API reference rates, not billing data.
-Transcripts and traces can contain prompts, code, paths, or sensitive text;
-review generated artifacts before sharing them.
+Cost reports are estimates based on public model pricing, not billing records.
+Session files and traces can contain prompts, code, file paths, and sensitive
+project context. Review artifacts before sharing them.
 
-### `lead` / `lead-research` model routing
+## Repository Layout
 
-These two skills route roles (lead, builder, reviewer, researcher, scout,
-critic) to different models. Resolve the effective routing with:
-
-```bash
-python skills/lead/config.py            # table of the effective routing
-python skills/lead/config.py --role builder
-python skills/lead/config.py --check    # verify each provider CLI is on PATH
-```
-
-Defaults live in `skills/lead/config.py` and `skills/lead/models.json`; override
-per repo via `.lead/config` or globally via `~/.lead/config`. Codex is an
-optional builder backend: `npm i -g @openai/codex@latest`.
-
-## Layout
-
-```
+```text
 skills/
-  async-learning-teacher/   # SKILL.md + README + agents/openai.yaml
-  lead/                      # SKILL.md + dispatch/loop/research refs + config.py + status/watchdog scripts
-  lead-research/             # SKILL.md + tactics.md
-  validate-market/           # SKILL.md
-  write-blog/                # SKILL.md + check.sh + reference/
-  code-standards/            # SKILL.md
-  session-profiler/          # SKILL.md + parser, analyses, TOC, trace exporter
-.claude/agents/              # lead-builder.md, lead-reviewer.md (dispatched by /lead)
-install.sh / install.ps1
+  async-learning-teacher/   SKILL.md, README, and optional agent config
+  code-standards/           disciplined engineering-change workflow
+  lead/                     autonomous build-loop skill, routing, and scripts
+  lead-research/            research harness and source tactics
+  session-profiler/         transcript parser, analyses, and trace exporter
+  validate-market/          market validation audit workflow
+  write-blog/               blog writing workflow and voice references
+.claude/agents/             lead-builder and lead-reviewer agent definitions
+install.sh                  macOS/Linux installer
+install.ps1                 Windows installer
 ```
 
-## Adding a skill
+## Creating Your Own Skill
 
-Drop a new `skills/<name>/SKILL.md` (with `name` and `description` frontmatter),
-re-run the installer, and it's live. Keep skills project-agnostic so the hub
-stays reusable across repos.
+Add a new directory under `skills/`:
+
+```text
+skills/my-skill/
+  SKILL.md
+```
+
+Use frontmatter at the top of `SKILL.md`:
+
+```markdown
+---
+name: my-skill
+description: Explain when an agent should use this skill.
+---
+
+# My Skill
+
+Write the workflow, rules, examples, and expected output here.
+```
+
+Then reinstall:
+
+```bash
+./install.sh
+```
+
+Keep skills portable when possible:
+
+- Avoid hard-coding a company, repository, branch, or tool unless the skill is
+  intentionally private.
+- Put reusable scripts beside the skill instead of relying on global shell state.
+- Include examples that show the exact type of request the skill should handle.
+- Keep sensitive credentials, tokens, and private data out of the skill folder.
+
+## Adapting This Repository
+
+If you are using this as a template:
+
+1. Delete any skills you do not need.
+2. Rename or rewrite skill descriptions so they match your own workflows.
+3. Run the installer with `--project` while testing.
+4. Move to user-level installation once the skills are stable.
+5. Share only the skills that are generic enough for others to reuse safely.
+
+## License
+
+Add the license that matches how you want others to use this collection before
+publishing it broadly.
