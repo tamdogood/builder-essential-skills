@@ -1,18 +1,19 @@
 param([switch]$Project)
 
 # Central skills hub installer. The same skills land in Claude Code
-# (~\.claude\skills) and in Codex (~\.agents\skills); the agents /lead dispatches
+# (~\.claude\skills) and in Codex (${CODEX_HOME:-~\.codex}\skills); the agents /lead dispatches
 # land in ~\.claude\agents. Use -Project to install into the current repo only.
 
 $srcRoot   = Join-Path $PSScriptRoot "skills"
 $agentsSrc = Join-Path $PSScriptRoot ".claude\agents"
 if ($Project) {
     $claudeDest = Join-Path (Get-Location) ".claude\skills"
-    $codexDest  = Join-Path (Get-Location) ".agents\skills"
+    $codexDest  = Join-Path (Get-Location) ".codex\skills"
     $agentsDest = Join-Path (Get-Location) ".claude\agents"
 } else {
     $claudeDest = Join-Path $env:USERPROFILE ".claude\skills"
-    $codexDest  = Join-Path $env:USERPROFILE ".agents\skills"
+    $codexHome = if ($env:CODEX_HOME) { $env:CODEX_HOME } else { Join-Path $env:USERPROFILE ".codex" }
+    $codexDest  = Join-Path $codexHome "skills"
     $agentsDest = Join-Path $env:USERPROFILE ".claude\agents"
 }
 
@@ -27,7 +28,7 @@ function Install-Into($destRoot, $label) {
     }
 }
 
-# Claude Code reads skills from ~\.claude\skills; Codex from ~\.agents\skills.
+# Claude Code reads skills from ~\.claude\skills; Codex from ${CODEX_HOME:-~\.codex}\skills.
 Install-Into $claudeDest "Claude"
 Install-Into $codexDest  "Codex"
 
