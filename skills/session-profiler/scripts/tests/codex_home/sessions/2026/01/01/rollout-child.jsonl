@@ -1,0 +1,7 @@
+{"timestamp":"2026-01-01T00:00:01.200Z","type":"session_meta","payload":{"id":"00000000-0000-4000-8000-000000000002","cwd":"/tmp/project","source":{"subagent":{"thread_spawn":{"parent_thread_id":"00000000-0000-4000-8000-000000000001","depth":1,"agent_nickname":"Curie","agent_role":"explorer"}}},"model_provider":"openai"}}
+{"timestamp":"2026-01-01T00:00:01.300Z","type":"event_msg","payload":{"type":"task_started","turn_id":"turn-child"}}
+{"timestamp":"2026-01-01T00:00:01.400Z","type":"turn_context","payload":{"turn_id":"turn-child","model":"gpt-5.6-luna","cwd":"/tmp/project"}}
+{"timestamp":"2026-01-01T00:00:01.500Z","type":"event_msg","payload":{"type":"user_message","message":"Inspect the failure"}}
+{"timestamp":"2026-01-01T00:00:02Z","type":"response_item","payload":{"type":"message","role":"assistant","content":[{"type":"output_text","text":"Found it"}],"internal_chat_message_metadata_passthrough":{"turn_id":"turn-child"}}}
+{"timestamp":"2026-01-01T00:00:02.100Z","type":"event_msg","payload":{"type":"token_count","info":{"last_token_usage":{"input_tokens":50,"cached_input_tokens":10,"output_tokens":5,"total_tokens":55}}}}
+{"timestamp":"2026-01-01T00:00:02.200Z","type":"event_msg","payload":{"type":"task_complete","turn_id":"turn-child","duration_ms":900}}

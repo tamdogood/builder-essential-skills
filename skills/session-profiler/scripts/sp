@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+HERE="$(cd "$(dirname "$0")" && pwd)"
+VENV="${SESSION_PROFILER_VENV:-$HOME/.cache/session-profiler-venv}"
+PY="$VENV/bin/python"
+
+if [ ! -x "$PY" ]; then
+  mkdir -p "$(dirname "$VENV")"
+  if command -v uv >/dev/null 2>&1; then
+    uv venv "$VENV"
+    uv pip install --python "$PY" -r "$HERE/requirements.txt"
+  else
+    python3 -m venv "$VENV"
+    "$PY" -m pip install -r "$HERE/requirements.txt"
+  fi
+fi
+
+export PYTHONPATH="$HERE${PYTHONPATH:+:$PYTHONPATH}"
+exec "$PY" -m session_profiler.cli "$@"

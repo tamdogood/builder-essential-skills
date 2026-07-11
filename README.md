@@ -20,6 +20,7 @@ This repo merges three former standalone repos into one place:
 | **`validate-market`** | Honest market-fit and viability audit of any project or idea. Produces a decision doc (not code) with pre-committed pass/middle/kill criteria, a competitive field, an independent cold read, and a concrete week-1 assignment. |
 | **`write-blog`** | Write and ship a blog post that reads like a human wrote it and earns SEO traffic. Enforces a human voice (no em dashes), picks a non-cannibalizing angle, wires the post into your site, and runs a humanizer pass before shipping. |
 | **`code-standards`** | A disciplined, language-agnostic engineering-change workflow: orient → baseline → smallest change → test → verify → self-review, with hard gates for interfaces, dependencies, auth, and secrets. |
+| **`session-profiler`** | Profile Claude Code and Codex JSONL sessions: inspect subagents, query events, break down time/tokens/estimated cost, generate a hierarchical TOC and improvement review, and export a Perfetto trace. |
 
 The three skills from `parler-protocol` were **genericized**: all project-,
 stack-, and brand-specific references were removed so they run on any repo.
@@ -70,6 +71,7 @@ skills/
   validate-market/           # SKILL.md
   write-blog/                # SKILL.md + check.sh + reference/
   code-standards/            # SKILL.md
+  session-profiler/          # SKILL.md + parser, analyses, TOC, trace exporter
 .claude/agents/              # lead-builder.md, lead-reviewer.md (dispatched by /lead)
 install.sh / install.ps1
 ```
