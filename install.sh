@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # Central skills hub installer. The same skills land in Claude Code
-# (~/.claude/skills) and in Codex (~/.agents/skills), and the agents the /lead
+# (~/.claude/skills) and in Codex (${CODEX_HOME:-~/.codex}/skills), and the agents the /lead
 # skill dispatches land in ~/.claude/agents. Pass --project (or -p) to install
 # into the current repo only.
 
@@ -14,11 +14,11 @@ case "${1:-}" in --project|-p) project=1;; esac
 
 if [ "$project" -eq 1 ]; then
     CLAUDE_DEST="$(pwd)/.claude/skills"
-    CODEX_DEST="$(pwd)/.agents/skills"
+    CODEX_DEST="$(pwd)/.codex/skills"
     AGENTS_DEST="$(pwd)/.claude/agents"
 else
     CLAUDE_DEST="$HOME/.claude/skills"
-    CODEX_DEST="$HOME/.agents/skills"
+    CODEX_DEST="${CODEX_HOME:-$HOME/.codex}/skills"
     AGENTS_DEST="$HOME/.claude/agents"
 fi
 
@@ -36,7 +36,7 @@ install_into() {
 
 # Claude Code reads skills from ~/.claude/skills (user) or $CWD/.claude/skills (repo).
 install_into "$CLAUDE_DEST" "Claude"
-# Codex reads skills from ~/.agents/skills (user) or $CWD/.agents/skills (repo).
+# Codex reads user skills from ${CODEX_HOME:-~/.codex}/skills.
 install_into "$CODEX_DEST" "Codex"
 
 # The /lead skill dispatches builder/reviewer subagents defined in .claude/agents.
