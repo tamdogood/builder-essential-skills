@@ -10,10 +10,50 @@
 </p>
 
 <p align="center">
-  <a href="#get-started">Get started</a> ·
   <a href="#pick-a-skill">Pick a skill</a> ·
+  <a href="#get-started">Get started</a> ·
   <a href="#bring-your-own-workflow">Create a skill</a>
 </p>
+
+## Pick a skill
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <a href="skills/lead/SKILL.md"><img src="assets/skill-cards/lead.svg" alt="lead — build and delivery skill" width="100%"></a>
+    </td>
+    <td width="50%" valign="top">
+      <a href="skills/lead-research/SKILL.md"><img src="assets/skill-cards/lead-research.svg" alt="lead-research — research and strategy skill" width="100%"></a>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <a href="skills/async-learning-teacher/SKILL.md"><img src="assets/skill-cards/async-learning-teacher.svg" alt="async-learning-teacher — learning skill" width="100%"></a>
+    </td>
+    <td width="50%" valign="top">
+      <a href="skills/validate-market/SKILL.md"><img src="assets/skill-cards/validate-market.svg" alt="validate-market — product and market skill" width="100%"></a>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <a href="skills/write-blog/SKILL.md"><img src="assets/skill-cards/write-blog.svg" alt="write-blog — writing and growth skill" width="100%"></a>
+    </td>
+    <td width="50%" valign="top">
+      <a href="skills/orwell-writing/SKILL.md"><img src="assets/skill-cards/orwell-writing.svg" alt="orwell-writing — direct writing skill" width="100%"></a>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <a href="skills/code-standards/SKILL.md"><img src="assets/skill-cards/code-standards.svg" alt="code-standards — engineering quality skill" width="100%"></a>
+    </td>
+    <td width="50%" valign="top">
+      <a href="skills/session-profiler/SKILL.md"><img src="assets/skill-cards/session-profiler.svg" alt="session-profiler — developer tools skill" width="100%"></a>
+    </td>
+  </tr>
+</table>
+
+Every skill lives in `skills/<name>/SKILL.md`. Some also ship scripts,
+reference material, or agent definitions that support the workflow.
 
 ## Why this exists
 
@@ -58,46 +98,6 @@ instead:
 
 The project install uses `.claude/skills` and `.codex/skills`, so it stays
 with that repository rather than changing your user-level setup.
-
-## Pick a skill
-
-<table>
-  <tr>
-    <td width="50%" valign="top">
-      <a href="skills/lead/SKILL.md"><img src="assets/skill-cards/lead.svg" alt="lead — build and delivery skill" width="100%"></a>
-    </td>
-    <td width="50%" valign="top">
-      <a href="skills/lead-research/SKILL.md"><img src="assets/skill-cards/lead-research.svg" alt="lead-research — research and strategy skill" width="100%"></a>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <a href="skills/async-learning-teacher/SKILL.md"><img src="assets/skill-cards/async-learning-teacher.svg" alt="async-learning-teacher — learning skill" width="100%"></a>
-    </td>
-    <td width="50%" valign="top">
-      <a href="skills/validate-market/SKILL.md"><img src="assets/skill-cards/validate-market.svg" alt="validate-market — product and market skill" width="100%"></a>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <a href="skills/write-blog/SKILL.md"><img src="assets/skill-cards/write-blog.svg" alt="write-blog — writing and growth skill" width="100%"></a>
-    </td>
-    <td width="50%" valign="top">
-      <a href="skills/orwell-writing/SKILL.md"><img src="assets/skill-cards/orwell-writing.svg" alt="orwell-writing — direct writing skill" width="100%"></a>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <a href="skills/code-standards/SKILL.md"><img src="assets/skill-cards/code-standards.svg" alt="code-standards — engineering quality skill" width="100%"></a>
-    </td>
-    <td width="50%" valign="top">
-      <a href="skills/session-profiler/SKILL.md"><img src="assets/skill-cards/session-profiler.svg" alt="session-profiler — developer tools skill" width="100%"></a>
-    </td>
-  </tr>
-</table>
-
-Every skill lives in `skills/<name>/SKILL.md`. Some also ship scripts,
-reference material, or agent definitions that support the workflow.
 
 ## What gets installed
 
@@ -217,6 +217,8 @@ Keep skills easy to move between projects:
 - Avoid hard-coding a company, repository, branch, or tool unless the skill is intentionally private.
 - Put reusable scripts beside the skill instead of relying on global shell state.
 - Include request examples that show exactly when the skill should run.
+- Create `assets/skill-cards/<name>.svg` for each new skill and add it to the
+  README's "Pick a skill" table.
 - Never put credentials, tokens, or private data in a skill folder.
 
 Re-run the installer after adding or changing a skill:
