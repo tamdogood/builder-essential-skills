@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/readme-hero.png" alt="An abstract field of colorful signal ribbons representing reusable AI agent skills" width="100%">
+  <img src="assets/readme-hero.png" alt="Tam's essential AI skills, framed by colorful abstract signal ribbons" width="100%">
 </p>
 
 <h1 align="center">AI Agent Skills</h1>
