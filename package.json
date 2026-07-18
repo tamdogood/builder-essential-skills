@@ -1,0 +1,24 @@
+{
+  "name": "@tamng0905/ai-agent-skills",
+  "version": "0.1.0",
+  "description": "Reusable workflows for Claude Code and Codex",
+  "type": "commonjs",
+  "scripts": {
+    "test": "node --test"
+  },
+  "bin": {
+    "ai-agent-skills": "bin/ai-agent-skills.js"
+  },
+  "files": [
+    "bin",
+    "skills",
+    "assets",
+    ".claude/agents",
+    "install.ps1",
+    "install.sh",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  }
+}

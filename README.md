@@ -72,6 +72,31 @@ From the repository root, install every skill for the current user:
 ./install.sh
 ```
 
+Once this repository is published to npm, install the collection from
+anywhere with:
+
+```bash
+npx @tamng0905/ai-agent-skills
+```
+
+To install into the repository you are currently in:
+
+```bash
+npx @tamng0905/ai-agent-skills --project
+```
+
+To install only one skill:
+
+```bash
+npx @tamng0905/ai-agent-skills --skill lead
+```
+
+Add `--project` to that command to install the selected skill into the current
+repository.
+
+The `npx` command installs the same files as the scripts below. It supports
+macOS, Linux, and Windows wherever Node.js 18 or newer is available.
+
 On Windows:
 
 ```powershell
@@ -188,7 +213,28 @@ assets/readme-hero.png    README banner
 .claude/agents/          Builder and reviewer agents for lead
 install.sh                macOS/Linux installer
 install.ps1               Windows installer
+package.json              npm package metadata and npx entrypoint
+bin/ai-agent-skills.js    cross-platform npx installer
 ```
+
+### Publish the installer
+
+Choose an available npm package name in `package.json`, authenticate with npm,
+then publish from the repository root:
+
+```bash
+npm login
+npm publish --access public
+```
+
+npm requires either 2FA enabled on the account, followed by the one-time code
+requested by `npm publish`, or a granular access token with read/write access
+and **Bypass two-factor authentication** enabled. For a local interactive
+publish, enabling 2FA and running `npm login` again is the simplest option.
+Never commit an access token; use npm's login flow or a secure CI secret.
+
+After publishing, users can run `npx @tamng0905/ai-agent-skills` without cloning the
+repository. Bump the version in `package.json` for each subsequent publish.
 
 ## Bring your own workflow
 
