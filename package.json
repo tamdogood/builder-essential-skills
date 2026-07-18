@@ -2,6 +2,7 @@
   "name": "@tamng0905/builder-essential-skills",
   "version": "0.1.0",
   "description": "Builder's Essential Skills — reusable workflows for Claude Code and Codex",
+  "license": "MIT",
   "type": "commonjs",
   "scripts": {
     "test": "node --test"
@@ -16,6 +17,7 @@
     ".claude/agents",
     "install.ps1",
     "install.sh",
+    "LICENSE",
     "README.md"
   ],
   "engines": {

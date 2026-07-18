@@ -275,5 +275,4 @@ Re-run the installer after adding or changing a skill:
 
 ## License
 
-Add the license that matches how you want others to use this collection before
-publishing it broadly.
+MIT. See [LICENSE](LICENSE).
