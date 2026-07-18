@@ -1,9 +1,9 @@
 <p align="center">
-  <img src="assets/readme-hero.png" alt="Tam's essential AI skills, framed by colorful abstract signal ribbons" width="100%">
+  <img src="assets/readme-hero.png" alt="Builder's Essential Skills, shown as an original dark atelier of connected creative tools" width="100%">
 </p>
 <p align="center">
-  <strong>Reusable workflows that help Claude Code and Codex do sharper work.</strong><br>
-  Plan, build, research, learn, validate, write, and review without starting from zero each time.
+  <strong>Builder's Essential Skills</strong><br>
+  A considered collection of reusable workflows for planning, building, researching, learning, validating, writing, and reviewing with Claude Code and Codex.
 </p>
 
 <p align="center">
@@ -73,19 +73,19 @@ Once this repository is published to npm, install the collection from
 anywhere with:
 
 ```bash
-npx @tamng0905/ai-agent-skills
+npx @tamng0905/builders-essential-skills
 ```
 
 To install into the repository you are currently in:
 
 ```bash
-npx @tamng0905/ai-agent-skills --project
+npx @tamng0905/builders-essential-skills --project
 ```
 
 To install only one skill:
 
 ```bash
-npx @tamng0905/ai-agent-skills --skill lead
+npx @tamng0905/builders-essential-skills --skill lead
 ```
 
 Add `--project` to that command to install the selected skill into the current
@@ -211,7 +211,7 @@ assets/readme-hero.png    README banner
 install.sh                macOS/Linux installer
 install.ps1               Windows installer
 package.json              npm package metadata and npx entrypoint
-bin/ai-agent-skills.js    cross-platform npx installer
+bin/builders-essential-skills.js    cross-platform npx installer
 ```
 
 ### Publish the installer
@@ -230,7 +230,7 @@ and **Bypass two-factor authentication** enabled. For a local interactive
 publish, enabling 2FA and running `npm login` again is the simplest option.
 Never commit an access token; use npm's login flow or a secure CI secret.
 
-After publishing, users can run `npx @tamng0905/ai-agent-skills` without cloning the
+After publishing, users can run `npx @tamng0905/builders-essential-skills` without cloning the
 repository. Bump the version in `package.json` for each subsequent publish.
 
 ## Bring your own workflow

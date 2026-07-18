@@ -12,13 +12,13 @@ against sources, and produce a decision-oriented report.
 Install this skill for your user account:
 
 ```bash
-npx @tamng0905/ai-agent-skills --skill lead-research
+npx @tamng0905/builders-essential-skills --skill lead-research
 ```
 
 Install it into the current repository instead:
 
 ```bash
-npx @tamng0905/ai-agent-skills --skill lead-research --project
+npx @tamng0905/builders-essential-skills --skill lead-research --project
 ```
 
 Restart Claude Code or Codex, then ask it to research a topic, compare

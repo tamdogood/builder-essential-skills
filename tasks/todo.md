@@ -56,6 +56,12 @@ convention for the parler skills).
 - Background/subagent runtime = its own transcript first→last ts.
 - Cost = ESTIMATE via per-model public price table; always labeled as estimate.
 
+## Rebrand: Builder's Essential Skills
+
+- [x] Establish the new dark workshop visual language across the README hero and all eight skill cards.
+- [x] Rename public-facing collection and `npx` package references, including installer help and tests.
+- [x] Run the installer tests and inspect the resulting visual assets and diff.
+
 ## Genericization (vs internal doc)
 - venv: `uv venv` + `uv pip install` (fallback python3 -m venv); no Vault/fbpkg/proxy.
 - share: `sp trace` writes trace.json.gz; open at public https://ui.perfetto.dev

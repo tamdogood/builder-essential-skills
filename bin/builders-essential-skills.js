@@ -11,7 +11,7 @@ const skillsSource = path.join(packageRoot, "skills");
 const agentsSource = path.join(packageRoot, ".claude", "agents");
 
 function printHelp() {
-  console.log(`Install the AI Agent Skills collection.
+  console.log(`Install Builder's Essential Skills.
 
 Usage:
   ${npxCommand} [--skill <name>] [--project]

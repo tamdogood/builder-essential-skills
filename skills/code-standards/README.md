@@ -12,13 +12,13 @@ make the smallest change, test, verify, and self-review.
 Install this skill for your user account:
 
 ```bash
-npx @tamng0905/ai-agent-skills --skill code-standards
+npx @tamng0905/builders-essential-skills --skill code-standards
 ```
 
 Install it into the current repository instead:
 
 ```bash
-npx @tamng0905/ai-agent-skills --skill code-standards --project
+npx @tamng0905/builders-essential-skills --skill code-standards --project
 ```
 
 Restart Claude Code or Codex, then ask it to implement, fix, or refactor code
