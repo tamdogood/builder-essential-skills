@@ -1,0 +1,4 @@
+interface:
+  display_name: "Orwell Writing"
+  short_description: "Plain English rules for clear writing"
+  default_prompt: "Use $orwell-writing to revise this draft into clear, direct English."
