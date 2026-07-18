@@ -5,7 +5,7 @@ const path = require("node:path");
 const { execFileSync, spawnSync } = require("node:child_process");
 const { test } = require("node:test");
 
-const cli = path.resolve(__dirname, "..", "bin", "builders-essential-skills.js");
+const cli = path.resolve(__dirname, "..", "bin", "builder-essential-skills.js");
 
 test("prints help without installing anything", () => {
   const result = spawnSync(process.execPath, [cli, "--help"], {
@@ -15,7 +15,7 @@ test("prints help without installing anything", () => {
   assert.equal(result.status, 0);
   assert.match(
     result.stdout,
-    /npx @tamng0905\/builders-essential-skills \[--skill <name>\] \[--project\]/,
+    /npx @tamng0905\/builder-essential-skills \[--skill <name>\] \[--project\]/,
   );
 });
 

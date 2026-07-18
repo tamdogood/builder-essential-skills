@@ -12,13 +12,13 @@ break down time, tools, tokens, and estimated cost, and export Perfetto traces.
 Install this skill for your user account:
 
 ```bash
-npx @tamng0905/builders-essential-skills --skill session-profiler
+npx @tamng0905/builder-essential-skills --skill session-profiler
 ```
 
 Install it into the current repository instead:
 
 ```bash
-npx @tamng0905/builders-essential-skills --skill session-profiler --project
+npx @tamng0905/builder-essential-skills --skill session-profiler --project
 ```
 
 Restart Claude Code or Codex. Python 3 is required for the profiler's bundled

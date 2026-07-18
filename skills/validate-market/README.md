@@ -12,13 +12,13 @@ the case for the idea, and ends with clear pass, middle, or kill criteria.
 Install this skill for your user account:
 
 ```bash
-npx @tamng0905/builders-essential-skills --skill validate-market
+npx @tamng0905/builder-essential-skills --skill validate-market
 ```
 
 Install it into the current repository instead:
 
 ```bash
-npx @tamng0905/builders-essential-skills --skill validate-market --project
+npx @tamng0905/builder-essential-skills --skill validate-market --project
 ```
 
 Restart Claude Code or Codex, then ask it to audit a product, market, or
