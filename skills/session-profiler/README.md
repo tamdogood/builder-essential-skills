@@ -4,8 +4,8 @@
   <a href="SKILL.md"><img src="../../assets/skill-banners/session-profiler.webp" alt="session-profiler — developer tools skill" width="100%"></a>
 </p>
 
-Inspect Claude Code and Codex session transcripts, summarize agent activity,
-break down time, tools, tokens, and estimated cost, and export Perfetto traces.
+Inspect Hermes session transcripts, summarize agent activity, break down time,
+tools, tokens, and estimated cost, and export Perfetto traces.
 
 ## Install
 
@@ -21,5 +21,5 @@ Install it into the current repository instead:
 npx @tamng0905/builder-essential-skills --skill session-profiler --project
 ```
 
-Restart Claude Code or Codex. Python 3 is required for the profiler's bundled
-tools; see [SKILL.md](SKILL.md) for usage and transcript details.
+Restart Hermes. Python 3 is required for the profiler's bundled tools; see
+[SKILL.md](SKILL.md) for usage and transcript details.

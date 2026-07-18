@@ -1,11 +1,10 @@
 from __future__ import annotations
 
 import json
-import re
-import subprocess
-from pathlib import Path
 
-from .dataset import load, load_agents, work_dir
+import pandas as pd
+
+from .dataset import load, work_dir
 
 
 def digest(data_dir=None) -> str:
@@ -37,7 +36,56 @@ def _markdown(data: dict) -> str:
     return "\n".join(lines)
 
 
-def create(data_dir=None, dry_run=False, model=None, engine="auto") -> str:
+def _item_title(row) -> str:
+    if row.event_type == "user_prompt":
+        return "Prompt: " + (" ".join(str(row.text).split())[:80] or "user prompt")
+    if row.event_type == "tool":
+        prefix = "Failed tool" if bool(row.is_error) else "Tool"
+        return f"{prefix}: {row.tool_name or 'tool'}"
+    if row.event_type == "assistant_text":
+        return "Response: " + (" ".join(str(row.text).split())[:80] or "assistant response")
+    return str(row.event_type).replace("_", " ").title()
+
+
+def _local_toc(data_dir) -> dict:
+    df = load(data_dir)
+    if df.empty:
+        return {"phases": []}
+
+    main_prompts = [
+        {"ts": row.ts, "end_ts": row.end_ts, "text": row.text}
+        for row in df[(df.agent_id == "main") & (df.event_type == "user_prompt")].sort_values("ts").itertuples()
+    ]
+    if not main_prompts:
+        first = df.sort_values("ts").iloc[0]
+        main_prompts = [{"ts": first.ts, "end_ts": first.end_ts, "text": ""}]
+    phases = []
+    session_end = df.end_ts.max()
+
+    for index, prompt in enumerate(main_prompts):
+        start = prompt["ts"]
+        end = main_prompts[index + 1]["ts"] if index + 1 < len(main_prompts) else session_end
+        part = df[(df.ts >= start) & (df.ts <= end) & df.event_type.isin(["assistant_text", "tool"])].sort_values("ts")
+        prompt_text = " ".join(str(prompt["text"]).split())
+        steps = []
+        for row in part.head(20).itertuples():
+            steps.append({
+                "title": _item_title(row),
+                "start_ts": row.ts.isoformat(),
+                "end_ts": row.end_ts.isoformat(),
+                "substeps": [],
+            })
+        phases.append({
+            "title": f"Turn {index + 1}",
+            "summary": prompt_text[:240] if prompt_text else "Session activity",
+            "start_ts": pd.Timestamp(start).isoformat(),
+            "end_ts": pd.Timestamp(end).isoformat(),
+            "steps": steps,
+        })
+    return {"phases": phases}
+
+
+def create(data_dir=None, dry_run=False) -> str:
     out = work_dir(data_dir)
     source = digest(out)
     prompt = """Write a chronological, hierarchical table of contents for this agent coding session.
@@ -50,24 +98,7 @@ SESSION DIGEST
     (out / "toc-prompt.txt").write_text(prompt)
     if dry_run:
         return prompt
-    provider = load_agents(out).get("provider", "claude")
-    selected = provider if engine == "auto" else engine
-    if selected == "codex":
-        result_file = out / "toc-response.txt"
-        command = ["codex", "exec", "--ephemeral", "--sandbox", "read-only", "--skip-git-repo-check", "--color", "never", "-o", str(result_file)]
-        if model:
-            command.extend(["--model", model])
-        command.append(prompt)
-        proc = subprocess.run(command, text=True, capture_output=True)
-        raw = result_file.read_text().strip() if result_file.exists() else proc.stdout.strip()
-    else:
-        command = ["claude", "-p", "--model", model or "sonnet", prompt]
-        proc = subprocess.run(command, text=True, capture_output=True)
-        raw = proc.stdout.strip()
-    if proc.returncode:
-        raise RuntimeError(proc.stderr.strip() or f"{selected} TOC generation failed")
-    raw = re.sub(r"^```(?:json)?\s*|\s*```$", "", raw)
-    data = json.loads(raw)
+    data = _local_toc(out)
     (out / "toc.json").write_text(json.dumps(data, indent=2))
     md = _markdown(data)
     (out / "toc.md").write_text(md)

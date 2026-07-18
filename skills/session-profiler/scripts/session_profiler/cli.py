@@ -7,17 +7,17 @@ from pathlib import Path
 
 from . import analyses
 from .dataset import parse, work_dir
-from .discover import codex_transcripts, find_sessions, is_codex_subagent, main_transcripts, project_dirs, resolve_session, session_info
+from .discover import hermes_transcripts, find_sessions, is_hermes_subagent, main_transcripts, project_dirs, resolve_session, session_info
 from .toc import create as create_toc
 from .trace import create as create_trace, open_ui
 
 
 def parser() -> argparse.ArgumentParser:
-    p = argparse.ArgumentParser(prog="sp", description="Profile Claude Code and Codex JSONL sessions")
+    p = argparse.ArgumentParser(prog="sp", description="Profile Hermes JSONL sessions")
     p.add_argument("--data-dir", help="Parsed work directory (also SESSION_DATA_DIR)")
     sub = p.add_subparsers(dest="command", required=True)
     sub.add_parser("projects")
-    x = sub.add_parser("list"); x.add_argument("--project-dir", type=Path); x.add_argument("--provider", choices=["claude", "codex"]); x.add_argument("--n", type=int, default=20)
+    x = sub.add_parser("list"); x.add_argument("--project-dir", type=Path); x.add_argument("--provider", choices=["hermes", "transcript"]); x.add_argument("--n", type=int, default=20)
     x = sub.add_parser("find"); x.add_argument("prefix")
     x = sub.add_parser("info"); x.add_argument("session")
     x = sub.add_parser("parse"); x.add_argument("session"); x.add_argument("--out", type=Path)
@@ -27,7 +27,7 @@ def parser() -> argparse.ArgumentParser:
     sub.add_parser("inference-vs-tool"); sub.add_parser("errors"); sub.add_parser("turns"); sub.add_parser("brief"); sub.add_parser("review")
     x = sub.add_parser("timeline"); x.add_argument("moment"); x.add_argument("--window", type=int, default=120)
     x = sub.add_parser("events"); x.add_argument("--agent"); x.add_argument("--tool"); x.add_argument("--grep"); x.add_argument("--since"); x.add_argument("--n", type=int, default=30); x.add_argument("--long", action="store_true")
-    x = sub.add_parser("toc"); x.add_argument("--dry-run", action="store_true"); x.add_argument("--engine", choices=["auto", "claude", "codex"], default="auto"); x.add_argument("--model")
+    x = sub.add_parser("toc"); x.add_argument("--dry-run", action="store_true")
     sub.add_parser("trace"); sub.add_parser("open"); sub.add_parser("where")
     return p
 
@@ -41,10 +41,8 @@ def main() -> None:
             paths = main_transcripts(args.project_dir.expanduser())
         else:
             paths = []
-            if args.provider != "codex":
-                for d in project_dirs():
-                    if ".claude/projects" in str(d): paths.extend(main_transcripts(d))
-            if args.provider != "claude": paths.extend(p for p in codex_transcripts() if not is_codex_subagent(p))
+            if args.provider != "transcript":
+                paths.extend(p for p in hermes_transcripts() if not is_hermes_subagent(p))
             paths = sorted(paths, key=lambda path: path.stat().st_mtime, reverse=True)
         shown = 0
         for path in paths:
@@ -67,7 +65,7 @@ def main() -> None:
     elif args.command == "timeline": print(analyses.timeline(args.moment, args.window, data))
     elif args.command == "events": print(analyses.events_query(data, args.agent, args.tool, args.grep, args.since, args.n, args.long))
     elif args.command == "review": print(analyses.review(data))
-    elif args.command == "toc": print(create_toc(data, args.dry_run, args.model, args.engine))
+    elif args.command == "toc": print(create_toc(data, args.dry_run))
     elif args.command == "trace": print(create_trace(data))
     elif args.command == "open": print(open_ui())
     elif args.command == "where": print(work_dir(data))

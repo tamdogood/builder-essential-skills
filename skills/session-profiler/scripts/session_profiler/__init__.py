@@ -1,4 +1,4 @@
-"""Claude Code JSONL session profiler."""
+"""Hermes JSONL session profiler."""
 
 from .dataset import load
 

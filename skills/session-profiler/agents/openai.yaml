@@ -1,4 +1,4 @@
 interface:
   display_name: "Session Profiler"
-  short_description: "Profile Claude and Codex agent sessions"
-  default_prompt: "Use $session-profiler to profile this Claude Code or Codex session, explain where time and tokens went, and identify improvements for the next run."
+  short_description: "Profile Hermes agent sessions"
+  default_prompt: "Use $session-profiler to profile this Hermes session, explain where time and tokens went, and identify improvements for the next run."
