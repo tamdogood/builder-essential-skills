@@ -35,9 +35,10 @@ $SP parse <session-id-or-main-jsonl-path>
 
 The command prints and remembers its work directory. It writes `events.parquet`, `events.csv`, and `agents.json`. Override the remembered directory with global `--data-dir <dir>` or `SESSION_DATA_DIR`.
 
-3. Start with the summary, then narrow the investigation.
+3. Start with a readable profile, then narrow the investigation.
 
 ```bash
+$SP brief
 $SP agent-summary
 $SP costs
 $SP slowest-tools --n 20 [--agent <id-or-name>]
@@ -48,6 +49,11 @@ $SP turns
 $SP timeline 2026-07-08T19:14:00Z --window 120
 $SP events [--agent main] [--tool Bash] [--grep rebase] [--since 2026-07-08] [--n 30] [--long]
 ```
+
+Use `brief` first when explaining a session to a person. It writes `brief.md`
+with the session's headline metrics, standout slow paths or failures, prompt
+trail or TOC storyline, and an agent scoreboard. Use the table commands for
+specific questions after the brief identifies the interesting region.
 
 For ad hoc pandas analysis, set `SESSION_DATA_DIR`, add `scripts/` to `PYTHONPATH`, and use `from session_profiler.dataset import load; df = load()` inside the wrapper's venv.
 
@@ -69,7 +75,12 @@ $SP trace
 $SP open
 ```
 
-Load the emitted `trace.json.gz` in [Perfetto](https://ui.perfetto.dev). The trace contains TOC phases when `toc.json` exists, per-agent inference and tool activity, human prompts, and cumulative token/cost counters.
+Load the emitted `trace.json.gz` in [Perfetto](https://ui.perfetto.dev). Read
+it top-down: `Session overview` gives the whole run, `Table of contents` shows
+the story when `toc.json` exists, each agent's `work timeline` shows inference
+and tools, `prompt trail` marks user turns, and `usage tokens + cost` shows
+cumulative counters. Click a slice to inspect sanitized input/output previews,
+duration, concurrency, failure state, token count, and estimated cost.
 
 ## Interpretation Rules
 
