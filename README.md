@@ -7,10 +7,33 @@
 </p>
 
 <p align="center">
+  <a href="#install">Install</a> ·
   <a href="#pick-a-skill">Pick a skill</a> ·
-  <a href="#get-started">Get started</a> ·
   <a href="#bring-your-own-workflow">Create a skill</a>
 </p>
+
+## Install
+
+Install every skill for your user account:
+
+```bash
+npx @tamng0905/builder-essential-skills
+```
+
+Install into the repository you are currently in:
+
+```bash
+npx @tamng0905/builder-essential-skills --project
+```
+
+Install only one skill:
+
+```bash
+npx @tamng0905/builder-essential-skills --skill lead
+```
+
+Add `--project` to that command to install the selected skill into the current
+repository. Restart Claude Code or Codex after installation.
 
 ## Pick a skill
 
@@ -61,35 +84,15 @@ adapt, and share.
 
 Use the whole collection, or take only the skills your team needs.
 
-## Get started
+## Local install
+
+Use the local scripts only when you are installing from a cloned checkout.
 
 From the repository root, install every skill for the current user:
 
 ```bash
 ./install.sh
 ```
-
-Once this repository is published to npm, install the collection from
-anywhere with:
-
-```bash
-npx @tamng0905/builders-essential-skills
-```
-
-To install into the repository you are currently in:
-
-```bash
-npx @tamng0905/builders-essential-skills --project
-```
-
-To install only one skill:
-
-```bash
-npx @tamng0905/builders-essential-skills --skill lead
-```
-
-Add `--project` to that command to install the selected skill into the current
-repository.
 
 The `npx` command installs the same files as the scripts below. It supports
 macOS, Linux, and Windows wherever Node.js 18 or newer is available.
@@ -211,7 +214,7 @@ assets/readme-hero.png    README banner
 install.sh                macOS/Linux installer
 install.ps1               Windows installer
 package.json              npm package metadata and npx entrypoint
-bin/builders-essential-skills.js    cross-platform npx installer
+bin/builder-essential-skills.js     cross-platform npx installer
 ```
 
 ### Publish the installer
@@ -230,7 +233,7 @@ and **Bypass two-factor authentication** enabled. For a local interactive
 publish, enabling 2FA and running `npm login` again is the simplest option.
 Never commit an access token; use npm's login flow or a secure CI secret.
 
-After publishing, users can run `npx @tamng0905/builders-essential-skills` without cloning the
+After publishing, users can run `npx @tamng0905/builder-essential-skills` without cloning the
 repository. Bump the version in `package.json` for each subsequent publish.
 
 ## Bring your own workflow

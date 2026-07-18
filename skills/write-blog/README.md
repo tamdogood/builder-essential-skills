@@ -12,13 +12,13 @@ keyword cannibalization, and connects the finished post to the project site.
 Install this skill for your user account:
 
 ```bash
-npx @tamng0905/builders-essential-skills --skill write-blog
+npx @tamng0905/builder-essential-skills --skill write-blog
 ```
 
 Install it into the current repository instead:
 
 ```bash
-npx @tamng0905/builders-essential-skills --skill write-blog --project
+npx @tamng0905/builder-essential-skills --skill write-blog --project
 ```
 
 Restart Claude Code or Codex, then ask it to draft, edit, or publish a blog

@@ -1,5 +1,5 @@
 {
-  "name": "@tamng0905/builders-essential-skills",
+  "name": "@tamng0905/builder-essential-skills",
   "version": "0.1.0",
   "description": "Builder's Essential Skills — reusable workflows for Claude Code and Codex",
   "type": "commonjs",
@@ -7,7 +7,7 @@
     "test": "node --test"
   },
   "bin": {
-    "builders-essential-skills": "bin/builders-essential-skills.js"
+    "builder-essential-skills": "bin/builder-essential-skills.js"
   },
   "files": [
     "bin",
