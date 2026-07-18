@@ -155,6 +155,7 @@ Parse a session and run common analyses:
 
 ```bash
 $SP parse <session-id-or-jsonl-path>
+$SP brief
 $SP agent-summary
 $SP costs
 $SP slowest-tools --n 20
@@ -170,6 +171,11 @@ $SP review
 $SP trace
 $SP open
 ```
+
+`brief` writes a scan-friendly `brief.md` with headline metrics, standout slow
+paths or failures, a prompt trail or TOC storyline, and an agent scoreboard. The
+Perfetto trace adds an overview lane, labeled TOC phases, per-agent work lanes,
+prompt lanes, and cumulative token/cost counters.
 
 Cost reports are estimates based on public model pricing, not billing records.
 Session files and traces can contain prompts, code, file paths, and sensitive
