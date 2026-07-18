@@ -9,13 +9,13 @@ from typing import Any
 
 import pandas as pd
 
-from .discover import codex_family, detect_provider, resolve_session, session_id
+from .discover import hermes_family, detect_provider, resolve_session, session_id
 
-# Public Claude Opus-tier rates from the source specification, USD per million tokens.
-CLAUDE_PRICE = {"input": 15.0, "cache_read": 1.5, "cache_write": 18.75, "output": 75.0}
+# Reference rates from the source specification, USD per million tokens.
+TRANSCRIPT_PRICE = {"input": 15.0, "cache_read": 1.5, "cache_write": 18.75, "output": 75.0}
 # Public standard API rates per million tokens, verified 2026-07-11 against
-# developers.openai.com/api/docs/models/. Codex subscription billing can differ.
-OPENAI_PRICE = {
+# developers.openai.com/api/docs/models/. Hermes billing can differ.
+HERMES_PRICE = {
     "gpt-5.6-sol": {"input": 5.0, "cache_read": 0.5, "cache_write": 6.25, "output": 30.0},
     "gpt-5.6-terra": {"input": 2.5, "cache_read": 0.25, "cache_write": 3.125, "output": 15.0},
     "gpt-5.6-luna": {"input": 1.0, "cache_read": 0.1, "cache_write": 1.25, "output": 6.0},
@@ -41,19 +41,19 @@ def _ts(value: Any) -> pd.Timestamp:
 
 
 def _price(provider: str, model: str) -> dict | None:
-    if provider == "claude":
-        return CLAUDE_PRICE
-    for prefix, price in OPENAI_PRICE.items():
+    if provider == "transcript":
+        return TRANSCRIPT_PRICE
+    for prefix, price in HERMES_PRICE.items():
         if model == prefix or re.fullmatch(re.escape(prefix) + r"-\d{4}-\d{2}-\d{2}", model):
             return price
     return None
 
 
-def _cost(usage: dict, provider: str = "claude", model: str = "") -> float:
+def _cost(usage: dict, provider: str = "transcript", model: str = "") -> float:
     price = _price(provider, model)
     if not price:
         return 0.0
-    long_context = provider == "codex" and model.startswith(("gpt-5.4", "gpt-5.6")) and usage.get("input_tokens", 0) + usage.get("cache_read_input_tokens", 0) > 272_000
+    long_context = provider == "hermes" and model.startswith(("gpt-5.4", "gpt-5.6")) and usage.get("input_tokens", 0) + usage.get("cache_read_input_tokens", 0) > 272_000
     input_multiplier = 2.0 if long_context else 1.0
     output_multiplier = 1.5 if long_context else 1.0
     return (
@@ -78,8 +78,8 @@ def _records(path: Path) -> list[dict]:
 
 
 def _agent_files(main: Path) -> list[tuple[str, Path, dict]]:
-    if detect_provider(main) == "codex":
-        family = codex_family(main)
+    if detect_provider(main) == "hermes":
+        family = hermes_family(main)
         root_id = family[0][0]
         found = []
         for index, (thread_id, path, session_meta) in enumerate(family):
@@ -127,7 +127,7 @@ def parse(session: str | Path, out_dir: str | Path | None = None) -> Path:
     spawn_owner: dict[str, str] = {}
     for agent_id, rows in raw_by_agent.items():
         for row in rows:
-            if provider == "claude":
+            if provider == "transcript":
                 for block in _content_blocks(row):
                     if block.get("type") == "tool_use" and block.get("name") in {"Agent", "Task"}:
                         spawn_owner[block.get("id", "")] = agent_id
@@ -141,7 +141,7 @@ def parse(session: str | Path, out_dir: str | Path | None = None) -> Path:
         timestamps = [t for t in timestamps if not pd.isna(t)]
         parent_id = spawn_owner.get(meta.get("toolUseId", ""), "" if agent_id == "main" else "main")
         spawn_tool_id = meta.get("toolUseId", "")
-        if provider == "codex" and agent_id != "main":
+        if provider == "hermes" and agent_id != "main":
             parent_id = id_map.get(meta.get("parentThreadId"), "main")
             child_thread = meta.get("threadId", "")
             for row in raw_by_agent.get(parent_id, []):
@@ -150,7 +150,7 @@ def parse(session: str | Path, out_dir: str | Path | None = None) -> Path:
                     spawn_tool_id = payload.get("call_id", "")
                     break
         description = meta.get("description", "")
-        if provider == "codex" and not description:
+        if provider == "hermes" and not description:
             description = next((sanitize(row.get("payload", {}).get("message", ""), 200) for row in rows if row.get("type") == "event_msg" and row.get("payload", {}).get("type") == "user_message"), "")
         agent = {
             "id": agent_id,
@@ -166,10 +166,10 @@ def parse(session: str | Path, out_dir: str | Path | None = None) -> Path:
             "end_ts": timestamps[-1].isoformat() if timestamps else None,
         }
         agents.append(agent)
-        if provider == "codex":
-            _parse_codex_agent(rows, agent, events)
+        if provider == "hermes":
+            _parse_hermes_agent(rows, agent, events)
         else:
-            _parse_claude_agent(rows, agent, events)
+            _parse_transcript_agent(rows, agent, events)
 
     df = pd.DataFrame(events)
     if not df.empty:
@@ -186,9 +186,9 @@ def parse(session: str | Path, out_dir: str | Path | None = None) -> Path:
     return out
 
 
-def _parse_claude_agent(rows: list[dict], agent: dict, events: list[dict]) -> None:
+def _parse_transcript_agent(rows: list[dict], agent: dict, events: list[dict]) -> None:
     aid = agent["id"]
-    base = {"provider": "claude", "agent_id": aid, "agent_name": agent["name"], "agent_type": agent["agent_type"], "spawn_depth": agent["spawn_depth"]}
+    base = {"provider": "transcript", "agent_id": aid, "agent_name": agent["name"], "agent_type": agent["agent_type"], "spawn_depth": agent["spawn_depth"]}
     tool_starts: dict[str, dict] = {}
     tool_uses_by_message: defaultdict[str, list[dict]] = defaultdict(list)
     messages: defaultdict[str, list[tuple[pd.Timestamp, dict]]] = defaultdict(list)
@@ -244,14 +244,14 @@ def _parse_claude_agent(rows: list[dict], agent: dict, events: list[dict]) -> No
         events.append({**base, "ts": first_ts, "end_ts": last_ts, "duration_ms": max(0.0, (last_ts - first_ts).total_seconds() * 1000), "event_type": "inference", "message_id": mid, "tool_use_id": "", "tool_name": "", "model": last_row.get("message", {}).get("model", ""), "text": "", "input_preview": "", "output_preview": "", "is_error": False, "concurrent": False, "input_tokens": int(usage.get("input_tokens", 0) or 0), "cache_read_input_tokens": int(usage.get("cache_read_input_tokens", 0) or 0), "cache_creation_input_tokens": int(usage.get("cache_creation_input_tokens", 0) or 0), "output_tokens": int(usage.get("output_tokens", 0) or 0), "estimated_cost_usd": _cost(usage), "source": agent["source"], "line_no": first_row["_line_no"]})
 
 
-def _codex_is_error(value: Any) -> bool:
+def _hermes_is_error(value: Any) -> bool:
     if isinstance(value, str):
         try:
-            return _codex_is_error(json.loads(value))
+            return _hermes_is_error(json.loads(value))
         except json.JSONDecodeError:
             return bool(re.search(r"(?i)(?:process exited with code|exit code\s*[:=]?)\s*[1-9]\d*", value))
     if isinstance(value, list):
-        return any(_codex_is_error(item) for item in value)
+        return any(_hermes_is_error(item) for item in value)
     if not isinstance(value, dict):
         return False
     if value.get("is_error") or value.get("isError") or value.get("success") is False:
@@ -260,11 +260,11 @@ def _codex_is_error(value: Any) -> bool:
         return True
     if str(value.get("status", "")).lower() in {"error", "failed", "failure"}:
         return True
-    return any(_codex_is_error(item) for item in value.values() if isinstance(item, (dict, list)))
+    return any(_hermes_is_error(item) for item in value.values() if isinstance(item, (dict, list)))
 
 
-def _parse_codex_agent(rows: list[dict], agent: dict, events: list[dict]) -> None:
-    base = {"provider": "codex", "agent_id": agent["id"], "agent_name": agent["name"], "agent_type": agent["agent_type"], "spawn_depth": agent["spawn_depth"]}
+def _parse_hermes_agent(rows: list[dict], agent: dict, events: list[dict]) -> None:
+    base = {"provider": "hermes", "agent_id": agent["id"], "agent_name": agent["name"], "agent_type": agent["agent_type"], "spawn_depth": agent["spawn_depth"]}
     models: dict[str, str] = {}
     for row in rows:
         if row.get("type") == "turn_context":
@@ -323,7 +323,7 @@ def _parse_codex_agent(rows: list[dict], agent: dict, events: list[dict]) -> Non
         if row_type == "response_item" and payload_type in {"custom_tool_call_output", "function_call_output", "local_shell_call_output"}:
             tool_id = payload.get("call_id", "")
             output = payload.get("output", "")
-            error = _codex_is_error(output)
+            error = _hermes_is_error(output)
             events.append({**common(ts, row, turn_id), "event_type": "tool_result", "tool_use_id": tool_id, "tool_name": "", "text": "", "input_preview": "", "output_preview": sanitize(output), "is_error": error})
             if tool_id in tool_starts:
                 start = tool_starts[tool_id]
@@ -346,7 +346,7 @@ def _parse_codex_agent(rows: list[dict], agent: dict, events: list[dict]) -> Non
             normalized = {"input_tokens": max(0, int(usage.get("input_tokens", 0) or 0) - cached), "cache_read_input_tokens": cached, "cache_creation_input_tokens": 0, "output_tokens": int(usage.get("output_tokens", 0) or 0)}
             start = inference_start.get(turn_id, ts)
             model = models.get(turn_id, "")
-            events.append({**common(start, row, turn_id), "end_ts": ts, "duration_ms": max(0.0, (ts - start).total_seconds() * 1000), "event_type": "inference", "message_id": f"{turn_id}:{response_index}", "tool_use_id": "", "tool_name": "", "model": model, "text": "", "input_preview": "", "output_preview": "", **normalized, "estimated_cost_usd": _cost(normalized, "codex", model)})
+            events.append({**common(start, row, turn_id), "end_ts": ts, "duration_ms": max(0.0, (ts - start).total_seconds() * 1000), "event_type": "inference", "message_id": f"{turn_id}:{response_index}", "tool_use_id": "", "tool_name": "", "model": model, "text": "", "input_preview": "", "output_preview": "", **normalized, "estimated_cost_usd": _cost(normalized, "hermes", model)})
             inference_start[turn_id] = ts
 
 

@@ -163,20 +163,16 @@ default.
 
 ### Profile an agent session
 
-After installation, point `SP` at the wrapper for your agent:
+After installation, point `SP` at the wrapper for Hermes:
 
 ```bash
-# Claude Code install
-SP="$HOME/.claude/skills/session-profiler/scripts/sp"
-
-# Codex install
-SP="${CODEX_HOME:-$HOME/.codex}/skills/session-profiler/scripts/sp"
+SP="${HERMES_HOME:-$HOME/.hermes}/skills/session-profiler/scripts/sp"
 ```
 
 Then explore your sessions:
 
 ```bash
-$SP list --provider codex --n 20
+$SP list --provider hermes --n 20
 $SP info <session-id-or-jsonl-path>
 $SP parse <session-id-or-jsonl-path>
 $SP brief

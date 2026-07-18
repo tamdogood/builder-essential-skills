@@ -31,16 +31,16 @@ with tempfile.TemporaryDirectory() as tmp:
     assert "usage tokens" in names
 print("fixture ok")
 
-codex_home = Path(__file__).parent / "codex_home"
-codex_fixture = codex_home / "sessions" / "2026" / "01" / "01" / "rollout-root.jsonl"
-previous = os.environ.get("CODEX_HOME")
-os.environ["CODEX_HOME"] = str(codex_home)
+hermes_home = Path(__file__).parent / "hermes_home"
+hermes_fixture = hermes_home / "sessions" / "2026" / "01" / "01" / "rollout-root.jsonl"
+previous = os.environ.get("HERMES_HOME")
+os.environ["HERMES_HOME"] = str(hermes_home)
 try:
     with tempfile.TemporaryDirectory() as tmp:
-        out = parse(codex_fixture, tmp)
+        out = parse(hermes_fixture, tmp)
         df = load(out)
         metadata = load_agents(out)
-        assert metadata["provider"] == "codex"
+        assert metadata["provider"] == "hermes"
         assert len(metadata["agents"]) == 2
         assert metadata["agents"][1]["parent_agent_id"] == "main"
         assert metadata["agents"][1]["spawn_tool_use_id"] == "call-spawn"
@@ -48,11 +48,11 @@ try:
         assert first.input_tokens == 60 and first.cache_read_input_tokens == 40
         assert first.estimated_cost_usd > 0
         assert df[df.event_type == "tool"].iloc[0].duration_ms == 2000
-        assert "Provider: `codex`" in brief(out)
+        assert "Provider: `hermes`" in brief(out)
         assert create(out).exists()
 finally:
     if previous is None:
-        os.environ.pop("CODEX_HOME", None)
+        os.environ.pop("HERMES_HOME", None)
     else:
-        os.environ["CODEX_HOME"] = previous
-print("codex fixture ok")
+        os.environ["HERMES_HOME"] = previous
+print("hermes fixture ok")
