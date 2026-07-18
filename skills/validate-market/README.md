@@ -1,7 +1,7 @@
 # Validate Market
 
 <p align="center">
-  <img src="../../assets/skill-cards/validate-market.svg" alt="validate-market skill card" width="100%">
+  <a href="SKILL.md"><img src="../../assets/skill-banners/validate-market.webp" alt="validate-market — product and market skill" width="100%"></a>
 </p>
 
 Run an honest market-fit and viability audit that compares competitors, tests

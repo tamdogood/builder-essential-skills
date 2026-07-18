@@ -1,7 +1,7 @@
 # Write Blog
 
 <p align="center">
-  <img src="../../assets/skill-cards/write-blog.svg" alt="write-blog skill card" width="100%">
+  <a href="SKILL.md"><img src="../../assets/skill-banners/write-blog.webp" alt="write-blog — writing and growth skill" width="100%"></a>
 </p>
 
 Write and ship a human-sounding blog post that targets search traffic, avoids

@@ -1,7 +1,7 @@
 # Orwell Writing
 
 <p align="center">
-  <img src="../../assets/skill-cards/orwell-writing.svg" alt="orwell-writing skill card" width="100%">
+  <a href="SKILL.md"><img src="../../assets/skill-banners/orwell-writing.webp" alt="orwell-writing — direct writing skill" width="100%"></a>
 </p>
 
 Draft, revise, and polish prose in plain English while preserving the intended

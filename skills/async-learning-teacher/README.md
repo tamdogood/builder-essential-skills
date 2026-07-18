@@ -1,7 +1,7 @@
 # Async Learning Teacher
 
 <p align="center">
-  <img src="../../assets/skill-cards/async-learning-teacher.svg" alt="async-learning-teacher skill card" width="100%">
+  <a href="SKILL.md"><img src="../../assets/skill-banners/async-learning-teacher.webp" alt="async-learning-teacher — learning skill" width="100%"></a>
 </p>
 
 ## Install
