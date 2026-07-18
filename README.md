@@ -1,9 +1,6 @@
 <p align="center">
   <img src="assets/readme-hero.png" alt="Tam's essential AI skills, framed by colorful abstract signal ribbons" width="100%">
 </p>
-
-<h1 align="center">AI Agent Skills</h1>
-
 <p align="center">
   <strong>Reusable workflows that help Claude Code and Codex do sharper work.</strong><br>
   Plan, build, research, learn, validate, write, and review without starting from zero each time.
