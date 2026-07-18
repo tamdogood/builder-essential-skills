@@ -20,34 +20,34 @@
 <table>
   <tr>
     <td width="50%" valign="top">
-      <a href="skills/lead/SKILL.md"><img src="assets/skill-cards/lead.svg" alt="lead — build and delivery skill" width="100%"></a>
+      <a href="skills/lead/SKILL.md"><img src="assets/skill-banners/lead.webp" alt="lead — build and delivery skill" width="100%"></a>
     </td>
     <td width="50%" valign="top">
-      <a href="skills/lead-research/SKILL.md"><img src="assets/skill-cards/lead-research.svg" alt="lead-research — research and strategy skill" width="100%"></a>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <a href="skills/async-learning-teacher/SKILL.md"><img src="assets/skill-cards/async-learning-teacher.svg" alt="async-learning-teacher — learning skill" width="100%"></a>
-    </td>
-    <td width="50%" valign="top">
-      <a href="skills/validate-market/SKILL.md"><img src="assets/skill-cards/validate-market.svg" alt="validate-market — product and market skill" width="100%"></a>
+      <a href="skills/lead-research/SKILL.md"><img src="assets/skill-banners/lead-research.webp" alt="lead-research — research and strategy skill" width="100%"></a>
     </td>
   </tr>
   <tr>
     <td width="50%" valign="top">
-      <a href="skills/write-blog/SKILL.md"><img src="assets/skill-cards/write-blog.svg" alt="write-blog — writing and growth skill" width="100%"></a>
+      <a href="skills/async-learning-teacher/SKILL.md"><img src="assets/skill-banners/async-learning-teacher.webp" alt="async-learning-teacher — learning skill" width="100%"></a>
     </td>
     <td width="50%" valign="top">
-      <a href="skills/orwell-writing/SKILL.md"><img src="assets/skill-cards/orwell-writing.svg" alt="orwell-writing — direct writing skill" width="100%"></a>
+      <a href="skills/validate-market/SKILL.md"><img src="assets/skill-banners/validate-market.webp" alt="validate-market — product and market skill" width="100%"></a>
     </td>
   </tr>
   <tr>
     <td width="50%" valign="top">
-      <a href="skills/code-standards/SKILL.md"><img src="assets/skill-cards/code-standards.svg" alt="code-standards — engineering quality skill" width="100%"></a>
+      <a href="skills/write-blog/SKILL.md"><img src="assets/skill-banners/write-blog.webp" alt="write-blog — writing and growth skill" width="100%"></a>
     </td>
     <td width="50%" valign="top">
-      <a href="skills/session-profiler/SKILL.md"><img src="assets/skill-cards/session-profiler.svg" alt="session-profiler — developer tools skill" width="100%"></a>
+      <a href="skills/orwell-writing/SKILL.md"><img src="assets/skill-banners/orwell-writing.webp" alt="orwell-writing — direct writing skill" width="100%"></a>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <a href="skills/code-standards/SKILL.md"><img src="assets/skill-banners/code-standards.webp" alt="code-standards — engineering quality skill" width="100%"></a>
+    </td>
+    <td width="50%" valign="top">
+      <a href="skills/session-profiler/SKILL.md"><img src="assets/skill-banners/session-profiler.webp" alt="session-profiler — developer tools skill" width="100%"></a>
     </td>
   </tr>
 </table>
