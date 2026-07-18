@@ -1,117 +1,130 @@
 <p align="center">
-  <img src="assets/readme-hero.png" alt="AI Agent Skills hero banner">
+  <img src="assets/readme-hero.png" alt="An abstract field of colorful signal ribbons representing reusable AI agent skills" width="100%">
 </p>
 
-# AI Agent Skills
+<h1 align="center">AI Agent Skills</h1>
 
-A reusable collection of agent skills for Claude Code and Codex.
+<p align="center">
+  <strong>Reusable workflows that help Claude Code and Codex do sharper work.</strong><br>
+  Plan, build, research, learn, validate, write, and review without starting from zero each time.
+</p>
 
-This repository is designed to be copied, forked, and adapted. It gives you one
-place to keep reusable workflows, install them into your local agent tools, and
-share them with teammates or the community.
+<p align="center">
+  <a href="#get-started">Get started</a> ·
+  <a href="#pick-a-skill">Pick a skill</a> ·
+  <a href="#bring-your-own-workflow">Create a skill</a>
+</p>
 
-## What Is Included
+## Why this exists
 
-| Skill | Use it when you want to... |
-| --- | --- |
-| `lead` | Run an autonomous build loop: turn a goal into a reviewed plan, dispatch builder jobs, verify frozen acceptance checks, and finish with one pull request. |
-| `lead-research` | Run parallel, source-grounded research for technology choices, product decisions, market scans, or state-of-the-art reviews. |
-| `async-learning-teacher` | Turn papers, articles, links, videos, and saved references into clear teaching artifacts or interactive tutoring sessions. |
-| `validate-market` | Audit whether an idea or project has real market pull, competitive space, and a concrete next validation step. |
-| `write-blog` | Draft, improve, and wire in blog posts with a consistent voice, SEO angle, and publishing checklist. |
-| `code-standards` | Apply a disciplined engineering workflow before and during code changes: orient, baseline, implement, test, verify, and self-review. |
-| `session-profiler` | Inspect Claude Code or Codex JSONL sessions, including subagents, timing, errors, token usage, estimated cost, and Perfetto traces. |
+An AI agent is much more useful when it has a repeatable way to handle the
+work. This collection packages practical workflows as portable skills: compact
+instructions, scripts, references, and agent definitions that you can install,
+adapt, and share.
 
-Each skill lives in `skills/<name>/SKILL.md`. Some skills also include scripts,
-reference material, or agent definitions used by the workflow.
+Use the whole collection, or take only the skills your team needs.
 
-## Requirements
+## Get started
 
-- macOS, Linux, or Windows with PowerShell
-- Claude Code and/or Codex, depending on where you want to use the skills
-- Python 3 for the `lead` model-routing helper and the `session-profiler` tools
-- Optional: Codex CLI for `lead` builder jobs that use Codex as a backend
-
-Install Codex CLI if you want that optional builder backend:
-
-```bash
-npm i -g @openai/codex@latest
-```
-
-## Installation
-
-Clone or copy this repository, then run the installer from the repository root.
-
-### macOS and Linux
-
-Install for the current user:
+From the repository root, install every skill for the current user:
 
 ```bash
 ./install.sh
 ```
 
-Install only into the current project:
-
-```bash
-./install.sh --project
-```
-
-### Windows
-
-Install for the current user:
+On Windows:
 
 ```powershell
 ./install.ps1
 ```
 
-Install only into the current project:
+Restart Claude Code or Codex, then invoke a skill in plain English:
+
+```text
+/lead Build the smallest version of this feature and open a PR.
+$async-learning-teacher Teach me this paper step by step: https://arxiv.org/abs/...
+```
+
+Want to try the collection inside one repository first? Install it locally
+instead:
+
+```bash
+./install.sh --project
+```
 
 ```powershell
 ./install.ps1 -Project
 ```
 
-The installer copies every folder under `skills/` into the matching skill
-directories for the selected install mode:
+The project install uses `.claude/skills` and `.codex/skills`, so it stays
+with that repository rather than changing your user-level setup.
 
-- Claude Code user skills: `~/.claude/skills`
-- Codex user skills: `${CODEX_HOME:-~/.codex}/skills`
-- Project-local Claude skills: `.claude/skills`
-- Project-local Codex skills: `.codex/skills`
+## Pick a skill
 
-It also installs the `lead` builder and reviewer agents into the matching
-`.claude/agents` directory.
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <a href="skills/lead/SKILL.md"><img src="assets/skill-cards/lead.svg" alt="lead — build and delivery skill" width="100%"></a>
+    </td>
+    <td width="50%" valign="top">
+      <a href="skills/lead-research/SKILL.md"><img src="assets/skill-cards/lead-research.svg" alt="lead-research — research and strategy skill" width="100%"></a>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <a href="skills/async-learning-teacher/SKILL.md"><img src="assets/skill-cards/async-learning-teacher.svg" alt="async-learning-teacher — learning skill" width="100%"></a>
+    </td>
+    <td width="50%" valign="top">
+      <a href="skills/validate-market/SKILL.md"><img src="assets/skill-cards/validate-market.svg" alt="validate-market — product and market skill" width="100%"></a>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <a href="skills/write-blog/SKILL.md"><img src="assets/skill-cards/write-blog.svg" alt="write-blog — writing and growth skill" width="100%"></a>
+    </td>
+    <td width="50%" valign="top">
+      <a href="skills/orwell-writing/SKILL.md"><img src="assets/skill-cards/orwell-writing.svg" alt="orwell-writing — direct writing skill" width="100%"></a>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <a href="skills/code-standards/SKILL.md"><img src="assets/skill-cards/code-standards.svg" alt="code-standards — engineering quality skill" width="100%"></a>
+    </td>
+    <td width="50%" valign="top">
+      <a href="skills/session-profiler/SKILL.md"><img src="assets/skill-cards/session-profiler.svg" alt="session-profiler — developer tools skill" width="100%"></a>
+    </td>
+  </tr>
+</table>
 
-Restart your agent session after installing so the new skills are discovered.
+Every skill lives in `skills/<name>/SKILL.md`. Some also ship scripts,
+reference material, or agent definitions that support the workflow.
 
-## Usage
+## What gets installed
 
-Invoke a skill by name from your agent session.
+The installers copy each folder in `skills/` to the right location for your
+agent and install the `lead` builder and reviewer agents for Claude Code.
 
-Claude Code examples:
+| Install mode | Claude Code | Codex |
+| --- | --- | --- |
+| User | `~/.claude/skills` | `${CODEX_HOME:-~/.codex}/skills` |
+| Current project | `.claude/skills` | `.codex/skills` |
 
-```text
-/lead Build the smallest version of this feature and open a PR.
-/validate-market Audit this project idea before I spend another week on it.
-/session-profiler Profile my latest Claude Code session and explain where the time went.
+You will need Claude Code and/or Codex, depending on which agent you use.
+Python 3 is required for the `lead` routing helper and the
+`session-profiler` tools. The Codex CLI is optional, but `lead` can use it for
+builder jobs:
+
+```bash
+npm i -g @openai/codex@latest
 ```
 
-Codex examples:
+## Go deeper
 
-```text
-$async-learning-teacher Teach me this paper step by step: https://arxiv.org/abs/...
-$code-standards Apply the project workflow while fixing this bug.
-$session-profiler Profile my latest Codex session, including subagents and cost.
-```
+### Route models for `lead`
 
-You can also copy one skill folder by itself into your own skills directory if
-you do not want the full collection.
-
-## Model Routing For `lead`
-
-The `lead` and `lead-research` skills can route roles such as lead, builder,
-reviewer, researcher, scout, and critic to different models.
-
-Inspect the effective routing:
+`lead` and `lead-research` can assign different models to roles such as
+lead, builder, reviewer, researcher, scout, and critic. Inspect the active
+routing before a run:
 
 ```bash
 python skills/lead/config.py
@@ -119,20 +132,13 @@ python skills/lead/config.py --role builder
 python skills/lead/config.py --check
 ```
 
-Defaults live in:
+Defaults live in `skills/lead/config.py` and `skills/lead/models.json`. Use
+`.lead/config` for a repository override or `~/.lead/config` for a personal
+default.
 
-- `skills/lead/config.py`
-- `skills/lead/models.json`
+### Profile an agent session
 
-Override routing per repository with `.lead/config` or globally with
-`~/.lead/config`.
-
-## Session Profiler CLI
-
-The `session-profiler` skill includes a command-line wrapper that creates and
-manages its own Python environment on first use.
-
-After installation, choose the wrapper for your agent:
+After installation, point `SP` at the wrapper for your agent:
 
 ```bash
 # Claude Code install
@@ -142,67 +148,41 @@ SP="$HOME/.claude/skills/session-profiler/scripts/sp"
 SP="${CODEX_HOME:-$HOME/.codex}/skills/session-profiler/scripts/sp"
 ```
 
-Find and inspect sessions:
+Then explore your sessions:
 
 ```bash
-$SP list --provider claude --n 20
 $SP list --provider codex --n 20
-$SP find <session-id-prefix>
 $SP info <session-id-or-jsonl-path>
-```
-
-Parse a session and run common analyses:
-
-```bash
 $SP parse <session-id-or-jsonl-path>
-$SP agent-summary
-$SP costs
-$SP slowest-tools --n 20
-$SP errors
-$SP turns
-```
-
-Generate richer artifacts:
-
-```bash
-$SP toc
 $SP review
 $SP trace
-$SP open
 ```
 
 Cost reports are estimates based on public model pricing, not billing records.
-Session files and traces can contain prompts, code, file paths, and sensitive
-project context. Review artifacts before sharing them.
+Session files and traces can include prompts, code, file paths, and other
+sensitive project context. Review them before sharing.
 
-## Repository Layout
+## Repository map
 
 ```text
-skills/
-  async-learning-teacher/   SKILL.md, README, and optional agent config
-  code-standards/           disciplined engineering-change workflow
-  lead/                     autonomous build-loop skill, routing, and scripts
-  lead-research/            research harness and source tactics
-  session-profiler/         transcript parser, analyses, and trace exporter
-  validate-market/          market validation audit workflow
-  write-blog/               blog writing workflow and voice references
-assets/
-  readme-hero.png           README hero banner
-.claude/agents/             lead-builder and lead-reviewer agent definitions
-install.sh                  macOS/Linux installer
-install.ps1                 Windows installer
+skills/                  The skill collection
+  <skill>/SKILL.md        Each skill's entry point and workflow
+assets/readme-hero.png    README banner
+.claude/agents/          Builder and reviewer agents for lead
+install.sh                macOS/Linux installer
+install.ps1               Windows installer
 ```
 
-## Creating Your Own Skill
+## Bring your own workflow
 
-Add a new directory under `skills/`:
+Start with one folder:
 
 ```text
 skills/my-skill/
   SKILL.md
 ```
 
-Use frontmatter at the top of `SKILL.md`:
+Give `SKILL.md` clear frontmatter and a focused workflow:
 
 ```markdown
 ---
@@ -215,29 +195,18 @@ description: Explain when an agent should use this skill.
 Write the workflow, rules, examples, and expected output here.
 ```
 
-Then reinstall:
+Keep skills easy to move between projects:
+
+- Avoid hard-coding a company, repository, branch, or tool unless the skill is intentionally private.
+- Put reusable scripts beside the skill instead of relying on global shell state.
+- Include request examples that show exactly when the skill should run.
+- Never put credentials, tokens, or private data in a skill folder.
+
+Re-run the installer after adding or changing a skill:
 
 ```bash
 ./install.sh
 ```
-
-Keep skills portable when possible:
-
-- Avoid hard-coding a company, repository, branch, or tool unless the skill is
-  intentionally private.
-- Put reusable scripts beside the skill instead of relying on global shell state.
-- Include examples that show the exact type of request the skill should handle.
-- Keep sensitive credentials, tokens, and private data out of the skill folder.
-
-## Adapting This Repository
-
-If you are using this as a template:
-
-1. Delete any skills you do not need.
-2. Rename or rewrite skill descriptions so they match your own workflows.
-3. Run the installer with `--project` while testing.
-4. Move to user-level installation once the skills are stable.
-5. Share only the skills that are generic enough for others to reuse safely.
 
 ## License
 
