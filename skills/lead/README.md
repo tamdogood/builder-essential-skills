@@ -1,7 +1,7 @@
 # Lead
 
 <p align="center">
-  <img src="../../assets/skill-cards/lead.svg" alt="lead skill card" width="100%">
+  <a href="SKILL.md"><img src="../../assets/skill-banners/lead.webp" alt="lead — build and delivery skill" width="100%"></a>
 </p>
 
 Run the autonomous build factory: turn a goal into an approved plan, freeze

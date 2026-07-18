@@ -1,7 +1,7 @@
 # Lead Research
 
 <p align="center">
-  <img src="../../assets/skill-cards/lead-research.svg" alt="lead-research skill card" width="100%">
+  <a href="SKILL.md"><img src="../../assets/skill-banners/lead-research.webp" alt="lead-research — research and strategy skill" width="100%"></a>
 </p>
 
 Map a topic cheaply, design parallel research assignments, verify claims

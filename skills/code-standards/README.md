@@ -1,7 +1,7 @@
 # Code Standards
 
 <p align="center">
-  <img src="../../assets/skill-cards/code-standards.svg" alt="code-standards skill card" width="100%">
+  <a href="SKILL.md"><img src="../../assets/skill-banners/code-standards.webp" alt="code-standards — engineering quality skill" width="100%"></a>
 </p>
 
 Apply a disciplined workflow to code changes: orient, establish a baseline,

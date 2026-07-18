@@ -1,7 +1,7 @@
 # Session Profiler
 
 <p align="center">
-  <img src="../../assets/skill-cards/session-profiler.svg" alt="session-profiler skill card" width="100%">
+  <a href="SKILL.md"><img src="../../assets/skill-banners/session-profiler.webp" alt="session-profiler — developer tools skill" width="100%"></a>
 </p>
 
 Inspect Claude Code and Codex session transcripts, summarize agent activity,
