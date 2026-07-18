@@ -1,13 +1,13 @@
 {
-  "name": "@tamng0905/ai-agent-skills",
+  "name": "@tamng0905/builders-essential-skills",
   "version": "0.1.0",
-  "description": "Reusable workflows for Claude Code and Codex",
+  "description": "Builder's Essential Skills — reusable workflows for Claude Code and Codex",
   "type": "commonjs",
   "scripts": {
     "test": "node --test"
   },
   "bin": {
-    "ai-agent-skills": "bin/ai-agent-skills.js"
+    "builders-essential-skills": "bin/builders-essential-skills.js"
   },
   "files": [
     "bin",

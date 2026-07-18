@@ -12,13 +12,13 @@ meaning, voice, audience, and genre.
 Install this skill for your user account:
 
 ```bash
-npx @tamng0905/ai-agent-skills --skill orwell-writing
+npx @tamng0905/builders-essential-skills --skill orwell-writing
 ```
 
 Install it into the current repository instead:
 
 ```bash
-npx @tamng0905/ai-agent-skills --skill orwell-writing --project
+npx @tamng0905/builders-essential-skills --skill orwell-writing --project
 ```
 
 Restart Claude Code or Codex, then ask it to draft, edit, simplify, or

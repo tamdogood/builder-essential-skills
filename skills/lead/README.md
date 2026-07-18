@@ -14,13 +14,13 @@ Install this skill and its supporting builder/reviewer agents for your user
 account:
 
 ```bash
-npx @tamng0905/ai-agent-skills --skill lead
+npx @tamng0905/builders-essential-skills --skill lead
 ```
 
 Install them into the current repository instead:
 
 ```bash
-npx @tamng0905/ai-agent-skills --skill lead --project
+npx @tamng0905/builders-essential-skills --skill lead --project
 ```
 
 Restart Claude Code or Codex, then invoke it with `/lead` or ask for an
