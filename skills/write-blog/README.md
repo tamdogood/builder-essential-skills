@@ -4,8 +4,9 @@
   <a href="SKILL.md"><img src="../../assets/skill-banners/write-blog.webp" alt="write-blog — writing and growth skill" width="100%"></a>
 </p>
 
-Write and ship a human-sounding blog post that targets search traffic, avoids
-keyword cannibalization, and connects the finished post to the project site.
+Write and ship a human-sounding blog post that uses ASD-STE100 Simplified
+Technical English for technical prose, targets search traffic, avoids keyword
+cannibalization, and connects the finished post to the project site.
 
 ## Install
 

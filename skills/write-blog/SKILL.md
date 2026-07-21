@@ -5,8 +5,8 @@ description: >-
   SEO traffic to your site. Use when a contributor wants to draft, edit, or publish a blog
   post, add a post to the site, write about the project for search/traction, or make an
   existing draft sound less like AI. Enforces the house voice (no em dashes), picks a
-  non-cannibalizing angle, wires the post into your site, and runs the humanizer pass
-  before shipping.
+  non-cannibalizing angle, uses ASD-STE100 Simplified Technical English for technical
+  prose, wires the post into your site, and runs the humanizer pass before shipping.
 compatibility: claude-code
 allowed-tools:
   - Read
@@ -23,6 +23,15 @@ allowed-tools:
 You are helping a contributor write a blog post for the project's website. The bar: it
 reads like a person wrote it, it ranks for a search cluster no other post already owns,
 and it ships wired correctly into the site with the build green.
+
+Use ASD-STE100 Simplified Technical English (STE) for the post's technical and
+instructional prose. Use short, direct sentences, consistent terms, clear actions, and
+the approved meaning of technical words when the STE dictionary is available. Do not use
+idioms, slang, figurative language, or synonym changes that can make a technical term
+unclear. Preserve exact code, commands, identifiers, product names, and quotations.
+The post can keep a human opinion and a concrete example, but clarity takes priority over
+rhythm or decoration. Do not claim strict STE conformance without checking the current
+ASD-STE100 issue and dictionary.
 
 This skill exists so every contributor writes in the same voice, picks non-overlapping
 topics, and passes the same anti-AI-slop gate, whether or not they already know the house
@@ -85,18 +94,20 @@ lead and the H2-spine are 80% of whether the post gets finished and ranked. Stru
 ### 4. Draft
 
 Write the prose as plain markdown first, in your blog's source directory (the source of
-truth). Follow `reference/voice.md` and `reference/craft.md` as you write, so there's less
-to fix later. Keep it honest, concrete, and grounded in real project code. Vary sentence
-length. Have an opinion. If `/direct-response-copy` is available in your environment, run it
+truth). Follow `reference/voice.md`, `reference/craft.md`, and the STE guidance above as
+you write. Keep it honest, concrete, and grounded in real project code. Use one clear
+opinion and support it with evidence. If `/direct-response-copy` is available in your environment, run it
 on the title, description, and closing CTA (only those three surfaces, not the body).
 
 ### 5. Humanize (mandatory)
 
 Run a humanizer pass on the draft: if `/humanizer` is available in your environment, invoke
 it on the draft. If it isn't available, apply the checklist in `reference/voice.md`
-yourself. Strip: significance inflation, promotional adjectives, the rule of three, "-ing"
-tail analyses, negative parallelisms ("it's not X, it's Y"), synonym cycling, hedging, and
-every dash. For headline/description/CTA polish you may also pull in
+yourself. Then run an STE pass. Check sentence length, clear subjects and actions,
+consistent technical terms, approved word meanings when available, and intentional
+exceptions. Strip: significance inflation, promotional adjectives, the rule of three,
+"-ing" tail analyses, negative parallelisms ("it's not X, it's Y"), synonym cycling,
+hedging, and every dash. For headline/description/CTA polish you may also pull in
 `/direct-response-copy` if it's available.
 
 Then run `bash check.sh <draft-file>` and fix anything it flags.
@@ -131,6 +142,8 @@ distribution loop in `reference/seo.md`. Always link the canonical production UR
 - Never invent project APIs, flags, or numbers. Read the source and quote it.
 - Never weaken the house voice to sound "professional." Concrete and a little contrarian
   beats polished and generic every time.
+- Use STE for technical and instructional prose. Do not use figurative language or
+  decorative wording when it can reduce technical clarity.
 - Don't ship a post whose angle overlaps a published one. Adjust the angle instead.
 - Covers can be SVG or a raster image. Match your site's brand palette. If you can't make a
   good cover, reuse an existing one rather than shipping something ugly.

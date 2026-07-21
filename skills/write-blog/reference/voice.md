@@ -1,4 +1,4 @@
-# House voice + anti-AI checklist
+# House voice, ASD-STE100, and anti-AI checklist
 
 This is self-contained: you can enforce it even if the `/humanizer` command isn't loaded.
 But if `/humanizer` is available, run it too. This file is the house-specific layer on top
@@ -12,9 +12,23 @@ of it.
   That candor is the reason it doesn't read like a press release.
 - **Concrete, always.** Every claim is backed by real code from the project, a real command,
   or a real number. Read the source before you describe it.
-- **Varied rhythm.** Short sentences next to long ones. Not every paragraph the same shape.
+- **Clear rhythm.** Use short sentences. Combine sentences only when the relationship is clear.
 - **First person when it fits.** "We shipped this and it broke in production" beats "the
   system experienced an issue."
+
+## ASD-STE100 baseline
+
+Use ASD-STE100 Simplified Technical English for technical and instructional prose:
+
+- Use short sentences with one main action or statement.
+- Use clear subjects and active verbs. State the actor when the actor matters.
+- Use one term for one concept. Do not use synonyms only to avoid repetition.
+- Use familiar words with precise meanings. Avoid idioms, slang, and figurative language.
+- Keep technical noun groups short. Use prepositions when they make relationships clear.
+- Write instructions as direct actions. State the condition, action, and expected result.
+- Preserve exact code, commands, identifiers, product names, and quotations.
+- Use the current STE dictionary when available. Do not claim full conformance without a
+  check against the current ASD-STE100 issue and dictionary.
 
 ## The hard rules (a post fails on any of these)
 
@@ -24,6 +38,8 @@ of it.
 3. **No emojis in body prose.**
 4. **Sentence case in headings, not Title Case.** "How agents hand off code", not "How
    Agents Hand Off Code".
+5. **Use STE for technical prose.** Mark any term or passage that needs a deliberate
+   domain-specific exception.
 
 ## AI tells to strip (the checklist)
 
@@ -57,8 +73,9 @@ patterns, tuned for this blog.
   if...". This is an article, not a chat reply.
 - **Boldface overuse.** Bold a term once when introduced, not every noun.
 
-## The soul test
+## The clarity test
 
-After cleaning, read it out loud. If it sounds like a Wikipedia intro or a LinkedIn post,
-it's clean but soulless. Add back a real opinion, a specific war story, a dry aside. A post
-with a pulse converts; a tidy one bounces.
+After cleaning, read the post out loud. If a sentence is hard to follow, name the subject
+and the action. If a technical term is vague, replace it with the exact term or define it.
+Keep one real opinion and one concrete example. Do not add decorative language to create
+personality.

@@ -1,13 +1,13 @@
 # Writing craft: make a technical post that people finish
 
 The house voice (`voice.md`) tells you what to strip. This file tells you what to build. A
-post that ranks but reads like a spec sheet gets a 90% bounce and never earns a backlink.
-Craft is what turns a correct post into one people finish and share.
+post that ranks but reads like a spec sheet can lose readers. Craft helps readers finish
+and share a correct post.
 
 Study the shipped posts before you write. They are the ground truth for the craft, not this
 file. Read two full ones from your blog's source and notice what they actually do.
 
-## The lead is 80% of the job
+## Make the lead specific
 
 Most readers decide in the first two sentences. The lead is also your meta description and
 your search snippet, so it does double duty. Every shipped lead names a concrete, specific
@@ -20,18 +20,16 @@ problem the reader already feels, with zero throat-clearing.
 - Contrarian open: `"AI agent memory in 2026 is mostly single-player."` A claim someone
   could disagree with.
 
-Bad leads announce the topic ("In this post we'll explore agent memory"). Good leads drop
-the reader into a problem mid-scene. If your lead would survive being pasted into a search
-result as the one line that wins the click, it's ready. This is where `/direct-response-copy`
-earns its keep: run it on the title and lead specifically.
+Bad leads announce the topic ("In this post we'll explore agent memory"). Good leads state
+the problem directly. If the lead can stand alone as a search result, it is ready. This is
+where `/direct-response-copy` helps: run it on the title and lead specifically.
 
-## Structure is a spine, not a pile
+## Give the post a clear structure
 
-A ranking technical post is an argument that moves. Each section advances one claim and
-hands off to the next. The test: read only your H2s in order. Do they tell a story on their
-own? If they read like a glossary ("Overview", "Architecture", "Details", "Conclusion"),
-the spine is missing. Rewrite the H2s to be claims: "Identity is not authorization",
-"One SQLite file, two search engines".
+A ranking technical post presents a sequence of claims. Each section advances one claim
+and prepares the next. Read only the H2s in order. They must show the argument. If they
+read like a glossary ("Overview", "Architecture", "Details", "Conclusion"), rewrite them
+as specific claims.
 
 Proven shapes:
 
@@ -44,34 +42,32 @@ Proven shapes:
 
 ## Show the machine
 
-The single biggest credibility lever in a technical post is real code, real commands, real
-numbers from your project, quoted accurately. Read the actual source and docs of your
-project and paste the actual thing. A reader who spots one invented API stops trusting the
-whole post. One accurate 8-line snippet beats three paragraphs describing it.
+The strongest credibility signal in a technical post is real code, real commands, and real
+numbers from your project. Read the actual source and docs before you quote them. An
+invented API can make the whole post untrustworthy. One accurate short snippet is better
+than several paragraphs that describe it.
 
 Give every code block a job. Don't paste code and move on; the sentence before it says what
 to watch for, the sentence after says what just happened. Numbers are strongest of all:
 "buffers the whole blob in RAM" is fine, "buffers the whole blob in RAM, so a 200MB bundle
 is 200MB resident" lands.
 
-## Rhythm and voice
+## Keep the prose clear
 
-- Vary sentence length on purpose. A four-word sentence after a long one is a drum hit. If
-  every sentence is the same length the reader's eye glazes; the humanizer will not catch
-  monotony, only you will. Read it out loud.
-- Have exactly one opinion per post and defend it. Contrarian-but-earned is the house
-  register: "most guides get this wrong" only works if you then show why, with code.
+- Use short sentences. Combine sentences only when the relationship is clear. Read the
+  draft out loud and fix sentences that are hard to follow.
+- Have one opinion per post and defend it. A contrarian view is useful only when you show
+  why it is correct, with code.
 - Admit what's deferred. A limitations beat ("what this is NOT") is the reason the post
   reads like an engineer wrote it and not marketing. Candor converts.
 - First person when it fits. "I shipped this and it warmed up my laptop" beats "the system
   experienced elevated CPU utilization."
 
-## Close on a next action, not a summary
+## Close with a next action
 
 Never end with "in conclusion, as agents evolve, the possibilities are endless." End on one
-concrete thing the reader can do or check right now: a command to run, a file to read, a
-repo to clone, a claim to go verify. The close is where you convert a reader into a repo
-star or a hub signup, so make it a door, not a wall.
+concrete thing the reader can do or check now: a command to run, a file to read, a repo to
+clone, or a claim to verify.
 
 ## Which creative skill to reach for, when
 
@@ -87,8 +83,7 @@ These are optional helper skills; use them if available in your environment.
 
 ## The finish test
 
-Read the whole thing out loud once. Three failure modes to catch: it sounds like a
-Wikipedia intro (clean but no pulse: add an opinion or a war story), it sounds like a sales
-page (promotional: cut adjectives, add code), or you got bored reading it (the spine
-sagged: find the section that repeats the one before it and cut it). Only ship a post you
-would actually finish reading.
+Read the whole post out loud once. Check three failure modes: it sounds like a generic
+introduction, it sounds like a sales page, or a section repeats the previous section. Add a
+specific opinion or example, cut promotional words, or remove repeated content. Ship only a
+post that is clear and useful.
