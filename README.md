@@ -5,6 +5,9 @@
   <strong>Builder's Essential Skills</strong><br>
   A considered collection of reusable workflows for planning, building, researching, learning, validating, writing, and reviewing with Claude Code and Codex.
 </p>
+<p align="center">
+  <a href="https://skills.sh/tamdogood/skills"><img src="https://skills.sh/b/tamdogood/skills" alt="skills.sh installs"></a>
+</p>
 
 <p align="center">
   <a href="#install">Install</a> ·
@@ -13,6 +16,25 @@
 </p>
 
 ## Install
+
+Install with the skills.sh CLI:
+
+```bash
+npx skills add tamdogood/skills
+```
+
+Install one skill from the collection:
+
+```bash
+npx skills add tamdogood/skills --skill lead
+```
+
+The skills.sh page for this repository is
+[skills.sh/tamdogood/skills](https://skills.sh/tamdogood/skills). It appears
+after the repository has been installed through the `skills` CLI and the
+skills.sh cache refreshes.
+
+You can also use the bundled npm installer.
 
 Install every skill for your user account:
 

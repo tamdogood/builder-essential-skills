@@ -1,0 +1,32 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Build",
+      "description": "Skills for implementation, review, and agent orchestration.",
+      "skills": [
+        "lead",
+        "code-standards",
+        "session-profiler"
+      ]
+    },
+    {
+      "title": "Research",
+      "description": "Skills for research, market validation, and learning workflows.",
+      "skills": [
+        "lead-research",
+        "validate-market",
+        "async-learning-teacher"
+      ]
+    },
+    {
+      "title": "Writing",
+      "description": "Skills for clear prose and publishing.",
+      "skills": [
+        "write-blog",
+        "orwell-writing"
+      ]
+    }
+  ]
+}

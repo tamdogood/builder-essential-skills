@@ -8,7 +8,8 @@ description: >
   report. Use when brainstorming a project or feature, choosing a technology, or
   asked to "research X", "state of the art", "deep research". For narrow
   slice-level fact checks inside the build loop, /lead handles those inline.
-effort: high
+metadata:
+  effort: high
 ---
 
 # Lead Research

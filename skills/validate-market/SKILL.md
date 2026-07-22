@@ -10,17 +10,7 @@ description: >-
   pre-committed pass/middle/kill criteria and a concrete week-1 assignment, then
   hardens it with an adversarial review loop.
 compatibility: claude-code
-allowed-tools:
-  - Read
-  - Write
-  - Edit
-  - Grep
-  - Glob
-  - Bash
-  - WebSearch
-  - WebFetch
-  - Agent
-  - AskUserQuestion
+allowed-tools: Read Write Edit Grep Glob Bash WebSearch WebFetch Agent AskUserQuestion
 ---
 
 # Validate a project / market
