@@ -1,3 +1,10 @@
+# Add `create-marketing-kit` skill
+
+- [x] Scaffold the skill with the system skill creator.
+- [x] Author the evidence-backed campaign workflow, references, and manifest validator.
+- [x] Add repository metadata, README discovery, card, and cinematic banner.
+- [x] Run focused validation, repository tests, visual inspection, and a forward test.
+
 # Build: `session-profiler` skill
 
 Profile & debug Claude Code and Codex sessions from their JSONL transcripts. Source spec = 4
