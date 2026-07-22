@@ -1,0 +1,4 @@
+interface:
+  display_name: "Create Skill"
+  short_description: "Create skills and matching artwork"
+  default_prompt: "Use $create-skill to create a new skill with all required files, metadata, README wiring, and matching artwork."
