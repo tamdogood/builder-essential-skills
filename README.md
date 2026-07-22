@@ -6,7 +6,7 @@
   A considered collection of reusable workflows for planning, building, researching, learning, validating, writing, and reviewing with Claude Code and Codex.
 </p>
 <p align="center">
-  <a href="https://skills.sh/tamdogood/skills"><img src="https://skills.sh/b/tamdogood/skills" alt="skills.sh installs"></a>
+  <a href="https://www.npmjs.com/package/@tamng0905/builder-essential-skills"><img src="https://img.shields.io/npm/v/%40tamng0905%2Fbuilder-essential-skills?logo=npm&amp;label=npm" alt="npm package version"></a>
 </p>
 
 <p align="center">
