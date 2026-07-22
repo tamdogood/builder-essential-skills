@@ -6,7 +6,7 @@
   A considered collection of reusable workflows for planning, building, researching, learning, validating, writing, and reviewing with Claude Code and Codex.
 </p>
 <p align="center">
-  <a href="https://skills.sh/tamdogood/skills"><img src="https://skills.sh/b/tamdogood/skills" alt="skills.sh installs"></a>
+  <a href="https://www.npmjs.com/package/@tamng0905/builder-essential-skills"><img src="https://img.shields.io/npm/v/%40tamng0905%2Fbuilder-essential-skills?label=npm" alt="npm package"></a>
 </p>
 
 <p align="center">
@@ -94,7 +94,7 @@ repository. Restart Claude Code or Codex after installation.
   </tr>
   <tr>
     <td width="50%" valign="top">
-      <a href="skills/make-playbook/SKILL.md"><img src="assets/skill-cards/make-playbook.svg" alt="make-playbook — indie maker playbook skill" width="100%"></a>
+      <a href="skills/make-playbook/SKILL.md"><img src="assets/skill-banners/make-playbook.webp" alt="make-playbook — indie maker playbook skill" width="100%"></a>
     </td>
     <td width="50%" valign="top"></td>
   </tr>
