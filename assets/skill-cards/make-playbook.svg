@@ -1,44 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
-  <title id="title">make-playbook skill card</title>
-  <desc id="desc">A Builder's Essential Skill for moving a bootstrapped app from idea to exit.</desc>
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#101513"/>
-      <stop offset=".54" stop-color="#171c1a"/>
-      <stop offset="1" stop-color="#0b0e10"/>
-    </linearGradient>
-    <linearGradient id="rail" x1="0" y1="0" x2="1" y2="0">
-      <stop stop-color="#62c58f"/>
-      <stop offset=".5" stop-color="#f0b35b"/>
-      <stop offset="1" stop-color="#7ab7dd"/>
-    </linearGradient>
-    <filter id="soft"><feGaussianBlur stdDeviation="10"/></filter>
-  </defs>
-  <rect width="1200" height="760" fill="#080a09"/>
-  <rect x="24" y="24" width="1152" height="712" rx="28" fill="url(#bg)" stroke="#6b756b" stroke-opacity=".72"/>
-  <path d="M88 517c134-122 265-174 394-156 132 18 203 113 330 89 101-19 156-91 300-101" fill="none" stroke="url(#rail)" stroke-width="7" stroke-linecap="round"/>
-  <path d="M88 517c134-122 265-174 394-156 132 18 203 113 330 89 101-19 156-91 300-101" fill="none" stroke="#f7e8c5" stroke-opacity=".18" stroke-width="24" stroke-linecap="round" filter="url(#soft)"/>
-  <text x="78" y="106" fill="#b6cfbc" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" letter-spacing="3">BUILDER'S ESSENTIAL SKILLS / 09</text>
-  <text x="78" y="204" fill="#f3f4e9" font-family="Arial, Helvetica, sans-serif" font-size="64" font-weight="700">make-playbook</text>
-  <text x="80" y="258" fill="#cbd4c7" font-family="Arial, Helvetica, sans-serif" font-size="28">Diagnose the stage, choose the next move, and keep</text>
-  <text x="80" y="296" fill="#cbd4c7" font-family="Arial, Helvetica, sans-serif" font-size="28">a bootstrapped product moving toward evidence.</text>
-  <g transform="translate(840 116)">
-    <rect x="0" y="0" width="228" height="168" rx="18" fill="#121817" stroke="#7a9f83" stroke-width="4"/>
-    <path d="M36 54h156M36 88h118M36 122h140" stroke="#f1d18a" stroke-width="10" stroke-linecap="round"/>
-    <circle cx="42" cy="162" r="34" fill="#62c58f"/>
-    <path d="m29 162 10 10 21-27" fill="none" stroke="#0c1510" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-  </g>
-  <rect x="78" y="376" width="1044" height="1" fill="#d7c18f" fill-opacity=".38"/>
-  <g font-family="Arial, Helvetica, sans-serif">
-    <text x="78" y="432" fill="#99c8a5" font-size="16" font-weight="700" letter-spacing="2">PATH</text>
-    <text x="78" y="476" fill="#f3f4e9" font-size="29">Idea -> Build -> Launch</text>
-    <text x="520" y="432" fill="#99c8a5" font-size="16" font-weight="700" letter-spacing="2">OUTCOME</text>
-    <text x="520" y="476" fill="#f3f4e9" font-size="29">A concrete maker action plan</text>
-  </g>
-  <rect x="78" y="554" width="820" height="66" rx="12" fill="#111817" stroke="#6d8f77"/>
-  <text x="104" y="596" fill="#d7eadb" font-family="monospace" font-size="17">$make-playbook Prep my launch plan for this app.</text>
-  <g transform="translate(1008 536)">
-    <circle cx="50" cy="50" r="34" fill="#e8b865"/>
-    <path d="M35 52h30M53 34l17 18-17 18" fill="none" stroke="#15110a" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-  </g>
+  <title id="title">make-playbook skill card</title><desc id="desc">A Builder's Essential Skill for moving a bootstrapped app from idea to exit.</desc>
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#121917"/><stop offset="1" stop-color="#090d0e"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="16"/></filter></defs>
+  <rect width="1200" height="760" fill="#080a0b"/><rect x="24" y="24" width="1152" height="712" rx="28" fill="url(#bg)" stroke="#58786d" stroke-opacity=".62"/><circle cx="975" cy="165" r="118" fill="#5ca98c" fill-opacity=".18" filter="url(#glow)"/><path d="M72 540C300 540 358 196 620 196s267 288 504 288" fill="none" stroke="#78b99b" stroke-opacity=".75" stroke-width="3"/>
+  <text x="78" y="106" fill="#a9c9b8" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" letter-spacing="3">BUILDER'S ESSENTIAL SKILLS / 09</text><text x="78" y="204" fill="#eff7f1" font-family="Arial, Helvetica, sans-serif" font-size="64" font-weight="700">make-playbook</text><text x="80" y="258" fill="#c2cec7" font-family="Arial, Helvetica, sans-serif" font-size="28">Diagnose the stage, choose the next move, and keep</text><text x="80" y="296" fill="#c2cec7" font-family="Arial, Helvetica, sans-serif" font-size="28">a bootstrapped product moving toward evidence.</text>
+  <g transform="translate(850 112)" fill="none" stroke="#91cfaa" stroke-width="5"><path d="M30 42h126v116H30z"/><path d="M58 78h68M58 108h42M58 138h54" stroke-linecap="round"/><path d="m135 137 14 14 27-34" stroke-linecap="round" stroke-linejoin="round"/></g><rect x="78" y="376" width="1044" height="1" fill="#99bfa9" fill-opacity=".35"/><text x="78" y="432" fill="#8eb8a0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" letter-spacing="2">DISCIPLINE</text><text x="78" y="476" fill="#eef6f0" font-family="Arial, Helvetica, sans-serif" font-size="29">Indie making</text><text x="520" y="432" fill="#8eb8a0" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" letter-spacing="2">PROMISE</text><text x="520" y="476" fill="#eef6f0" font-family="Arial, Helvetica, sans-serif" font-size="29">A clear next move for the product</text><rect x="78" y="554" width="780" height="66" rx="12" fill="#111a17" stroke="#547e69"/><text x="104" y="596" fill="#c8e5d2" font-family="monospace" font-size="19">/make-playbook Find my next move.</text><circle cx="1058" cy="586" r="30" fill="#6caf89"/><path d="m1048 586 8 8 15-17" fill="none" stroke="#0c1711" stroke-width="5"/>
 </svg>

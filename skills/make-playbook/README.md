@@ -1,7 +1,7 @@
 # MAKE Playbook
 
 <p align="center">
-  <a href="SKILL.md"><img src="../../assets/skill-cards/make-playbook.svg" alt="make-playbook — indie maker playbook skill" width="100%"></a>
+  <a href="SKILL.md"><img src="../../assets/skill-banners/make-playbook.webp" alt="make-playbook — indie maker playbook skill" width="100%"></a>
 </p>
 
 Diagnose a bootstrapped app by stage: idea, build, launch, grow, monetize,
