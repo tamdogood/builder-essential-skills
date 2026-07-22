@@ -94,7 +94,7 @@ repository. Restart Claude Code or Codex after installation.
   </tr>
   <tr>
     <td width="50%" valign="top">
-      <a href="skills/make-playbook/SKILL.md"><img src="assets/skill-cards/make-playbook.svg" alt="make-playbook — indie maker playbook skill" width="100%"></a>
+      <a href="skills/make-playbook/SKILL.md"><img src="assets/skill-banners/make-playbook.webp" alt="make-playbook — indie maker playbook skill" width="100%"></a>
     </td>
     <td width="50%" valign="top"></td>
   </tr>
