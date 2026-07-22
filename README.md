@@ -100,6 +100,12 @@ repository. Restart Claude Code or Codex after installation.
       <a href="skills/create-skill/SKILL.md"><img src="assets/skill-banners/create-skill.webp" alt="create-skill — skill creation workflow" width="100%"></a>
     </td>
   </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <a href="skills/create-marketing-kit/SKILL.md"><img src="assets/skill-banners/create-marketing-kit.webp" alt="create-marketing-kit — campaign copy and artwork skill" width="100%"></a>
+    </td>
+    <td width="50%" valign="top"></td>
+  </tr>
 </table>
 
 Every skill lives in `skills/<name>/SKILL.md`. Some also ship scripts,

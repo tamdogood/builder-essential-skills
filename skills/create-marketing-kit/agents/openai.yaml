@@ -1,0 +1,4 @@
+interface:
+  display_name: "Create Marketing Kit"
+  short_description: "Create campaign copy and artwork kits"
+  default_prompt: "Use $create-marketing-kit to create a truthful, human-centered campaign kit for this product."

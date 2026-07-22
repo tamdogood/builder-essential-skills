@@ -85,6 +85,25 @@ test("installs skills and agents into the current project", () => {
       fs.existsSync(path.join(projectRoot, ".codex", "skills", "write-blog", "SKILL.md")),
       true,
     );
+    assert.equal(
+      fs.existsSync(
+        path.join(projectRoot, ".codex", "skills", "create-marketing-kit", "SKILL.md"),
+      ),
+      true,
+    );
+    assert.equal(
+      fs.existsSync(
+        path.join(
+          projectRoot,
+          ".codex",
+          "skills",
+          "create-marketing-kit",
+          "agents",
+          "openai.yaml",
+        ),
+      ),
+      true,
+    );
   } finally {
     fs.rmSync(projectRoot, { recursive: true, force: true });
   }
