@@ -8,14 +8,7 @@ description: >-
   non-cannibalizing angle, uses ASD-STE100 Simplified Technical English for technical
   prose, wires the post into your site, and runs the humanizer pass before shipping.
 compatibility: claude-code
-allowed-tools:
-  - Read
-  - Write
-  - Edit
-  - Grep
-  - Glob
-  - Bash
-  - AskUserQuestion
+allowed-tools: Read Write Edit Grep Glob Bash AskUserQuestion
 ---
 
 # Write a blog post

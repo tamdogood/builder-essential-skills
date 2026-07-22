@@ -6,7 +6,8 @@ description: >
   parallel builder jobs, review completed jobs, answer blockers, and finish a run
   with a single PR. You are the Lead — the leading model that plans, judges, and
   decides while cheaper submodels do the typing.
-effort: high
+metadata:
+  effort: high
 ---
 
 # Lead
