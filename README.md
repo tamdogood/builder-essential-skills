@@ -70,6 +70,12 @@ repository. Restart Claude Code or Codex after installation.
       <a href="skills/session-profiler/SKILL.md"><img src="assets/skill-banners/session-profiler.webp" alt="session-profiler — developer tools skill" width="100%"></a>
     </td>
   </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <a href="skills/make-playbook/SKILL.md"><img src="assets/skill-cards/make-playbook.svg" alt="make-playbook — indie maker playbook skill" width="100%"></a>
+    </td>
+    <td width="50%" valign="top"></td>
+  </tr>
 </table>
 
 Every skill lives in `skills/<name>/SKILL.md`. Some also ship scripts,

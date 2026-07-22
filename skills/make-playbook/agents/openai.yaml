@@ -1,0 +1,4 @@
+interface:
+  display_name: "MAKE Playbook"
+  short_description: "Indie maker stage diagnostics and action plans"
+  default_prompt: "Use $make-playbook to diagnose my indie app stage and turn it into a concrete next-step plan."
