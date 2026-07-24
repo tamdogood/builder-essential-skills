@@ -104,7 +104,9 @@ repository. Restart Claude Code or Codex after installation.
     <td width="50%" valign="top">
       <a href="skills/create-marketing-kit/SKILL.md"><img src="assets/skill-banners/create-marketing-kit.webp" alt="create-marketing-kit — campaign copy and artwork skill" width="100%"></a>
     </td>
-    <td width="50%" valign="top"></td>
+    <td width="50%" valign="top">
+      <a href="skills/map-the-landscape/SKILL.md"><img src="assets/skill-banners/map-the-landscape.webp" alt="map-the-landscape — big-picture orientation skill" width="100%"></a>
+    </td>
   </tr>
 </table>
 
@@ -144,6 +146,7 @@ Restart Claude Code or Codex, then invoke a skill in plain English:
 ```text
 /lead Build the smallest version of this feature and open a PR.
 $async-learning-teacher Teach me this paper step by step: https://arxiv.org/abs/...
+$map-the-landscape Show me how this repository fits together.
 ```
 
 Want to try the collection inside one repository first? Install it locally

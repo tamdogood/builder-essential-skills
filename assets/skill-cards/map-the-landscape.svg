@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Map the Landscape skill card</title>
+  <desc id="desc">A dark atelier card with a layered compass map, representing big-picture orientation for a topic or repository.</desc>
+  <defs>
+    <linearGradient id="background" x1="70" y1="35" x2="1130" y2="730" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#17171B"/>
+      <stop offset="0.55" stop-color="#0A0C0E"/>
+      <stop offset="1" stop-color="#121715"/>
+    </linearGradient>
+    <radialGradient id="mapGlow" cx="0" cy="0" r="1" gradientTransform="translate(920 250) rotate(145) scale(390 300)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6E5A91" stop-opacity="0.38"/>
+      <stop offset="0.52" stop-color="#6C9A88" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#0A0C0E" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="line" x1="735" y1="130" x2="1070" y2="470" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E0C89D"/>
+      <stop offset="0.5" stop-color="#83AE9D"/>
+      <stop offset="1" stop-color="#75629A"/>
+    </linearGradient>
+    <filter id="softGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="760" rx="34" fill="url(#background)"/>
+  <rect width="1200" height="760" rx="34" fill="url(#mapGlow)"/>
+  <rect x="24" y="24" width="1152" height="712" rx="25" fill="none" stroke="#8B7AA5" stroke-opacity="0.46"/>
+  <path d="M72 552C262 704 496 718 698 630C876 552 1004 423 1130 256" fill="none" stroke="#9CB5AA" stroke-opacity="0.2" stroke-width="1.5"/>
+  <circle cx="928" cy="244" r="195" fill="#725D94" fill-opacity="0.1" filter="url(#softGlow)"/>
+
+  <text x="72" y="91" fill="#BFB39E" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="20" letter-spacing="3">BUILDER'S ESSENTIAL SKILLS</text>
+  <text x="1086" y="91" fill="#D7C5A3" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="25" text-anchor="end">12</text>
+
+  <text x="72" y="184" fill="#F2E9DA" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="55" font-weight="650">Map the Landscape</text>
+  <text x="72" y="234" fill="#C4BCB1" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="25">See how the parts, people, forces, and flows</text>
+  <text x="72" y="270" fill="#C4BCB1" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="25">fit together around any topic or repository.</text>
+
+  <g transform="translate(734 132)" fill="none" stroke="url(#line)" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="170" cy="165" r="132" stroke-width="2" stroke-dasharray="3 12"/>
+    <circle cx="170" cy="165" r="82" stroke-width="3"/>
+    <circle cx="170" cy="165" r="25" fill="#17191A" stroke-width="4"/>
+    <path d="M170 83V32M170 298v-51M88 165H37M303 165h-51M112 107 76 71M264 259l-36-36M228 107l36-36M112 223l-36 36" stroke-width="3"/>
+    <path d="m170 105 22 60-22 60-22-60Z" fill="#DCC697" fill-opacity="0.12" stroke-width="4"/>
+    <circle cx="37" cy="165" r="8" fill="#83AE9D"/>
+    <circle cx="170" cy="32" r="8" fill="#DCC697"/>
+    <circle cx="303" cy="165" r="8" fill="#75629A"/>
+    <circle cx="76" cy="259" r="8" fill="#83AE9D"/>
+  </g>
+
+  <rect x="72" y="352" width="1056" height="1" fill="#A797B7" fill-opacity="0.28"/>
+  <text x="72" y="407" fill="#A89982" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="700" letter-spacing="2">DISCIPLINE</text>
+  <text x="72" y="451" fill="#F0E8DB" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="28">Systems orientation</text>
+  <text x="514" y="407" fill="#A89982" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="700" letter-spacing="2">PROMISE</text>
+  <text x="514" y="451" fill="#F0E8DB" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="28">A mental model that holds</text>
+
+  <rect x="72" y="548" width="830" height="68" rx="10" fill="#141718" stroke="#6D8179"/>
+  <text x="98" y="591" fill="#CFE0D8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="19">/map-the-landscape Show me the big picture.</text>
+  <circle cx="1055" cy="582" r="31" fill="#8FAE9F"/>
+  <path d="m1044 582 8 8 16-18" fill="none" stroke="#101514" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
