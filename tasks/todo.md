@@ -5,6 +5,13 @@
 - [x] Add repository metadata, README discovery, card, and cinematic banner.
 - [x] Run focused validation, repository tests, visual inspection, and a forward test.
 
+# Add `map-the-landscape` skill
+
+- [x] Define topic, repository, and hybrid landscape-mapping modes.
+- [x] Scaffold and author the skill, progressive reference, and agent metadata.
+- [x] Add repository discovery metadata, README documentation, card, and banner.
+- [x] Run focused validation, repository tests, visual inspection, and self-review.
+
 # Build: `session-profiler` skill
 
 Profile & debug Claude Code and Codex sessions from their JSONL transcripts. Source spec = 4

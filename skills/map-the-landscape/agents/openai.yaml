@@ -1,0 +1,4 @@
+interface:
+  display_name: "Map the Landscape"
+  short_description: "See the whole system around a topic or repo"
+  default_prompt: "Use $map-the-landscape to help me understand the big picture of this topic or repository."
