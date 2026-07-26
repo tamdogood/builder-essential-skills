@@ -1,0 +1,4 @@
+interface:
+  display_name: "Build Scenario Tests"
+  short_description: "Compile behavior specs into deterministic tests"
+  default_prompt: "Use $build-scenario-tests to inspect this repository and compile a focused Markdown scenario into a deterministic test."

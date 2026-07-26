@@ -104,6 +104,32 @@ test("installs skills and agents into the current project", () => {
       ),
       true,
     );
+    assert.equal(
+      fs.existsSync(
+        path.join(
+          projectRoot,
+          ".codex",
+          "skills",
+          "build-scenario-tests",
+          "examples",
+          "web-workspace-invite.scenario.md",
+        ),
+      ),
+      true,
+    );
+    assert.equal(
+      fs.existsSync(
+        path.join(
+          projectRoot,
+          ".claude",
+          "skills",
+          "run-smoke-tests",
+          "examples",
+          "saas-team-onboarding.smoke.md",
+        ),
+      ),
+      true,
+    );
   } finally {
     fs.rmSync(projectRoot, { recursive: true, force: true });
   }
