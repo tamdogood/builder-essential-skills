@@ -108,6 +108,14 @@ repository. Restart Claude Code or Codex after installation.
       <a href="skills/map-the-landscape/SKILL.md"><img src="assets/skill-banners/map-the-landscape.webp" alt="map-the-landscape — big-picture orientation skill" width="100%"></a>
     </td>
   </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <a href="skills/build-scenario-tests/SKILL.md"><img src="assets/skill-banners/build-scenario-tests.webp" alt="build-scenario-tests — deterministic behavior validation skill" width="100%"></a>
+    </td>
+    <td width="50%" valign="top">
+      <a href="skills/run-smoke-tests/SKILL.md"><img src="assets/skill-banners/run-smoke-tests.webp" alt="run-smoke-tests — auditable user journey validation skill" width="100%"></a>
+    </td>
+  </tr>
 </table>
 
 Every skill lives in `skills/<name>/SKILL.md`. Some also ship scripts,

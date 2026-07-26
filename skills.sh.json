@@ -9,7 +9,9 @@
         "lead",
         "code-standards",
         "session-profiler",
-        "create-skill"
+        "create-skill",
+        "build-scenario-tests",
+        "run-smoke-tests"
       ]
     },
     {

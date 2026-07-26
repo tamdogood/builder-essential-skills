@@ -1,0 +1,4 @@
+interface:
+  display_name: "Run Smoke Tests"
+  short_description: "Execute user journeys with auditable evidence"
+  default_prompt: "Use $run-smoke-tests to understand this repository and execute a Markdown user journey with auditable evidence."
