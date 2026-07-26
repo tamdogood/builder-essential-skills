@@ -1,0 +1,94 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  bootstrap:
+    name: Check release baseline
+    runs-on: ubuntu-latest
+    outputs:
+      ready: ${{ steps.baseline.outputs.ready }}
+    steps:
+      - name: Check out the repository and tags
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          package-manager-cache: false
+
+      - name: Verify the initial npm release and Git tag
+        id: baseline
+        env:
+          BASELINE_VERSION: "0.2.0"
+          PACKAGE_NAME: "@tamng0905/builder-essential-skills"
+        run: |
+          if npm view "$PACKAGE_NAME@$BASELINE_VERSION" version >/dev/null 2>&1 \
+            && git rev-parse "v$BASELINE_VERSION^{commit}" >/dev/null 2>&1; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::Release automation will start after $PACKAGE_NAME@$BASELINE_VERSION and tag v$BASELINE_VERSION exist."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  release:
+    name: Prepare release
+    needs: bootstrap
+    if: ${{ needs.bootstrap.outputs.ready == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      release_sha: ${{ steps.release.outputs.sha }}
+      release_version: ${{ steps.release.outputs.version }}
+    steps:
+      - name: Create or update the release pull request
+        id: release
+        uses: googleapis/release-please-action@v5
+        with:
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+
+  publish:
+    name: Publish to npm
+    needs: release
+    if: ${{ needs.release.outputs.release_created == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Check out the released commit
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ needs.release.outputs.release_sha }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+          package-manager-cache: false
+
+      - name: Verify the released version
+        env:
+          RELEASE_VERSION: ${{ needs.release.outputs.release_version }}
+        run: |
+          test "$(node -p "require('./package.json').version")" = "$RELEASE_VERSION"
+
+      - name: Test
+        run: npm test
+
+      - name: Publish with npm trusted publishing
+        run: npm publish --access public

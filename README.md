@@ -262,22 +262,48 @@ bin/builder-essential-skills.js     cross-platform npx installer
 
 ### Publish the installer
 
-Choose an available npm package name in `package.json`, authenticate with npm,
-then publish from the repository root:
+The initial `0.2.0` release must be published manually because npm can configure
+a trusted publisher only after the package exists:
 
 ```bash
-npm login
+npm login --auth-type=web
+npm whoami
+npm test
+npm publish --dry-run
 npm publish --access public
 ```
 
-npm requires either 2FA enabled on the account, followed by the one-time code
-requested by `npm publish`, or a granular access token with read/write access
-and **Bypass two-factor authentication** enabled. For a local interactive
-publish, enabling 2FA and running `npm login` again is the simplest option.
-Never commit an access token; use npm's login flow or a secure CI secret.
+The npm account must own the `tamng0905` scope and have 2FA enabled. After the
+first publish, create the matching GitHub baseline release:
+
+```bash
+gh release create v0.2.0 --target main --title "v0.2.0" --generate-notes
+```
+
+The release workflow stays dormant until both the npm package and the `v0.2.0`
+Git tag exist. This prevents the first merge from creating a follow-up release
+before the package has been bootstrapped. Once both exist, the next conventional
+commit merged into `main` starts the automated release cycle.
+
+Then configure npm trusted publishing for
+`@tamng0905/builder-essential-skills`:
+
+- provider: GitHub Actions;
+- organization or user: `tamdogood`;
+- repository: `builder-essential-skills`;
+- workflow filename: `release.yml`;
+- allowed action: `npm publish`.
+
+In the GitHub repository settings, allow GitHub Actions to create pull requests.
+The workflow in `.github/workflows/release.yml` uses Release Please to maintain
+a version and changelog pull request from conventional commits. Merging that
+release pull request creates the GitHub release, runs the test suite, and
+publishes the same version to npm through short-lived OIDC credentials. No
+`NPM_TOKEN` secret is required.
 
 After publishing, users can run `npx @tamng0905/builder-essential-skills` without cloning the
-repository. Bump the version in `package.json` for each subsequent publish.
+repository. Normal feature and fix pull requests should not edit the version
+manually; Release Please owns later version bumps.
 
 ## Bring your own workflow
 

@@ -1,9 +1,17 @@
 {
   "name": "@tamng0905/builder-essential-skills",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Builder's Essential Skills — reusable workflows for Claude Code and Codex",
   "license": "MIT",
   "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tamdogood/builder-essential-skills.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "scripts": {
     "test": "node --test"
   },
