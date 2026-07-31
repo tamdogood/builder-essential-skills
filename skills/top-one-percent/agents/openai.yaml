@@ -1,0 +1,4 @@
+interface:
+  display_name: "Top One Percent"
+  short_description: "Build a rigorous path to exceptional skill"
+  default_prompt: "Use $top-one-percent to help me become exceptional at [topic]."
