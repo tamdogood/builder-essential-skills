@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">top-one-percent skill card</title>
+  <desc id="desc">A Builder's Essential Skill for developing exceptional capability through deliberate practice.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#17171a"/><stop offset="1" stop-color="#090a0e"/></linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="16"/></filter>
+  </defs>
+  <rect width="1200" height="760" fill="#0a0a0d"/>
+  <rect x="24" y="24" width="1152" height="712" rx="28" fill="url(#bg)" stroke="#8a7648" stroke-opacity=".65"/>
+  <circle cx="970" cy="164" r="124" fill="#7865a8" fill-opacity=".22" filter="url(#glow)"/>
+  <path d="M78 547c176 0 205-242 347-242 142 0 169 157 300 157 131 0 167-294 401-294" fill="none" stroke="#d1b675" stroke-opacity=".72" stroke-width="3"/>
+  <text x="78" y="106" fill="#d0bd87" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" letter-spacing="3">BUILDER'S ESSENTIAL SKILLS / 15</text>
+  <text x="78" y="204" fill="#f5f0e5" font-family="Arial, Helvetica, sans-serif" font-size="59" font-weight="700">top-one-percent</text>
+  <text x="80" y="258" fill="#d0cbc1" font-family="Arial, Helvetica, sans-serif" font-size="28">Turn a learning goal into deliberate practice,</text>
+  <text x="80" y="296" fill="#d0cbc1" font-family="Arial, Helvetica, sans-serif" font-size="28">credible feedback, and demonstrated mastery.</text>
+  <g transform="translate(864 112)" fill="none" stroke="#d5ba7c" stroke-width="5">
+    <path d="M96 6v172M20 154h152M35 124h122M50 94h92M65 64h62M80 34h32"/>
+    <path d="M69 154 96 124l27 30M78 124l18-30 18 30M87 94l9-30 9 30M91 64l5-30 5 30"/>
+    <circle cx="96" cy="14" r="12"/>
+  </g>
+  <rect x="78" y="376" width="1044" height="1" fill="#d4bb81" fill-opacity=".35"/>
+  <text x="78" y="432" fill="#d0b474" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" letter-spacing="2">DISCIPLINE</text>
+  <text x="78" y="476" fill="#f3eee4" font-family="Arial, Helvetica, sans-serif" font-size="29">Learning</text>
+  <text x="520" y="432" fill="#d0b474" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" letter-spacing="2">PROMISE</text>
+  <text x="520" y="476" fill="#f3eee4" font-family="Arial, Helvetica, sans-serif" font-size="29">Evidence-backed exceptional capability</text>
+  <rect x="78" y="554" width="780" height="66" rx="12" fill="#1b1917" stroke="#8a7447"/>
+  <text x="104" y="596" fill="#ead8a8" font-family="monospace" font-size="19">$top-one-percent Help me master [topic].</text>
+  <circle cx="1058" cy="586" r="30" fill="#c5a560"/>
+  <path d="m1048 586 8 8 15-17" fill="none" stroke="#17120a" stroke-width="5"/>
+</svg>

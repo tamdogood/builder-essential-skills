@@ -73,8 +73,14 @@ repository. Restart Claude Code or Codex after installation.
       <a href="skills/async-learning-teacher/SKILL.md"><img src="assets/skill-banners/async-learning-teacher.webp" alt="async-learning-teacher — learning skill" width="100%"></a>
     </td>
     <td width="50%" valign="top">
+      <a href="skills/top-one-percent/SKILL.md"><img src="assets/skill-banners/top-one-percent.webp" alt="top-one-percent — mastery learning skill" width="100%"></a>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
       <a href="skills/validate-market/SKILL.md"><img src="assets/skill-banners/validate-market.webp" alt="validate-market — product and market skill" width="100%"></a>
     </td>
+    <td width="50%" valign="top"></td>
   </tr>
   <tr>
     <td width="50%" valign="top">
