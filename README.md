@@ -80,7 +80,9 @@ repository. Restart Claude Code or Codex after installation.
     <td width="50%" valign="top">
       <a href="skills/validate-market/SKILL.md"><img src="assets/skill-banners/validate-market.webp" alt="validate-market — product and market skill" width="100%"></a>
     </td>
-    <td width="50%" valign="top"></td>
+    <td width="50%" valign="top">
+      <a href="skills/paper-opportunity-radar/SKILL.md"><img src="assets/skill-banners/paper-opportunity-radar.webp" alt="paper-opportunity-radar — research forensics and opportunity discovery skill" width="100%"></a>
+    </td>
   </tr>
   <tr>
     <td width="50%" valign="top">
@@ -161,6 +163,7 @@ Restart Claude Code or Codex, then invoke a skill in plain English:
 /lead Build the smallest version of this feature and open a PR.
 $async-learning-teacher Teach me this paper step by step: https://arxiv.org/abs/...
 $map-the-landscape Show me how this repository fits together.
+$paper-opportunity-radar Audit this topic's buried research for credible opportunities.
 ```
 
 Want to try the collection inside one repository first? Install it locally

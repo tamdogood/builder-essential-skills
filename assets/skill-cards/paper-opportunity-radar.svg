@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Paper Opportunity Radar skill card</title>
+  <desc id="desc">A dark atelier card with paper strata beneath a brass inspection lens revealing one amber signal, representing rigorous research auditing and opportunity discovery.</desc>
+  <defs>
+    <linearGradient id="background" x1="54" y1="28" x2="1146" y2="736" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#191817"/>
+      <stop offset="0.56" stop-color="#090B0D"/>
+      <stop offset="1" stop-color="#141119"/>
+    </linearGradient>
+    <radialGradient id="signalGlow" cx="0" cy="0" r="1" gradientTransform="translate(931 221) rotate(90) scale(224)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#C79447" stop-opacity="0.34"/>
+      <stop offset="0.48" stop-color="#6F5A93" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#090B0D" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="metal" x1="798" y1="98" x2="1068" y2="371" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E0C58F"/>
+      <stop offset="0.48" stop-color="#9A7140"/>
+      <stop offset="1" stop-color="#71609A"/>
+    </linearGradient>
+    <filter id="softGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="17"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="760" rx="34" fill="url(#background)"/>
+  <rect width="1200" height="760" rx="34" fill="url(#signalGlow)"/>
+  <rect x="24" y="24" width="1152" height="712" rx="25" fill="none" stroke="#8B7AA5" stroke-opacity="0.48"/>
+  <path d="M72 559C286 703 498 718 704 628C891 546 1010 410 1128 242" fill="none" stroke="#D0B47D" stroke-opacity="0.18" stroke-width="1.5"/>
+
+  <text x="72" y="91" fill="#BFB39E" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="20" letter-spacing="3">BUILDER'S ESSENTIAL SKILLS</text>
+  <text x="1086" y="91" fill="#D7C5A3" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="25" text-anchor="end">16</text>
+
+  <text x="72" y="176" fill="#F2E9DA" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="50" font-weight="650">Paper Opportunity Radar</text>
+  <text x="72" y="228" fill="#C4BCB1" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="25">Audit buried research, verify what holds, and surface</text>
+  <text x="72" y="264" fill="#C4BCB1" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="25">credible ideas worth testing in the real world.</text>
+
+  <g transform="translate(758 91)">
+    <ellipse cx="174" cy="146" rx="148" ry="121" fill="#6E5A91" fill-opacity="0.11" filter="url(#softGlow)"/>
+    <path d="M39 210h272M54 190h244M70 170h212" stroke="#C9B992" stroke-opacity="0.55" stroke-width="6" stroke-linecap="round"/>
+    <path d="M45 211c28 12 48 12 76 0s48-12 76 0 48 12 76 0 48-12 76 0" fill="none" stroke="#7D6A9C" stroke-width="3"/>
+    <circle cx="184" cy="126" r="85" fill="#111315" fill-opacity="0.83" stroke="url(#metal)" stroke-width="12"/>
+    <circle cx="184" cy="126" r="64" fill="none" stroke="#D9C294" stroke-opacity="0.3" stroke-width="2" stroke-dasharray="3 9"/>
+    <path d="M244 186l58 58" stroke="#B58A51" stroke-width="13" stroke-linecap="round"/>
+    <path d="m184 101 9 17 19 3-14 13 3 19-17-9-17 9 3-19-14-13 19-3Z" fill="#D4A24E" stroke="#F0D7A2" stroke-width="3"/>
+  </g>
+
+  <rect x="72" y="352" width="1056" height="1" fill="#A797B7" fill-opacity="0.28"/>
+  <text x="72" y="407" fill="#A89982" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="700" letter-spacing="2">DISCIPLINE</text>
+  <text x="72" y="451" fill="#F0E8DB" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="28">Research forensics</text>
+  <text x="514" y="407" fill="#A89982" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="700" letter-spacing="2">PROMISE</text>
+  <text x="514" y="451" fill="#F0E8DB" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="28">Signal you can test</text>
+
+  <rect x="72" y="548" width="870" height="68" rx="10" fill="#141718" stroke="#796A57"/>
+  <text x="98" y="591" fill="#E1D2B5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18">/paper-opportunity-radar Sweep this topic.</text>
+  <circle cx="1055" cy="582" r="31" fill="#C29A59"/>
+  <path d="m1044 582 8 8 16-18" fill="none" stroke="#15120E" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
