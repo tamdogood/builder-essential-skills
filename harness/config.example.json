@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "dataRoot": "/var/lib/opportunity-radar/harness",
+  "workspaceRoot": "/srv/opportunity-radar/experiments",
+  "dockerBinary": "docker",
+  "dockerHost": null,
+  "allowNetwork": false,
+  "allowedEnvironmentNames": ["EXPERIMENT_SEED"],
+  "images": {},
+  "defaults": {
+    "cpus": 2,
+    "memoryMb": 4096,
+    "pids": 256,
+    "timeoutSeconds": 900,
+    "tmpfsMb": 256,
+    "maxInputBytes": 104857600,
+    "maxOutputBytes": 104857600,
+    "maxFiles": 1000
+  },
+  "maximums": {
+    "cpus": 8,
+    "memoryMb": 16384,
+    "pids": 1024,
+    "timeoutSeconds": 7200,
+    "tmpfsMb": 2048,
+    "maxInputBytes": 1073741824,
+    "maxOutputBytes": 1073741824,
+    "maxFiles": 10000
+  }
+}

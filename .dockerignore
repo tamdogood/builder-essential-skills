@@ -1,0 +1,8 @@
+.git
+.context
+node_modules
+apps/radar/.next
+apps/radar/node_modules
+apps/radar/.radar-data
+harness/.runtime
+*.log

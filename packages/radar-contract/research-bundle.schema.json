@@ -1,0 +1,373 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tamnguyen.io/schemas/opportunity-radar/research-bundle.v1.json",
+  "title": "Opportunity Radar research bundle",
+  "type": "object",
+  "additionalProperties": false,
+  "minProperties": 5,
+  "required": ["schemaVersion", "bundleId", "generatedAt", "producer"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "bundleId": { "$ref": "#/$defs/id" },
+    "generatedAt": { "$ref": "#/$defs/dateTime" },
+    "producer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["agent", "skill"],
+      "properties": {
+        "agent": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "skill": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "version": { "type": "string", "maxLength": 80 },
+        "sessionId": { "type": "string", "maxLength": 160 }
+      }
+    },
+    "upserts": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "topics": { "type": "array", "items": { "$ref": "#/$defs/topic" } },
+        "runs": { "type": "array", "items": { "$ref": "#/$defs/run" } },
+        "papers": { "type": "array", "items": { "$ref": "#/$defs/paper" } },
+        "experiments": { "type": "array", "items": { "$ref": "#/$defs/experiment" } },
+        "opportunities": { "type": "array", "items": { "$ref": "#/$defs/opportunity" } },
+        "reports": { "type": "array", "items": { "$ref": "#/$defs/report" } },
+        "sources": { "type": "array", "items": { "$ref": "#/$defs/source" } }
+      }
+    },
+    "deletes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "id"],
+        "properties": {
+          "kind": { "$ref": "#/$defs/collectionKind" },
+          "id": { "$ref": "#/$defs/id" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+    },
+    "dateTime": { "type": "string", "format": "date-time" },
+    "httpUrl": { "type": "string", "pattern": "^https?://", "maxLength": 2048 },
+    "score": { "type": "number", "minimum": 0, "maximum": 5 },
+    "stringList": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1, "maxLength": 200 },
+      "uniqueItems": true
+    },
+    "extensions": { "type": "object", "additionalProperties": true },
+    "collectionKind": {
+      "enum": ["topics", "runs", "papers", "experiments", "opportunities", "reports", "sources"]
+    },
+    "topic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "updatedAt", "name", "slug", "domains", "status"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "createdAt": { "$ref": "#/$defs/dateTime" },
+        "updatedAt": { "$ref": "#/$defs/dateTime" },
+        "extensions": { "$ref": "#/$defs/extensions" },
+        "name": { "type": "string", "minLength": 1, "maxLength": 180 },
+        "slug": { "$ref": "#/$defs/id" },
+        "description": { "type": "string", "maxLength": 2000 },
+        "domains": { "$ref": "#/$defs/stringList" },
+        "status": { "enum": ["active", "paused", "archived"] }
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "recordsReturned": { "type": "integer", "minimum": 0 },
+        "recordsNew": { "type": "integer", "minimum": 0 },
+        "recordsDeduplicated": { "type": "integer", "minimum": 0 },
+        "recordsScreened": { "type": "integer", "minimum": 0 },
+        "fullTextsAccessed": { "type": "integer", "minimum": 0 },
+        "papersAudited": { "type": "integer", "minimum": 0 },
+        "baselineStatus": { "type": "string", "maxLength": 240 },
+        "nextCursor": { "type": "string", "maxLength": 1000 },
+        "blindSpots": { "$ref": "#/$defs/stringList" }
+      }
+    },
+    "run": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "updatedAt", "topicId", "skill", "status", "title", "summary", "startedAt"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "createdAt": { "$ref": "#/$defs/dateTime" },
+        "updatedAt": { "$ref": "#/$defs/dateTime" },
+        "extensions": { "$ref": "#/$defs/extensions" },
+        "topicId": { "$ref": "#/$defs/id" },
+        "skill": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "status": { "enum": ["queued", "running", "completed", "partial", "failed"] },
+        "title": { "type": "string", "minLength": 1, "maxLength": 240 },
+        "summary": { "type": "string", "minLength": 1, "maxLength": 6000 },
+        "scope": { "type": "string", "maxLength": 10000 },
+        "startedAt": { "$ref": "#/$defs/dateTime" },
+        "completedAt": { "$ref": "#/$defs/dateTime" },
+        "coverage": { "$ref": "#/$defs/coverage" },
+        "reportIds": { "$ref": "#/$defs/stringList" },
+        "error": { "type": "string", "maxLength": 6000 }
+      }
+    },
+    "paperVerdict": {
+      "enum": [
+        "SUBSTANTIATED",
+        "PROMISING - UNREPLICATED",
+        "MIXED OR FRAGILE",
+        "CONTRADICTED OR NOT REPRODUCED",
+        "INTEGRITY CONCERN - UNRESOLVED",
+        "RETRACTED OR SUPERSEDED",
+        "INSUFFICIENT ACCESS"
+      ]
+    },
+    "paper": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "updatedAt", "topicId", "title", "canonicalUrl", "domains", "verdict", "evidenceScore", "evidenceSummary"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "createdAt": { "$ref": "#/$defs/dateTime" },
+        "updatedAt": { "$ref": "#/$defs/dateTime" },
+        "extensions": { "$ref": "#/$defs/extensions" },
+        "topicId": { "$ref": "#/$defs/id" },
+        "runId": { "$ref": "#/$defs/id" },
+        "title": { "type": "string", "minLength": 1, "maxLength": 600 },
+        "authors": { "$ref": "#/$defs/stringList" },
+        "year": { "type": "integer", "minimum": 1500, "maximum": 2200 },
+        "venue": { "type": "string", "maxLength": 300 },
+        "canonicalUrl": { "$ref": "#/$defs/httpUrl" },
+        "identifiers": {
+          "type": "object",
+          "additionalProperties": { "type": "string", "maxLength": 300 }
+        },
+        "abstract": { "type": "string", "maxLength": 30000 },
+        "domains": { "$ref": "#/$defs/stringList" },
+        "tags": { "$ref": "#/$defs/stringList" },
+        "verdict": { "$ref": "#/$defs/paperVerdict" },
+        "evidenceScore": { "$ref": "#/$defs/score" },
+        "evidenceSummary": { "type": "string", "minLength": 1, "maxLength": 10000 },
+        "selectionReason": { "type": "string", "maxLength": 6000 },
+        "authorsClaim": { "type": "string", "maxLength": 10000 },
+        "evidenceSupports": { "type": "string", "maxLength": 10000 },
+        "strongestEvidence": { "type": "string", "maxLength": 10000 },
+        "strongestCounterevidence": { "type": "string", "maxLength": 10000 },
+        "integrityStatus": { "type": "string", "maxLength": 2000 },
+        "replicationStatus": { "type": "string", "maxLength": 4000 },
+        "decisiveNextCheck": { "type": "string", "maxLength": 6000 },
+        "dossierMarkdown": { "type": "string", "maxLength": 400000 },
+        "opportunityIds": { "$ref": "#/$defs/stringList" },
+        "experimentIds": { "$ref": "#/$defs/stringList" },
+        "sourceIds": { "$ref": "#/$defs/stringList" },
+        "discoveredAt": { "$ref": "#/$defs/dateTime" },
+        "auditedAt": { "$ref": "#/$defs/dateTime" }
+      }
+    },
+    "metric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "value"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1, "maxLength": 180 },
+        "value": { "type": ["number", "string", "boolean"] },
+        "unit": { "type": "string", "maxLength": 80 },
+        "target": { "type": "string", "maxLength": 180 },
+        "verdict": { "enum": ["pass", "fail", "informational"] }
+      }
+    },
+    "check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "status"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1, "maxLength": 180 },
+        "status": { "enum": ["pass", "fail", "warning"] },
+        "details": { "type": "string", "maxLength": 6000 }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "path", "mimeType", "sha256", "sizeBytes"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1, "maxLength": 240 },
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000,
+          "pattern": "^(?!/)(?!.*(^|/)\\.\\.(/|$)).+$"
+        },
+        "mimeType": { "type": "string", "minLength": 1, "maxLength": 180 },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "sizeBytes": { "type": "integer", "minimum": 0 },
+        "description": { "type": "string", "maxLength": 2000 }
+      }
+    },
+    "experiment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "updatedAt", "runId", "title", "status", "summary", "environment"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "createdAt": { "$ref": "#/$defs/dateTime" },
+        "updatedAt": { "$ref": "#/$defs/dateTime" },
+        "extensions": { "$ref": "#/$defs/extensions" },
+        "runId": { "$ref": "#/$defs/id" },
+        "paperId": { "$ref": "#/$defs/id" },
+        "opportunityId": { "$ref": "#/$defs/id" },
+        "campaignId": { "$ref": "#/$defs/id" },
+        "iteration": { "type": "integer", "minimum": 1, "maximum": 10000 },
+        "decision": { "enum": ["baseline", "keep", "discard", "inconclusive"] },
+        "decisionReason": { "type": "string", "maxLength": 10000 },
+        "parentExperimentId": { "$ref": "#/$defs/id" },
+        "title": { "type": "string", "minLength": 1, "maxLength": 300 },
+        "hypothesis": { "type": "string", "maxLength": 10000 },
+        "status": { "enum": ["queued", "running", "passed", "failed", "inconclusive", "blocked"] },
+        "summary": { "type": "string", "minLength": 1, "maxLength": 10000 },
+        "decisiveResult": { "type": "string", "maxLength": 10000 },
+        "environment": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["image", "network", "isolation"],
+          "properties": {
+            "image": { "type": "string", "minLength": 1, "maxLength": 300 },
+            "imageDigest": { "type": "string", "maxLength": 300 },
+            "network": { "enum": ["none", "bridge"] },
+            "isolation": { "$ref": "#/$defs/stringList" },
+            "resources": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "cpus": { "type": "number", "exclusiveMinimum": 0, "maximum": 64 },
+                "memoryMb": { "type": "integer", "minimum": 64, "maximum": 262144 },
+                "pids": { "type": "integer", "minimum": 16, "maximum": 32768 },
+                "timeoutSeconds": { "type": "integer", "minimum": 1, "maximum": 86400 }
+              }
+            }
+          }
+        },
+        "command": { "type": "array", "items": { "type": "string", "maxLength": 2000 }, "minItems": 1 },
+        "startedAt": { "$ref": "#/$defs/dateTime" },
+        "completedAt": { "$ref": "#/$defs/dateTime" },
+        "exitCode": { "type": "integer", "minimum": -1, "maximum": 255 },
+        "durationMs": { "type": "integer", "minimum": 0 },
+        "reproducible": { "type": "boolean" },
+        "metrics": { "type": "array", "items": { "$ref": "#/$defs/metric" } },
+        "checks": { "type": "array", "items": { "$ref": "#/$defs/check" } },
+        "logs": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "stdout": { "type": "string", "maxLength": 50000 },
+            "stderr": { "type": "string", "maxLength": 50000 }
+          }
+        },
+        "artifacts": { "type": "array", "items": { "$ref": "#/$defs/artifact" } },
+        "limitations": { "$ref": "#/$defs/stringList" }
+      }
+    },
+    "scores": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence", "unexploredness", "technical", "operational", "value"],
+      "properties": {
+        "evidence": { "$ref": "#/$defs/score" },
+        "unexploredness": { "$ref": "#/$defs/score" },
+        "technical": { "$ref": "#/$defs/score" },
+        "operational": { "$ref": "#/$defs/score" },
+        "value": { "$ref": "#/$defs/score" }
+      }
+    },
+    "opportunity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "updatedAt", "topicId", "title", "oneLine", "status", "unexploredness", "scores", "bindingConstraint"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "createdAt": { "$ref": "#/$defs/dateTime" },
+        "updatedAt": { "$ref": "#/$defs/dateTime" },
+        "extensions": { "$ref": "#/$defs/extensions" },
+        "topicId": { "$ref": "#/$defs/id" },
+        "runId": { "$ref": "#/$defs/id" },
+        "title": { "type": "string", "minLength": 1, "maxLength": 300 },
+        "oneLine": { "type": "string", "minLength": 1, "maxLength": 2000 },
+        "status": { "enum": ["watch", "verify paper", "test", "promote", "occupied", "drop"] },
+        "unexploredness": {
+          "enum": [
+            "OCCUPIED",
+            "PARTIALLY OCCUPIED - DIFFERENT WEDGE",
+            "NOT FOUND IN SEARCH - STRONG COVERAGE",
+            "NOT FOUND IN SEARCH - LIMITED COVERAGE",
+            "PRIOR-ART SEARCH INCOMPLETE"
+          ]
+        },
+        "scores": { "$ref": "#/$defs/scores" },
+        "bindingConstraint": { "type": "string", "minLength": 1, "maxLength": 10000 },
+        "whyNow": { "type": "string", "maxLength": 10000 },
+        "demonstrated": { "type": "string", "maxLength": 10000 },
+        "inference": { "type": "string", "maxLength": 10000 },
+        "priorArt": { "type": "string", "maxLength": 20000 },
+        "decisiveExperiment": { "type": "string", "maxLength": 10000 },
+        "killCriterion": { "type": "string", "maxLength": 6000 },
+        "risks": { "$ref": "#/$defs/stringList" },
+        "paperIds": { "$ref": "#/$defs/stringList" },
+        "experimentIds": { "$ref": "#/$defs/stringList" },
+        "reportMarkdown": { "type": "string", "maxLength": 400000 },
+        "domains": { "$ref": "#/$defs/stringList" },
+        "tags": { "$ref": "#/$defs/stringList" }
+      }
+    },
+    "report": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "updatedAt", "topicId", "runId", "kind", "skill", "title", "summary", "markdown", "publishedAt"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "createdAt": { "$ref": "#/$defs/dateTime" },
+        "updatedAt": { "$ref": "#/$defs/dateTime" },
+        "extensions": { "$ref": "#/$defs/extensions" },
+        "topicId": { "$ref": "#/$defs/id" },
+        "runId": { "$ref": "#/$defs/id" },
+        "kind": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "skill": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "title": { "type": "string", "minLength": 1, "maxLength": 400 },
+        "summary": { "type": "string", "minLength": 1, "maxLength": 10000 },
+        "markdown": { "type": "string", "maxLength": 600000 },
+        "publishedAt": { "$ref": "#/$defs/dateTime" },
+        "domains": { "$ref": "#/$defs/stringList" },
+        "tags": { "$ref": "#/$defs/stringList" },
+        "paperIds": { "$ref": "#/$defs/stringList" },
+        "opportunityIds": { "$ref": "#/$defs/stringList" },
+        "experimentIds": { "$ref": "#/$defs/stringList" },
+        "sourceIds": { "$ref": "#/$defs/stringList" }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "updatedAt", "title", "url", "type", "accessedAt"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "createdAt": { "$ref": "#/$defs/dateTime" },
+        "updatedAt": { "$ref": "#/$defs/dateTime" },
+        "extensions": { "$ref": "#/$defs/extensions" },
+        "title": { "type": "string", "minLength": 1, "maxLength": 500 },
+        "url": { "$ref": "#/$defs/httpUrl" },
+        "type": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "accessedAt": { "$ref": "#/$defs/dateTime" },
+        "publishedAt": { "$ref": "#/$defs/dateTime" },
+        "authors": { "$ref": "#/$defs/stringList" },
+        "identifier": { "type": "string", "maxLength": 300 }
+      }
+    }
+  }
+}

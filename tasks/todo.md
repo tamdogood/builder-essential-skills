@@ -5,6 +5,15 @@
 - [x] Add repository metadata, README discovery, card, and cinematic banner.
 - [x] Run focused validation, repository tests, visual inspection, and a forward test.
 
+# Build the Paper Opportunity Radar harness and console
+
+- [x] Define the versioned research bundle, append-only store, authenticated agent API, and CLI.
+- [x] Build the isolated Docker experiment harness and negative security tests.
+- [x] Build the Next.js paper, opportunity, report, and run views in the projectnext design language.
+- [x] Add VPS deployment, Hermes operation, backup, retention, and recovery documentation.
+- [x] Verify tests, lint, types, production build, Docker smoke, API behavior, and responsive browser renders.
+- [x] Self-review the complete diff and reconcile the docs, fixture, schema, and implementation.
+
 # Add `map-the-landscape` skill
 
 - [x] Define topic, repository, and hybrid landscape-mapping modes.
