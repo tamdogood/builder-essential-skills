@@ -1,9 +1,0 @@
-matplotlib==3.10.1
-networkx==3.4.2
-numpy==2.2.3
-pandas==2.2.3
-pytest==8.3.5
-scikit-learn==1.6.1
-scipy==1.15.2
-statsmodels==0.14.4
-sympy==1.13.3

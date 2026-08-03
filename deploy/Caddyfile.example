@@ -1,7 +1,0 @@
-radar.example.com {
-    encode zstd gzip
-    request_body {
-        max_size 26MB
-    }
-    reverse_proxy 127.0.0.1:3000
-}
