@@ -20,17 +20,17 @@
 Install with the skills.sh CLI:
 
 ```bash
-npx skills add tamdogood/builder-essential-skills
+npx skills add tamdogood/skills
 ```
 
 Install one skill from the collection:
 
 ```bash
-npx skills add tamdogood/builder-essential-skills --skill lead
+npx skills add tamdogood/skills --skill lead
 ```
 
 The skills.sh page for this repository is
-[skills.sh/tamdogood/builder-essential-skills](https://skills.sh/tamdogood/builder-essential-skills). It appears
+[skills.sh/tamdogood/skills](https://skills.sh/tamdogood/skills). It appears
 after the repository has been installed through the `skills` CLI and the
 skills.sh cache refreshes.
 
@@ -201,30 +201,6 @@ npm i -g @openai/codex@latest
 
 ## Go deeper
 
-### Operate the Opportunity Radar
-
-The paper radar includes a field-neutral Docker experiment harness and a
-minimal Next.js console for papers, verdicts, evidence, opportunities, generic
-skill reports, and runs across domains. Continuous campaigns use a fixed
-evaluator, isolated attempts, immutable proposal snapshots, and explicit
-keep/discard decisions so Hermes can resume progress across fresh cron
-sessions.
-
-Start with the [system guide](docs/opportunity-radar/README.md), then use the
-[Hermes runbook](docs/opportunity-radar/hermes.md) and
-[VPS guide](docs/opportunity-radar/vps.md). The harness protocol is documented
-in [harness/README.md](harness/README.md).
-
-Local demo:
-
-```bash
-npm --prefix apps/radar ci
-export RADAR_DATA_DIR="$PWD/.context/radar-local"
-export RADAR_WRITE_TOKEN="$(openssl rand -hex 32)"
-npm --prefix apps/radar run demo:seed
-npm run radar:dev -- --port 3000
-```
-
 ### Route models for `lead`
 
 `lead` and `lead-research` can assign different models to roles such as
@@ -285,18 +261,12 @@ sensitive project context. Review them before sharing.
 ```text
 skills/                  The skill collection
   <skill>/SKILL.md        Each skill's entry point and workflow
-apps/radar/              Next.js Opportunity Radar console and agent API
-harness/                 isolated one-shot and continuous experiment runtime
-packages/radar-contract/ versioned research bundle schema and shared types
-docs/opportunity-radar/  architecture, Hermes, and VPS operating guides
 assets/readme-hero.png    README banner
 .claude/agents/          Builder and reviewer agents for lead
 install.sh                macOS/Linux installer
 install.ps1               Windows installer
 package.json              npm package metadata and npx entrypoint
 bin/builder-essential-skills.js     cross-platform npx installer
-bin/radar-agent.js                  research console API client
-bin/radar-harness.js                isolated experiment harness CLI
 ```
 
 ### Publish the installer
