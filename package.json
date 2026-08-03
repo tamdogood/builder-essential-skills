@@ -5,13 +5,24 @@
   "license": "MIT",
   "type": "commonjs",
   "scripts": {
-    "test": "node --test"
+    "test": "node --test test/*.test.js && npm --prefix apps/radar test",
+    "radar:agent": "node bin/radar-agent.js",
+    "radar:build": "npm --prefix apps/radar run build",
+    "radar:dev": "npm --prefix apps/radar run dev",
+    "radar:harness": "node bin/radar-harness.js",
+    "radar:lint": "npm --prefix apps/radar run lint",
+    "radar:start": "npm --prefix apps/radar run start",
+    "radar:typecheck": "npm --prefix apps/radar run typecheck"
   },
   "bin": {
-    "builder-essential-skills": "bin/builder-essential-skills.js"
+    "builder-essential-skills": "bin/builder-essential-skills.js",
+    "radar-agent": "bin/radar-agent.js",
+    "radar-harness": "bin/radar-harness.js"
   },
   "files": [
     "bin",
+    "harness",
+    "packages/radar-contract",
     "skills",
     "assets",
     ".claude/agents",
