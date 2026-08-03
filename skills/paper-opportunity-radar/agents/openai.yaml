@@ -1,0 +1,4 @@
+interface:
+  display_name: "Paper Opportunity Radar"
+  short_description: "Audit buried research for credible opportunities"
+  default_prompt: "Use $paper-opportunity-radar to run a cumulative, fact-checked paper sweep for my topic and identify credible overlooked project or business opportunities."
