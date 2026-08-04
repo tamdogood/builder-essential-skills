@@ -1,114 +1,159 @@
 ---
 name: top-one-percent
-description: Build an evidence-based path toward exceptional capability in any topic, field, subtopic, or concept. Use when a user wants to learn a domain deeply, asks to become top 1%, requests a complete roadmap or curriculum, needs deliberate practice and feedback, or wants an adaptive tutor that moves from foundations to real-world mastery.
+description: Teach any topic deeply from first principles and build evidence-based paths toward exceptional capability. Use when a user asks to understand, explain, learn, or deep-dive into a topic; asks why or how something works, why it matters, how alternatives compare, or what different perspectives reveal; requests current paradigms, a complete roadmap or curriculum, deliberate practice and feedback, or a top-1%-level mastery plan. Answer explanation questions completely before offering a curriculum; route explicit mastery goals to an adaptive practice and proof-of-capability system.
 ---
 
 # Top One Percent
 
-Create an adaptive mastery system, not an encyclopedic information dump. Treat “top 1%” as a direction and an evidence standard: identify what exceptional practitioners demonstrably do, help the user produce comparable work, and never promise a percentile ranking that cannot be measured.
+Produce unusually clear understanding and evidence-backed mastery. Treat “top one percent” as a direction and a quality standard, not a percentile promise that cannot be measured.
 
-## Establish the Learning Contract
+## Follow the Answer-First Contract
 
-Infer missing details from the request, then state the assumptions briefly. Ask only one high-leverage question when it materially changes the plan; otherwise begin with a sensible default.
+Match the response to the user's actual intent:
 
-Capture:
+- Answer a question as a complete explanation. Do not replace the answer with a roadmap, diagnostic, study plan, or quiz.
+- Build a mastery system when the user asks to become excellent, requests a curriculum, or wants sustained practice.
+- Tutor interactively when the user asks for lessons, exercises, assessment, or ongoing coaching.
+- Combine these only when the combination directly serves the request. If the user asks “Why is X special?”, explain X first; a brief learning path may follow only if useful.
 
-- **Domain and boundary:** Distinguish the requested topic from adjacent fields; describe what is in and out of scope.
-- **Target performance:** Define the real work, decisions, artifacts, or problems the learner wants to handle.
-- **Starting point:** Estimate knowledge, experience, access to tools, and constraints. Use a short diagnostic if uncertain.
-- **Time and format:** Use the learner’s weekly capacity and deadline, if known. Default to sustainable weekly practice rather than an arbitrary intensive schedule.
-- **Evidence standard:** Name benchmarks that are meaningful for this domain: reliable outcomes, portfolio quality, peer review, credentials, competition results, client impact, research contribution, or another appropriate signal.
+Infer the learner's level, goals, and constraints from the request and conversation. State only assumptions that materially affect the answer. Ask at most one high-leverage question when different answers would produce substantially different work; otherwise begin with a sensible default. Personalize examples to the learner's background when known.
 
-If a topic is too broad (for example, “medicine,” “business,” or “programming”), first offer a coherent specialization while showing the larger map. Do not imply that anyone can learn all of a living field completely; identify the enduring core, active frontier, and useful boundaries instead.
+Do not force every learning-science technique into every response. Retrieval, diagnostics, spacing, and deliberate practice are valuable for building durable capability, but they must not become friction before a user receives the explanation they asked for.
 
-## Choose the Mode
+## Route the Request
 
-Select the narrowest mode that fulfils the request. Combine modes only when it makes the next action clearer.
+Select the narrowest useful mode.
 
-| Mode | Use for | Deliver |
+| Mode | Trigger | Primary deliverable |
 | --- | --- | --- |
-| **Mastery map** | A new or broad domain | A landscape, specialization choices, prerequisites, and a staged path |
-| **Learning plan** | A defined goal or deadline | Weekly milestones, resources, practice, and evidence of progress |
-| **Teach** | A topic or concept | A first-principles lesson, examples, misconceptions, and retrieval prompts |
-| **Practice coach** | Skill development | Deliberate exercises, feedback criteria, review, and the next drill |
-| **Diagnostic** | An unclear starting point | Short assessment, gap analysis, and a revised starting level |
-| **Capstone review** | Proving capability | A realistic project or performance brief and a rigorous evaluation rubric |
+| **Deep explainer** | “What is…?”, “Why…?”, “How…?”, “What is special about…?”, “Teach me…”, “Help me understand…”, comparisons, or requests to learn more | A layered, first-principles explanation that fully answers the question |
+| **Mastery map** | A broad or unfamiliar field | The landscape, important boundaries, prerequisites, specialization choices, and dependency-aware path |
+| **Learning plan** | A defined performance goal, deadline, or weekly capacity | Milestones, practice, resources, evidence, and readiness gates |
+| **Interactive tutor** | A request for a lesson sequence or ongoing teaching | One meaningful unit at a time with explanation, guided work, assessment, and adaptation |
+| **Practice coach** | A request to improve a skill through exercises or feedback | Deliberate drills, quality criteria, critique, revision, and the next drill |
+| **Diagnostic** | An unclear starting level or a request to identify gaps | A short assessment, gap analysis, and revised starting point |
+| **Capstone review** | A request to prove or evaluate capability | A realistic brief, rigorous rubric, review, and improvement loop |
 
-For a long-running learning relationship, teach and assess one meaningful unit at a time. Do not advance merely because content was presented.
+A new topic does not automatically require a mastery blueprint. Use **Deep explainer** when the user's immediate goal is understanding; use **Mastery map** or **Learning plan** when the goal is sustained capability.
 
-## Build the Mastery Map
+## Produce a Deep Explanation
 
-Research before making claims about a domain whose standards, tools, or frontier may have changed. Prefer primary sources, standards bodies, respected practitioners’ work, current curricula, and actual job or performance requirements. Label inferences and uncertainty. For high-stakes subjects, verify current guidance against authoritative sources and clearly distinguish education from professional advice.
+### Research before synthesis
 
-Organize the domain in this order:
+Use current research when claims may have changed, when the topic is niche or contested, or when the user asks about a current ecosystem, frontier, product, company, standard, law, or recommendation. Prefer official documentation, primary research, standards bodies, direct data, and credible first-party statements. Use strong secondary sources to add interpretation, not to replace an available primary source.
 
-1. **Purpose and landscape:** Explain what the field is for, its important subdomains, history or governing ideas only when they aid judgment, and how its pieces connect.
-2. **Mental models and vocabulary:** Teach the few ideas that let the learner reason rather than memorize isolated facts.
-3. **Foundations:** List prerequisite knowledge and skills, with a fast diagnostic or bridge plan for each material gap.
-4. **Core methods:** Show the repeatable workflows, tools, techniques, and decision rules practitioners use.
-5. **Applied judgment:** Cover trade-offs, failure modes, edge cases, ethics, and how experts choose between plausible approaches.
-6. **Frontier and specialization:** Identify active debates, evolving tools, adjacent disciplines, and a small number of worthwhile tracks. Do not confuse novelty with mastery.
-7. **Proof of capability:** Define observable work that demonstrates the target level.
+Separate:
 
-Use a dependency-aware sequence: prerequisite before application, simple representative case before edge case, guided practice before independent work, and independent work before performance claims.
+- Stable principles from current implementation details.
+- Documented facts from your synthesis or inference.
+- Marketing claims from mechanisms and observed trade-offs.
+- Broad consensus from active debate.
 
-## Design the Path
+Cite sources near the claims they support. Do not pad the response with citations for common knowledge, and do not use a list of links as a substitute for explanation.
 
-For each stage, specify the outcome, concepts, deliberate practice, feedback source, evidence, and readiness gate. Favor active work over passive consumption.
+### Build the causal model
+
+Before drafting, identify the central thesis and the few causal relationships that make the rest of the topic intelligible. Explain mechanisms with explicit links such as “because,” “which means,” and “therefore.” Do not present a feature inventory and expect the learner to infer why the features matter.
+
+Use the following sequence when it fits the question; omit irrelevant sections rather than mechanically filling a template:
+
+1. **Lead with the simplest accurate model.** Give the direct answer or a compact analogy in the opening. If using an analogy, state where it stops being accurate.
+2. **Separate commonly conflated layers.** Define the important actors, abstractions, or terms and show their responsibilities. Use a compact table when exact mapping is clearer than prose.
+3. **Explain the mechanism.** Trace how the system, idea, or phenomenon works from cause to effect. Make hidden constraints and design decisions visible.
+4. **Ground it in a concrete example.** Walk through one representative end-to-end case, worked example, or before-and-after comparison. Anchor every major abstraction in something observable.
+5. **Explain why it matters.** Connect the mechanism to user, engineering, business, scientific, or social consequences as relevant.
+6. **Use multiple perspectives.** When the topic benefits from it, analyze at least two genuinely different lenses—for example technical architecture, developer experience, economics, competitive strategy, operations, history, ethics, or user behavior. Do not relabel the same point as multiple perspectives.
+7. **Present alternatives and the strongest counterargument.** Explain when the celebrated approach is not best, what complexity it moves rather than removes, and what a thoughtful critic would say.
+8. **Tailor the implications.** Translate the analysis into what it means for the learner's projects, decisions, or next conceptual step when context permits.
+9. **Synthesize.** End with the deepest reusable idea in one or two sentences. For a learning-oriented request, optionally add two to four nontrivial questions or angles for further exploration; do not make answering them a condition of receiving the explanation.
+
+### Calibrate depth and form
+
+- For a simple factual question, answer concisely.
+- For a normal conceptual question, use enough sections and examples to make the causal model clear.
+- For “deep dive,” “teach me everything,” or “top-one-percent understanding,” favor comprehensive synthesis over arbitrary brevity. Interpret “everything” as the complete conceptual map, important mechanisms, trade-offs, and frontier—not every fact ever published.
+- For a broad topic, provide the big picture first and then zoom into the parts that explain the user's question. Make meaningful omissions explicit.
+- Use prose for reasoning. Use bullets for sets, tables for exact comparisons, and diagrams only when relationships or event order are materially easier to understand visually.
+- Define jargon on first use without flattening technical precision. For an experienced learner, move quickly through basics and spend more time on mechanisms, edge cases, competing models, and second-order consequences.
+
+Do not end with a shallow resource list or generic invitation. The explanation itself must create understanding. Recommend a small set of resources only when each has a clear purpose and place in a sequence.
+
+## Build a Mastery System
+
+### Establish the learning contract
+
+Capture only what is needed to design useful practice:
+
+- **Domain and boundary:** Distinguish the target from adjacent fields and state what is in and out of scope.
+- **Target performance:** Define the real decisions, artifacts, problems, or performances the learner wants to handle.
+- **Starting point:** Estimate knowledge, experience, tool access, and material constraints. Use a short diagnostic only when uncertainty changes the starting point.
+- **Time and format:** Use the learner's weekly capacity and deadline when known. Default to sustainable weekly practice.
+- **Evidence standard:** Choose meaningful signals such as reliable outcomes, portfolio quality, peer review, credentials, competition results, client impact, or research contribution.
+
+If a field is impossibly broad, offer a coherent specialization while showing the larger map. Identify the enduring core, active frontier, and useful boundaries; never imply that a living field can be learned completely.
+
+### Map the field
+
+Organize the mastery map in this order:
+
+1. **Purpose and landscape:** What the field is for, its major subdomains, and how the pieces connect.
+2. **Mental models and vocabulary:** The ideas that enable reasoning rather than isolated memorization.
+3. **Foundations:** Prerequisite knowledge and skills, with a fast diagnostic or bridge plan for material gaps.
+4. **Core methods:** The workflows, tools, techniques, and decision rules practitioners repeatedly use.
+5. **Applied judgment:** Trade-offs, failure modes, edge cases, ethics, and method selection under ambiguity.
+6. **Frontier and specialization:** Active debates, evolving tools, adjacent disciplines, and a small number of worthwhile tracks. Do not confuse novelty with mastery.
+7. **Proof of capability:** Observable work that demonstrates the target performance.
+
+Sequence prerequisite before application, a simple representative case before edge cases, guided practice before independent work, and independent work before performance claims.
+
+### Design stages and gates
+
+For each stage, specify the outcome, concepts, deliberate practice, feedback source, evidence, and readiness gate.
 
 | Stage | Aim | Required evidence |
 | --- | --- | --- |
-| **Orient** | Form an accurate map and choose a target track | Explain the field, its constraints, and the chosen target in plain language |
+| **Orient** | Form an accurate map and choose a target track | Explain the field, constraints, and target in plain language |
 | **Foundation** | Gain prerequisite fluency | Solve representative basic problems without a script |
-| **Core craft** | Execute the field’s central methods | Produce or perform work that meets a stated rubric |
-| **Applied judgment** | Adapt methods to ambiguous conditions | Compare alternatives, justify decisions, and recover from mistakes |
-| **Deliberate excellence** | Improve the limiting subskills | Track attempts, feedback, revisions, and error patterns over time |
-| **Contribution** | Operate at the edge of the learner’s target | Complete a realistic capstone, receive credible critique, and improve it |
+| **Core craft** | Execute the field's central methods | Produce or perform work that meets a stated rubric |
+| **Applied judgment** | Adapt methods under ambiguity | Compare alternatives, justify decisions, and recover from mistakes |
+| **Deliberate excellence** | Improve limiting subskills | Track attempts, feedback, revisions, and error patterns over time |
+| **Contribution** | Operate at the edge of the target | Complete a realistic capstone, receive credible critique, and improve it |
 
-Set a readiness gate for every stage. When a learner misses it, diagnose the underlying misconception or subskill and prescribe a smaller corrective loop; do not just repeat the same explanation.
+When a readiness gate is missed, diagnose the underlying misconception or subskill and prescribe a smaller corrective loop. Do not merely repeat the same explanation.
 
-## Teach Each Unit
+## Teach and Coach Interactively
 
-Use this sequence for a lesson or practice session:
+For an ongoing lesson or practice session:
 
-1. State the concrete capability the unit unlocks and why it matters.
-2. Diagnose the prerequisite level. For a novice, explain from first principles,
-   define jargon, and show a worked example; for an experienced learner, begin
-   nearer to realistic independent performance.
-3. Make the important decisions, assumptions, and failure modes visible. Ask the
-   learner to self-explain the reasoning, not just repeat the steps.
-4. Move from a worked example to a completion task, a near-transfer task, and
-   then independent work. Fade support as evidence of competence grows.
-5. Give a no-notes retrieval prompt or constrained exercise before offering the
-   answer. Ask for a confidence estimate when an assessment matters.
-6. Assess reasoning and result against explicit criteria, including whether the
-   learner selected the method appropriately.
-7. Give task-, process-, and next-action feedback; diagnose the first important
-   error instead of only reporting a score. Update the learning record.
+1. State the capability the unit unlocks and explain the concept fully enough to begin.
+2. Diagnose prerequisites lightly. For a novice, teach from first principles and show a worked example; for an experienced learner, start nearer to realistic independent work.
+3. Expose consequential decisions, assumptions, and failure modes. Ask for self-explanation when it reveals understanding.
+4. Move from a worked example to a completion task, a near-transfer task, and independent work. Fade support as evidence improves.
+5. Use a no-notes retrieval prompt or constrained exercise before revealing an assessment answer, not before providing the initial lesson.
+6. Assess reasoning, result, and method selection against explicit criteria.
+7. Give task-, process-, and next-action feedback. Diagnose the first important error instead of reporting only a score.
 
-Use Socratic questions when the goal is durable understanding. Give direct instruction when a misconception, safety concern, or missing foundation makes discovery inefficient. Scale complexity deliberately: isolated component, controlled task, realistic task, then novel or time-constrained task.
+Use Socratic questions when discovery improves durable understanding. Give direct instruction when a missing foundation, misconception, or safety issue makes discovery inefficient.
+
+Read [references/learning-principles.md](references/learning-principles.md) when designing a curriculum, lesson sequence, review schedule, assessment, practice task, or feedback loop. Apply its guardrails without treating a general learning effect as a universal rule.
 
 ## Use Deliberate Practice
 
-Turn vague effort into feedback-rich repetitions. Each practice assignment must name:
+Each practice assignment must name:
 
-- The single or small set of subskills being trained.
-- A task that is difficult but achievable with focused effort.
-- Quality criteria or a rubric before the attempt.
-- A feedback source: the agent, a test suite, a trusted peer, a domain expert, a benchmark, or observable results.
-- A revision or repeat step that targets the discovered weakness.
+- The small set of subskills being trained.
+- A difficult but achievable task.
+- Quality criteria or a rubric disclosed before the attempt.
+- A credible feedback source: the agent, tests, a benchmark, observable results, a trusted peer, or a domain expert.
+- A revision or repeat step targeting the discovered weakness.
 
-Use a review queue for high-value knowledge and skills. Revisit after meaningful
-delays, retrieve or perform before reviewing, and lengthen or shorten the next
-interval based on independent performance. Mix related task types only after
-the learner can distinguish them; early interleaving must not overload a
-novice. Include both familiar and varied contexts before claiming transfer.
+Use delayed retrieval for high-value knowledge and skills. Mix related task types only after the learner can distinguish them. Include familiar and varied contexts before claiming transfer.
 
-Avoid fake precision. Estimate timelines as ranges and name the variables that dominate them: prior transfer, practice quality, feedback access, hours, health, opportunity, and the domain’s competitive depth. Focused deliberate practice matters, but it alone does not determine elite performance; never use a “10,000-hour” promise.
+Estimate timelines as ranges and name the variables that dominate them: prior transfer, practice quality, feedback access, hours, health, opportunity, and competitive depth. Deliberate practice matters but is not sufficient for elite performance; never make a “10,000-hour” promise.
 
 ## Measure and Adapt
 
-Keep a compact learning record in the conversation or a user-requested file:
+Keep a compact learning record only for a sustained mastery or tutoring workflow:
 
 ```markdown
 ## Mastery Record — [Topic]
@@ -122,19 +167,42 @@ Keep a compact learning record in the conversation or a user-requested file:
 - Review date: [date or trigger]
 ```
 
-After each substantive attempt:
+After a substantive attempt:
 
-1. Evaluate the work, reasoning, method selection, and calibration—not only the final answer.
-2. Separate knowledge gaps, process gaps, execution gaps, judgment gaps, and confidence errors.
-3. Update the next practice task to attack the highest-leverage gap, with clear success criteria.
-4. Periodically revisit earlier material with delayed retrieval, then test it in a varied or more realistic context.
+1. Evaluate work, reasoning, method selection, and calibration—not only the final answer.
+2. Separate knowledge, process, execution, judgment, and confidence gaps.
+3. Target the highest-leverage gap with clear success criteria.
+4. Revisit earlier material after a delay and in a varied or realistic context.
 5. Increase independence as evidence improves; reduce scaffolding instead of adding more content.
 
-When claimed progress lacks credible evidence, say so plainly and offer the smallest test that would resolve it.
+When claimed progress lacks credible evidence, say so and offer the smallest test that would resolve it.
 
-## Default Output
+## Choose the Output by Mode
 
-For a new topic, return a concise but complete `Mastery Blueprint`:
+### Deep explainer
+
+Lead with the answer, then use the smallest useful subset of:
+
+```markdown
+# [Topic]
+
+[Simplest accurate model and central thesis]
+
+## The layers or terms people conflate
+## How it actually works
+## A concrete example
+## Why it matters from different perspectives
+## Alternatives, trade-offs, and counterargument
+## What this means for the learner
+## The deeper takeaway
+## Questions worth exploring next
+```
+
+This is a coverage guide, not a rigid heading template.
+
+### Mastery map or learning plan
+
+Return a `Mastery Blueprint` adapted to the request:
 
 ```markdown
 # [Topic] — Mastery Blueprint
@@ -144,7 +212,7 @@ For a new topic, return a concise but complete `Mastery Blueprint`:
 ## Domain Map
 ## Starting Point and Assumptions
 ## Staged Curriculum
-## First 7 Days / First Milestone
+## First 7 Days or First Milestone
 ## Deliberate Practice System
 ## Resources and Why Each One Earned a Place
 ## Assessments and Readiness Gates
@@ -153,15 +221,19 @@ For a new topic, return a concise but complete `Mastery Blueprint`:
 ## Next Action
 ```
 
-Do not list resources for their own sake. Choose a small, varied set—primary material, an explanatory source, practice material, and feedback channel—then explain the purpose and order of use. Offer an expanded resource map only when the user asks for it.
+For an ongoing tutor, complete the current unit and then end with its assessment prompt. For a narrow explanation, do not append the full blueprint.
 
-For a narrow concept, replace the full blueprint with a lesson and at least one retrieval or transfer exercise. For an ongoing tutor, end after the current unit’s assessment prompt and wait for the learner’s response.
+## Final Quality Check
 
-## Quality Bar
+Before responding, verify:
 
-- Make the path specific enough to act on today and flexible enough to survive new evidence.
-- Teach the whole relevant landscape without flattening it into an unprioritized list.
-- Tie every important claim, resource, and recommendation to a purpose.
-- Name uncertainty, scope limits, and professional boundaries openly.
-- Optimize for demonstrated judgment and output, not the feeling of having consumed a complete curriculum.
-- Read [references/learning-principles.md](references/learning-principles.md) when designing lessons, review schedules, practice, or feedback. Apply its guardrails; do not turn a general learning effect into a universal rule.
+- The opening directly answers the user's real question.
+- The response explains causal mechanisms, not only labels or features.
+- Important abstractions are grounded in at least one concrete example.
+- Frequently confused layers or alternatives are distinguished.
+- The analysis includes a real trade-off or strongest counterargument when relevant.
+- Multiple perspectives add genuinely different insight when the topic warrants them.
+- Current, niche, or contested claims are researched and uncertainty is labeled.
+- Personalization changes the explanation or recommendation rather than merely mentioning the learner.
+- A roadmap, diagnostic, or quiz appears only when it serves the requested mode.
+- The learner leaves with both a reusable mental model and a clear next conceptual or practical step.
