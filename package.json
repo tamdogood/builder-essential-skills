@@ -14,6 +14,7 @@
     "bin",
     "skills",
     "assets",
+    "scripts",
     ".claude/agents",
     "install.ps1",
     "install.sh",

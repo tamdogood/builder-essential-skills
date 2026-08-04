@@ -27,7 +27,7 @@ Keep these traits consistent:
 - restrained indigo-violet light as a recurring depth cue;
 - soft museum lighting, deep shadows, subtle grain, and believable contact shadows;
 - one strong physical metaphor, with small tactile details that reward inspection;
-- thin, widely tracked cream typography integrated into the scene;
+- deterministic Avenir Next typography composited after image generation;
 - generous negative space for the title and a short uppercase promise.
 
 Use color as a signal, not decoration. Violet can suggest thought or depth,
@@ -57,6 +57,12 @@ possible, begin with `/`, and use the exact skill slug. The subtitle should be
 short, concrete, and uppercase with generous tracking. Use a left-aligned
 title when the hero object is on the right; use right-aligned title only when
 the scene clearly supports it.
+
+Do not ask the image model to render the final lettering. Generate a text-free
+scene, then use `scripts/render-skill-banner-type.swift` to composite the shared
+type system: Avenir Next Regular at 64 px for titles; Avenir Next Medium at 18
+px with 5 px tracking for subtitles; a 26 px gap; and warm parchment color.
+Placement may adapt to the composition, but these typography values must not.
 
 Suggested copy format:
 
@@ -93,14 +99,15 @@ Color palette: charcoal black, graphite, antique brass, parchment cream,
   muted indigo-violet.
 Materials/textures: rough stone, handmade paper fibers, brushed metal,
   believable shadows and surface wear.
-Text (verbatim): "/<slug>" and beneath it, "<SHORT PROMISE>".
-Constraints: exact spelling, no other text, no logo, no watermark, no UI,
+Text: no text; final title and subtitle are composited locally after generation.
+Constraints: no text, no logo, no watermark, no UI,
   no border, no neon colors, no people unless the skill requires them.
 ```
 
 For image generation, keep the scene prompt specific but not overloaded. Name
-the skill's metaphor, placement, materials, light, negative space, and exact
-text. Do not ask the model to create a whole set of unrelated objects.
+the skill's metaphor, placement, materials, light, and negative space. Add the
+exact title and subtitle only during the deterministic local type pass. Do not
+ask the model to create a whole set of unrelated objects.
 
 ## SVG card specification
 
