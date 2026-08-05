@@ -28,9 +28,10 @@
     },
     {
       "title": "Writing",
-      "description": "Skills for clear prose, publishing, and campaign creation.",
+      "description": "Skills for naming, clear prose, publishing, and campaign creation.",
       "skills": [
         "write-blog",
+        "name-your-business",
         "create-marketing-kit",
         "orwell-writing"
       ]

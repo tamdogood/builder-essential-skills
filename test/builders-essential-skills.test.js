@@ -110,6 +110,19 @@ test("installs skills and agents into the current project", () => {
           projectRoot,
           ".codex",
           "skills",
+          "name-your-business",
+          "agents",
+          "openai.yaml",
+        ),
+      ),
+      true,
+    );
+    assert.equal(
+      fs.existsSync(
+        path.join(
+          projectRoot,
+          ".codex",
+          "skills",
           "build-scenario-tests",
           "examples",
           "web-workspace-invite.scenario.md",

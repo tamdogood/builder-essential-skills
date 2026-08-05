@@ -25,6 +25,7 @@ private let banners: [Banner] = [
     .init(slug: "lead", subtitle: "TURN A PRODUCT GOAL INTO A SHIPPED PR", anchorX: 836, titleTop: 220, alignment: .center),
     .init(slug: "make-playbook", subtitle: "TURN THE NEXT MOVE INTO A PLAN.", anchorX: 88, titleTop: 294, alignment: .left),
     .init(slug: "map-the-landscape", subtitle: "SEE HOW THE WHOLE SYSTEM FITS TOGETHER", anchorX: 76, titleTop: 536, alignment: .left),
+    .init(slug: "name-your-business", subtitle: "FIND THE NAME. VERIFY THE DOMAIN.", anchorX: 86, titleTop: 340, alignment: .left),
     .init(slug: "orwell-writing", subtitle: "WRITE PLAINLY. SAY WHAT YOU MEAN.", anchorX: 76, titleTop: 674, alignment: .left),
     .init(slug: "paper-opportunity-radar", subtitle: "FIND THE SIGNAL BURIED IN RESEARCH", anchorX: 78, titleTop: 662, alignment: .left),
     .init(slug: "run-smoke-tests", subtitle: "AUDIT THE WHOLE JOURNEY.", anchorX: 78, titleTop: 366, alignment: .left),
@@ -49,13 +50,21 @@ private func originX(anchor: CGFloat, width: CGFloat, alignment: Alignment) -> C
     }
 }
 
-guard CommandLine.arguments.count == 3 else {
-    fputs("usage: swift scripts/render-skill-banner-type.swift <background-png-dir> <output-png-dir>\n", stderr)
+guard CommandLine.arguments.count == 3 || CommandLine.arguments.count == 4 else {
+    fputs("usage: swift scripts/render-skill-banner-type.swift <background-png-dir> <output-png-dir> [slug]\n", stderr)
     exit(2)
 }
 
 let inputDirectory = URL(fileURLWithPath: CommandLine.arguments[1], isDirectory: true)
 let outputDirectory = URL(fileURLWithPath: CommandLine.arguments[2], isDirectory: true)
+private let selectedSlug = CommandLine.arguments.count == 4 ? CommandLine.arguments[3] : nil
+private let selectedBanners = selectedSlug == nil ? banners : banners.filter { $0.slug == selectedSlug }
+
+if let selectedSlug, selectedBanners.isEmpty {
+    fputs("unknown banner slug: \(selectedSlug)\n", stderr)
+    exit(2)
+}
+
 try FileManager.default.createDirectory(at: outputDirectory, withIntermediateDirectories: true)
 
 let shadow = NSShadow()
@@ -63,7 +72,7 @@ shadow.shadowColor = NSColor.black.withAlphaComponent(0.7)
 shadow.shadowBlurRadius = 5
 shadow.shadowOffset = NSSize(width: 0, height: -1)
 
-for banner in banners {
+for banner in selectedBanners {
     let inputURL = inputDirectory.appendingPathComponent("\(banner.slug).png")
     let outputURL = outputDirectory.appendingPathComponent("\(banner.slug).png")
 

@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Name Your Business skill card</title>
+  <desc id="desc">A dark atelier card with a brass naming rail, blank candidate tiles, and a verification ring, describing fast creative naming followed by selective live validation.</desc>
+  <defs>
+    <linearGradient id="background" x1="78" y1="42" x2="1116" y2="726" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#15131A"/>
+      <stop offset="0.52" stop-color="#0A0B0E"/>
+      <stop offset="1" stop-color="#15110D"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientTransform="translate(950 235) rotate(140) scale(448 320)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#66518C" stop-opacity="0.4"/>
+      <stop offset="0.55" stop-color="#B68A50" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#0A0B0E" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="brass" x1="710" y1="150" x2="1072" y2="472" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EED5A2"/>
+      <stop offset="0.46" stop-color="#B8874A"/>
+      <stop offset="1" stop-color="#704A29"/>
+    </linearGradient>
+    <filter id="softGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="760" rx="34" fill="url(#background)"/>
+  <rect width="1200" height="760" rx="34" fill="url(#glow)"/>
+  <rect x="24" y="24" width="1152" height="712" rx="25" fill="none" stroke="#B68B56" stroke-opacity="0.42"/>
+  <path d="M73 544C226 702 470 732 681 651C857 584 990 461 1127 283" fill="none" stroke="#B68B56" stroke-opacity="0.22" stroke-width="1.5"/>
+  <circle cx="954" cy="222" r="205" fill="#675493" fill-opacity="0.1" filter="url(#softGlow)"/>
+
+  <text x="72" y="91" fill="#BFAE92" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="20" letter-spacing="3">BUILDER'S ESSENTIAL SKILLS</text>
+  <text x="1086" y="91" fill="#D7C3A0" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="25" text-anchor="end">17</text>
+
+  <text x="72" y="188" fill="#F1E8D8" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="54" font-weight="650" letter-spacing="-1.8">Name Your Business</text>
+  <text x="72" y="237" fill="#BDB4A9" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="25">Explore distinctive names quickly, then verify</text>
+  <text x="72" y="272" fill="#BDB4A9" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="25">the exact domain before making the final choice.</text>
+
+  <g transform="translate(670 137)" fill="none" stroke="url(#brass)" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="16" y="32" width="92" height="64" rx="9" fill="#18141A" stroke-width="3"/>
+    <rect x="16" y="114" width="92" height="64" rx="9" fill="#18141A" stroke-width="3" opacity="0.72"/>
+    <rect x="16" y="196" width="92" height="64" rx="9" fill="#18141A" stroke-width="3" opacity="0.52"/>
+    <path d="M125 64h59M125 146h59M125 228h59" stroke-width="3" opacity="0.5"/>
+    <path d="M184 64v164" stroke-width="4" opacity="0.82"/>
+    <path d="M184 146h58" stroke-width="4"/>
+    <rect x="242" y="102" width="210" height="88" rx="12" fill="#171318" stroke-width="4"/>
+    <path d="M268 126h157M268 166h112" stroke-width="3" opacity="0.4"/>
+    <path d="M347 190v48" stroke-width="4"/>
+    <circle cx="347" cy="287" r="49" fill="#111014" stroke-width="5"/>
+    <circle cx="347" cy="287" r="30" stroke-width="3" opacity="0.6"/>
+    <path d="m328 287 13 14 27-31" stroke="#E8D4AD" stroke-width="5"/>
+    <path d="M452 146h31M483 146l20-18M483 146l20 18" stroke-width="3" opacity="0.66"/>
+  </g>
+
+  <line x1="72" y1="363" x2="1128" y2="363" stroke="#B68B56" stroke-opacity="0.32"/>
+  <text x="72" y="414" fill="#8E806C" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17" letter-spacing="2.4">DISCIPLINE</text>
+  <text x="72" y="452" fill="#E7D8C0" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="24">Brand strategy &amp; verbal identity</text>
+  <text x="554" y="414" fill="#8E806C" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17" letter-spacing="2.4">PROMISE</text>
+  <text x="554" y="452" fill="#E7D8C0" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="24">Fast shortlist, evidence-backed finalist</text>
+
+  <rect x="72" y="515" width="1056" height="91" rx="13" fill="#0A0B0D" stroke="#8C6A43" stroke-opacity="0.72"/>
+  <circle cx="105" cy="561" r="5" fill="#B68B56"/>
+  <text x="126" y="570" fill="#D9C7A9" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="21">/name-your-business Name this idea, then verify the finalists.</text>
+
+  <circle cx="84" cy="681" r="12" fill="none" stroke="#B68B56" stroke-width="2"/>
+  <path d="m78 681 4 4 8-10" fill="none" stroke="#E8D4AD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="108" y="688" fill="#9C907F" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17" letter-spacing="1.3">FRAME → GENERATE → SHORTLIST → VERIFY → DECIDE</text>
+  <text x="1128" y="688" fill="#756B5E" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" text-anchor="end">builder-essential-skills</text>
+</svg>
