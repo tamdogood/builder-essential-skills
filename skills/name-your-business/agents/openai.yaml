@@ -1,0 +1,4 @@
+interface:
+  display_name: "Name Your Business"
+  short_description: "Create and screen a distinctive business name"
+  default_prompt: "Use $name-your-business to turn my idea into a distinctive, strategically sound name. Start with the fastest useful creative mode; when I ask about availability or choose a final name, validate the relevant conflicts and exact domains live."

@@ -124,6 +124,12 @@ repository. Restart Claude Code or Codex after installation.
       <a href="skills/run-smoke-tests/SKILL.md"><img src="assets/skill-banners/run-smoke-tests.webp" alt="run-smoke-tests — auditable user journey validation skill" width="100%"></a>
     </td>
   </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <a href="skills/name-your-business/SKILL.md"><img src="assets/skill-banners/name-your-business.webp" alt="name-your-business — fast naming and selective live validation skill" width="100%"></a>
+    </td>
+    <td width="50%" valign="top"></td>
+  </tr>
 </table>
 
 Every skill lives in `skills/<name>/SKILL.md`. Some also ship scripts,
