@@ -189,39 +189,26 @@ with that repository rather than changing your user-level setup.
 ## What gets installed
 
 The installers copy each folder in `skills/` to the right location for your
-agent and install the `lead` builder and reviewer agents for Claude Code.
+agent runtime.
 
 | Install mode | Claude Code | Codex |
 | --- | --- | --- |
 | User | `~/.claude/skills` | `${CODEX_HOME:-~/.codex}/skills` |
 | Current project | `.claude/skills` | `.codex/skills` |
 
-You will need Claude Code and/or Codex, depending on which agent you use.
-Python 3 is required for the `lead` routing helper and the
-`session-profiler` tools. The Codex CLI is optional, but `lead` can use it for
-builder jobs:
-
-```bash
-npm i -g @openai/codex@latest
-```
+You will need Claude Code and/or Codex, depending on which agent you use. Some
+bundled deterministic tools, including `session-profiler`, require Python 3.
 
 ## Go deeper
 
-### Route models for `lead`
+### Native-agent orchestration
 
-`lead` and `lead-research` can assign different models to roles such as
-lead, builder, reviewer, researcher, scout, and critic. Inspect the active
-routing before a run:
-
-```bash
-python skills/lead/config.py
-python skills/lead/config.py --role builder
-python skills/lead/config.py --check
-```
-
-Defaults live in `skills/lead/config.py` and `skills/lead/models.json`. Use
-`.lead/config` for a repository override or `~/.lead/config` for a personal
-default.
+`lead` and `lead-research` use the subagent tools provided by whichever runtime
+invokes them. They probe concurrency, isolation, messaging, shell, write, and web
+capabilities at the start of a run, then assign work by role. There are no model
+IDs or provider CLI commands to configure when switching between Codex and
+Claude Code. A runtime without native subagent delegation stops instead of
+letting the orchestrator write code or perform research itself.
 
 ### Profile an agent session
 
@@ -268,7 +255,6 @@ sensitive project context. Review them before sharing.
 skills/                  The skill collection
   <skill>/SKILL.md        Each skill's entry point and workflow
 assets/readme-hero.png    README banner
-.claude/agents/          Builder and reviewer agents for lead
 install.sh                macOS/Linux installer
 install.ps1               Windows installer
 package.json              npm package metadata and npx entrypoint

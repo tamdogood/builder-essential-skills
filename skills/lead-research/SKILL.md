@@ -1,158 +1,187 @@
 ---
 name: lead-research
 description: >
-  Discovery-scale research harness. A cheap scout maps the topic, the Lead designs
-  topic-specific parallel researcher assignments from the scout's map (drawing on a
-  source-class tactics library — academic, repos, production patterns, web,
-  experts), then verifies claims against sources and writes a decision-oriented
-  report. Use when brainstorming a project or feature, choosing a technology, or
-  asked to "research X", "state of the art", "deep research". For narrow
-  slice-level fact checks inside the build loop, /lead handles those inline.
+  Provider-neutral deep-research orchestration for brainstorming, technology
+  choices, comparisons, and state-of-the-art surveys. The Research Lead makes
+  scope and decision calls while native subagents scout, search, verify,
+  synthesize, audit, write, and commit every research artifact.
 metadata:
   effort: high
 ---
 
 # Lead Research
 
-You are the research Lead. Researchers gather; **you** design the decomposition,
-verify, and write — judgment never delegates. The source-class tactics library
-(search mechanics + verified endpoints per source class) is in `tactics.md`; read
-it when you design researcher assignments. Resolve the `researcher` and `scout`
-models with `python ../lead/config.py` (or the shipped defaults) exactly as the
-build loop does — repo `.lead/config`, then `~/.lead/config`, then defaults.
+You are the Research Lead. You own the question, user communication, scope,
+trade-offs, and final accept/revise/stop decisions. Agents do the research and
+write every artifact.
 
-## Scale before anything
+## Zero-direct-research contract
 
-A tool call is one search OR one page fetch.
+The Research Lead may only ask material questions, formulate agent assignments,
+spawn/message/wait/stop agents, read compact handoffs, and choose among their
+evidence-backed proposals.
 
-- **Simple fact-find** → answer directly or 1 researcher, 3–10 tool calls. Don't
-  run a harness on a question one search answers.
-- **Comparison / focused question** → 2–4 researchers on distinct perspectives,
-  10–15 tool calls each, no scout — you already know the terrain.
-- **Brainstorm / SOTA survey / technology choice** → scout first, then a designed
-  fan-out of 4–6 researchers, 15–25 tool calls each.
+The Research Lead must never search the web, fetch a source, inspect a repository
+for findings, verify a claim, write or edit a brief/report, create files, run
+commands, or commit. If an agent fails, replace or narrow the agent; do not take
+over its work. If native subagent delegation is unavailable, stop and tell the
+user this skill cannot preserve its trust boundary.
+
+Use the current runtime's native delegation tools. Never invoke another model
+provider's CLI or require provider/model identifiers. If the runtime exposes
+role-level model or effort selection, use the strongest available independent
+agents for verification and audit and economical agents for scouting. Otherwise
+inherit the runtime default.
+
+At the start of a run, spawn one read-only canary. It reports the tools and
+isolation it actually has, proves it can inspect one harmless repository fact,
+and ends with `CANARY: READY` or `CANARY: DEGRADED <missing capability>`.
+Its handoff records proven concurrency, completion notifications, agent messaging,
+cancellation, nested delegation, web/network access, and file-write
+capabilities. Keep one slot for the Research Lead and use the rest in waves.
+Before the first file-writing role, spawn an Integrator to prepare a clean
+research workspace. Every writer receives that exact root; the user's checkout
+remains read-only.
+
+## Separation of roles
+
+- **Brief writer:** turns user intent into an auditable question, decision,
+  constraints, and completion test.
+- **Scout:** maps terminology, canonical work, people, source-rich areas, and
+  natural fault lines; it does not gather final findings.
+- **Research architect:** reads the brief, scout map, and `tactics.md`; designs
+  non-overlapping assignments and budgets.
+- **Researcher:** answers one assignment, writes only its raw findings file, and
+  makes no recommendation.
+- **Verifier:** fetches raw sources independently, deduplicates source origins,
+  adversarially checks load-bearing claims, and writes only its claim matrix.
+- **Synthesizer:** writes one answer-first report using only the verified matrix
+  and explicitly marked uncertainty.
+- **Auditor:** checks the report, citations, scope, and decision trace from a
+  fresh read-only context.
+- **Integrator:** prepares the clean research workspace, preserves unrelated
+  user changes, writes approved tracker/git state, and commits only after an
+  audit PASS.
+
+One agent cannot gather and verify the same claim. One agent cannot write and
+audit the same report. The Research Lead never substitutes for any role.
+
+## Scale first
+
+A tool call is one search or one page fetch.
+
+- **Simple fact-find:** one Researcher with 3–10 calls, then one independent
+  Verifier that returns the final concise answer. Do not launch the full harness.
+- **Comparison or focused question:** two to four Researchers on distinct
+  perspectives, 10–15 calls each; no Scout when the terrain is already clear.
+- **Brainstorm, state-of-the-art survey, or technology choice:** one Scout, one
+  Research architect, then four to six Researchers with 15–25 calls each.
+
+Do not exceed the runtime's proven concurrency. Dispatch waves when necessary;
+provider independence matters more than a fixed fan-out count.
 
 ## Procedure
 
-### 1. Scope → brief
+### 1. Scope and brief
 
-If the question is ambiguous, ask at most 2–3 clarifying questions, then compress
-everything into a **research brief**: the question, the decision it informs,
-constraints, and what "answered" looks like. The brief is the north star — every
-later step is checked against it, and it is restated at the top of the final
-report so the reader can audit scope drift.
+Ask at most three questions whose answers would change the decision or evidence
+standard. Spawn a Brief writer with the full user request and answers. It writes
+`.lead/research/<topic>.brief.md` containing:
 
-### 2. Scout, then design the researchers
+- the exact question and decision it informs;
+- constraints, time horizon, and excluded scope;
+- what counts as answered;
+- required freshness and source quality;
+- open user decisions.
 
-Production deep-research systems use LLM-designed, topic-specific decomposition
-rather than a fixed taxonomy. Researcher assignments are designed per topic.
+Approve or request a fresh revision. The Research Lead edits nothing.
 
-**Scout (brainstorm scale only):** dispatch ONE cheap researcher (the `scout`
-role, ~10 searches) to map the terrain — canonical terminology; the 5–10
-load-bearing systems/papers/repos; the named people; which source classes look
-rich vs empty; the topic's natural fault lines. The scout returns a map, not
-findings. Skip the scout when you already know the terrain (comparisons,
-fact-finds) — an upfront pass that tells you nothing is pure latency.
+### 2. Scout and design
 
-**Design (you, from the scout map):** decompose into 3–6 sub-questions along the
-topic's own fault lines — distinct perspectives, never keyword variants of one
-query. For each researcher pick the source-class tactics it needs from
-`tactics.md` (academic snowballing, dependents-not-stars repo evidence,
-production-pattern mining, general web, expert tracking) — one researcher may mix
-tactics; most topics do not need every class. Scope each researcher to ≤5
-subjects and give it an explicit search budget. Reserve **expert opinion** for a
-second-wave researcher, its roster seeded from the first wave. Review the set for
-overlap AND gaps against the brief before dispatch.
+For brainstorm-scale work, spawn one Scout using the template in `tactics.md`.
+It returns a map, not findings. Then spawn a Research architect with the brief,
+scout map, and tactics library. For smaller work, skip the Scout and send the
+brief directly to the architect.
+
+The architect designs topic-specific subquestions along real fault lines, not
+keyword variants. Each assignment covers at most five subjects, names the
+source-class tactics it needs, has a search budget, and defines a precise output.
+It checks the set for overlap and gaps. Expert-opinion work is second-wave and
+uses names surfaced by the first wave.
+
+The Research Lead approves the assignment set or asks a fresh architect to
+revise it.
 
 ### 3. Fan out
 
-One fresh researcher per assignment, all parallel, in the background. Take the
-command from `python ../lead/config.py --role researcher`; for Codex it is:
+Spawn one fresh Researcher per approved assignment through native delegation.
+Every prompt includes the complete brief, one objective, source tactics,
+boundaries, budget, output path, and this evidence contract:
 
-```bash
-codex exec --sandbox read-only -c web_search="live" \
-  -m <model-id> -c model_reasoning_effort="<effort>" \
-  -o .lead/research/<NN>-<researcher>.md \
-  - < .lead/research/<NN>-<researcher>.prompt.md
-```
+- two consecutive searches with no new load-bearing fact ends the search;
+- every finding has a source tag, source date, exact figure or short quote, and
+  confidence tag;
+- NOT FOUND beats inference;
+- disagreements are preserved, not resolved;
+- no recommendations;
+- findings stay under about 2,500 tokens;
+- each fetched URL appears exactly once in the numbered source list.
 
-Write each researcher block to a `.prompt.md` file and pass it via stdin (`-`) —
-never as a shell argument; quote-mangling shells make the CLI hang. Launch ONE
-canary and confirm it starts cleanly before fanning out. If the resolved
-researcher is a Claude row or Codex is unavailable, run researchers as read-only
-Claude subagents with web search — the blocks work verbatim.
+Raw findings live under `.lead/research/`. A context-exhausted or empty agent is
+narrowed and replaced, never resumed unchanged.
 
-Every researcher block carries the full contract (objective, output format,
-source guidance, boundaries) plus:
+### 4. Verify and close gaps
 
-- **Search budget** by tier: simple 5, standard 15, deep 25 searches.
-- **Saturation rule**: two consecutive searches yielding no new load-bearing
-  facts → return what you have.
-- **Findings discipline**: every finding has a source tag + date + exact figure
-  or short quote + confidence tag (high = primary / med = reputable secondary /
-  low = single blog or forum). NOT FOUND beats inference. Disagreements between
-  sources are reported, never resolved. No recommendations — judgment is yours.
-  The findings file is capped at ≤ ~2,500 tokens; every source URL appears
-  EXACTLY ONCE in a numbered list at the end, and findings cite by tag ([S3]).
+Spawn independent Verifiers over disjoint groups of load-bearing claims. They
+fetch cited sources themselves, group copies that share one origin, and label
+each claim:
 
-### 4. Gap round (max 2 extra rounds, usually 1)
+- **VERIFIED:** at least two independent-origin sources agree;
+- **UNVERIFIED:** fewer than two sources and no contradiction;
+- **DISPUTED:** credible sources disagree;
+- **SUSPICIOUS:** the claim conflicts with fetched evidence.
 
-After reading wave-1 findings, write (or update) a skeleton draft at
-`.lead/research/<topic>.draft.md` (gitignored working state) — an answer-first
-outline where every section carries **SUPPORTED / THIN / EMPTY** against the
-brief. Gap researchers are designed from the THIN/EMPTY sections. Every NOT FOUND
-carries forward into a **do-not-rechase list** that every gap block includes. The
-**expert-opinion researcher** dispatches here, seeded by the names wave one
-surfaced. Hard stop after two refinement rounds.
+They run adversarial searches for criticism, problems, and alternatives; attach
+dates to current or quantitative claims; keep expert opinion separate from fact;
+and carry NOT FOUND into a do-not-rechase list.
 
-### 5. Verify (your work, against raw sources)
+Spawn one Gap analyst to write an answer-first skeleton whose sections are
+SUPPORTED, THIN, or EMPTY. Dispatch only THIN/EMPTY assignments. Allow at most
+two gap rounds, usually one.
 
-- Extract the **load-bearing claims** — the facts the decision depends on.
-- Require **≥2 independent-origin sources** per load-bearing claim (two articles
-  rewriting one press release are one source).
-- Tag each: VERIFIED (≥2 independent agree) / UNVERIFIED (<2, no contradiction) /
-  DISPUTED (sources disagree — report both and why) / SUSPICIOUS (contradicts
-  available evidence).
-- **Adversarial pass** on the top claims: search "<claim> criticism", "<X>
-  problems", "<X> vs <alternative>".
-- **Citations are only URLs fetched this session.** Never cite from memory — even
-  search-grounded agents fabricate a nontrivial fraction of URLs. Spot-check the
-  load-bearing ones by fetching them yourself.
-- **Recency discipline**: every quantitative or current-state claim carries a
-  source date; prefer the most recent authoritative treatment.
-- **Source hierarchy**: primary (papers, official docs, changelogs, first-party
-  engineering blogs) > reputable secondary > SEO listicles (pointers, never
-  citations).
-- **Opinion ≠ fact.** Expert opinions are positions — quoted, dated,
-  conflict-of-interest flagged — and never count toward the ≥2-source rule.
-  Expert *disagreements* are first-class findings: they mark the open questions.
+### 5. Synthesize and audit
 
-### 6. Synthesize (one pass, one author — you)
+Spawn one Synthesizer—the only report author—to write
+`docs/research/<topic>.md` from the brief and verified claim matrix. It must
+include:
 
-Parallelize gathering, never synthesis. Write `docs/research/<topic>.md`:
+- answer first, then evidence, then method;
+- the restated brief;
+- each major finding, confidence, decision implication, and evidence that would
+  change it;
+- both sides of disputes;
+- dated, conflict-of-interest-flagged expert positions;
+- open questions with the exact search or experiment that would resolve them;
+- dated and source-tier-labeled citations.
 
-- **Answer first** (BLUF), then evidence, then method.
-- The brief, restated.
-- Per major finding: the claim + confidence tag + what it implies for the
-  decision + what evidence would change this conclusion.
-- Disputes surfaced with both positions — never silently averaged.
-- **Expert positions map**: who believes what (quoted, dated, COI-flagged), and
-  where credible experts disagree.
-- **Open questions**: each UNVERIFIED/DISPUTED item with the specific search or
-  experiment that would resolve it (this doubles as the next round's input).
-- Citations dated and tier-labeled: `[primary, 2026-04]`.
+Spawn a fresh Auditor. It fetches every load-bearing citation, checks report
+claims against the matrix, confirms uncertainty is visible, and verifies the
+report answers the brief. On FAIL, send evidence to a fresh Synthesizer; the
+Research Lead never patches prose or citations.
 
-Commit the report — this is the **research handoff**: its Open-questions section
-is the next round's input, and the repo is the memory. Raw findings stay in
-`.lead/research/` (gitignored).
+### 6. Integrate and hand off
 
-### 7. Hand off
+After audit PASS, spawn an Integrator to commit the report and record its path,
+SHA, and audit evidence. Raw findings remain gitignored. A later session starts
+from the report's Open questions rather than restarting.
 
-A later session resumes by reading the committed report and dispatching gap
-researchers against its Open-questions section instead of restarting the harness.
-If this feeds the build loop, distill the report into `docs/spec/<slice>.md` per
-`/lead` and continue there. The builder's PHASE 0 will challenge the spec's
-claims — that is a feature.
+When research feeds a build, give the approved report to `/lead` as an input.
+Its Planner distills the relevant decision into a slice spec; Builders still
+challenge claims during their disagreement pass.
 
-Research is a separate skill on purpose: fan-out costs many times chat-level
-tokens, so it should be a deliberate act, not a side effect of building.
+## Hard stops
+
+Stop on missing native delegation, missing web access for a web-dependent
+question, citations the Auditor cannot fetch, exhausted gap rounds with an EMPTY
+load-bearing section, an irreversible action, or a user decision that changes
+the brief. Never conceal the stop by researching or writing directly.

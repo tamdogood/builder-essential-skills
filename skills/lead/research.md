@@ -1,76 +1,84 @@
-# Inline research fan-out (for the build loop)
+# Inline research fan-out
 
-Read this only when a research trigger fires inside the factory (an oddity, a
-failure diagnosis, a load-bearing fact the spec depends on). The fan-out uses the
-`researcher` role as parallel web-research subagents — read-only, live search, on
-the flat-rate subscription — and the Lead keeps all judgment: it verifies the
-load-bearing claims and writes the spec itself. For discovery-scale research, use
-the separate `/lead-research` skill; this is the slice-scale version.
+Use this only for a load-bearing fact, failure diagnosis, or unfamiliar API
+inside a build run. Discovery-scale work belongs to `/lead-research`.
 
-## Fan out
+The Lead never searches, fetches sources, verifies claims, or writes the spec.
+It dispatches native agents, reads their compact verdicts, and decides whether
+the evidence is sufficient.
 
-Resolve the researcher model with `python skills/lead/config.py --role
-researcher`. Decompose the question into 3–5 narrow, NON-OVERLAPPING questions —
-cover different angles, not one angle five times. Typical split: official
-docs/reference; changelog / breaking changes; community failure reports;
-alternatives/comparisons; security/operational constraints.
+## Flow
 
-One fresh researcher per question, all launched in parallel in the background.
-Take the exact command from the resolver; for Codex it looks like:
+1. Spawn one Research planner with the question, approved slice, and decision it
+   informs. It returns 2–5 narrow, non-overlapping assignments and a source plan.
+2. Approve or revise the assignments, then spawn one fresh Researcher per
+   assignment in parallel within the runtime's proven concurrency limit.
+3. Spawn a fresh Verifier with the raw findings. It fetches every load-bearing
+   source, checks independent origin, runs an adversarial search, and writes a
+   claim matrix.
+4. If the matrix is thin, dispatch only the named gap assignments. Stop after
+   two gap rounds.
+5. Spawn a Spec writer to distill verified claims into
+   `docs/spec/<slice>.md`, then a fresh Reviewer to check the spec against the
+   claim matrix and sources.
+6. On PASS, an Integrator commits the spec. Raw working files remain under
+   `.lead/research/`.
 
-```bash
-codex exec -C <repo-root> --sandbox read-only -c web_search="live" \
-  -m <model-id> -c model_reasoning_effort="<effort>" \
-  -o .lead/research/<NN>-<topic>.md \
-  - < .lead/research/<NN>-<topic>.prompt.md
-```
+No agent may both gather and verify the same claim, or write and approve the
+same spec. If web/network access is unavailable, record NOT VERIFIED and stop;
+the Lead must not research directly as a fallback.
 
-Write each research block to a `.prompt.md` file and pass it via stdin (`-`),
-never as a shell argument — quote-mangling shells make the CLI hang on stdin.
-Launch ONE canary researcher and confirm it starts cleanly before fanning out. If
-the resolved researcher is a Claude row or Codex is unavailable, run the fan-out
-as read-only Claude subagents with web search — the block below works verbatim.
-
-- `--sandbox read-only`: researchers never write to the repo.
-- Effort is coverage-tier (`high`, not `xhigh`); synthesis happens on the Lead's
-  side.
-- Scope each researcher to ≤5 subjects and put hard context rules in the block
-  (snippet over page; quote ≤2 sentences; stop the moment you can answer) — a
-  researcher that fills its context window dies without writing its output.
-  Bisect and re-dispatch a dead researcher; do not re-run it as-is.
-
-## Research block template
+## Researcher block
 
 ```text
-You are a web research agent. Answer ONE question. Do not write code, do not make
-recommendations - judgment belongs to the Lead who reads your output.
-
+ROLE: Researcher
 QUESTION: <one narrow question>
+DECISION: <what implementation decision this evidence informs>
+BOUNDARY: read repo/web; write only <findings path>; do not write code or
+          recommend a choice
+BUDGET: <search/fetch limit>
 
-OUTPUT FORMAT - a markdown report, <= ~2,500 tokens total:
-- Findings as bullets. EVERY finding carries: a source tag (e.g. [S3]), source
-  date (if shown), the exact figure or a short direct quote, and a confidence tag
-  (high = primary source / med = reputable secondary / low = single blog or forum).
-- Prefer primary sources (official docs, changelogs, release notes, source code)
-  over blog posts. Record exact version numbers and dates.
-- When sources disagree, report the disagreement - do not resolve it.
-- If you cannot find evidence, write NOT FOUND - never infer or fill gaps from
-  prior knowledge without flagging it.
-- End with a numbered source list - every source URL appears EXACTLY ONCE - then
-  the 2-3 findings most likely to change an implementation decision.
+Return <=2,500 tokens:
+- Findings, each with [S#], source date, exact figure or short quote, and
+  confidence (high primary / medium reputable secondary / low single informal
+  source).
+- Disagreements and NOT FOUND items; never fill gaps from memory.
+- The 2–3 findings most likely to change the implementation.
+- One numbered source list; every fetched URL appears exactly once.
+End with: RESEARCH: COMPLETE | BLOCKED <reason>
 ```
 
-## Gather (Lead — your work, not a subagent's)
+## Verifier block
 
-1. Read every findings file in `.lead/research/`.
-2. Identify the **load-bearing claims** — the facts the spec will depend on (an
-   API shape, a version constraint, a limit, a deprecation). Adversarially verify
-   each against a second independent source or the live dependency itself.
-   Discard single-source low-confidence claims or mark them as open questions.
-3. Write `docs/spec/<slice>.md`: problem, decision + why, requirements, non-goals,
-   verified facts **with citations**, open questions for the human. You write it;
-   researchers gather, you judge.
-4. Commit the spec. Raw findings stay in `.lead/research/` (gitignored) — only the
-   distilled, cited spec is repo memory.
-5. The slice spec references this spec instead of restating it; the builder's
-   PHASE 0 is expected to challenge the spec's claims.
+```text
+ROLE: Verifier
+INPUTS: <raw findings paths>
+DECISION: <the implementation decision>
+BOUNDARY: read repo/web; write only <claim-matrix path>; do not write code or
+          recommendations
+
+Extract only load-bearing claims. Fetch the cited sources yourself. Require two
+independent-origin sources for VERIFIED; two articles repeating one upstream
+claim count as one. Search for criticism, failure reports, and alternatives.
+Label each claim VERIFIED, UNVERIFIED, DISPUTED, or SUSPICIOUS with exact source
+evidence and dates. Carry every NOT FOUND item into a do-not-rechase list.
+Write the claim matrix to <path>.
+End with: VERIFY: PASS | THIN | BLOCKED <reason>
+```
+
+## Spec-writer block
+
+```text
+ROLE: Spec writer
+INPUTS: <approved goal, claim matrix, open questions>
+OWNERSHIP: docs/spec/<slice>.md only
+
+Write problem, decision and rationale, requirements, non-goals, verified facts
+with citations, and open questions. Use no claim absent from the matrix. Mark
+UNVERIFIED and DISPUTED evidence explicitly. Do not implement.
+End with: SPEC: READY | BLOCKED <reason>
+```
+
+The final slice references the committed research spec instead of restating it.
+The Builder's disagreement pass should challenge its claims against the live
+repository and dependencies.

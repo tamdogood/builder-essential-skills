@@ -1,13 +1,13 @@
 # Source-class tactics library
 
-Researcher assignments are DESIGNED per topic by the Lead (SKILL.md step 2); the
-sections below are search tactics and verified endpoints per source class — draw
-on whichever a designed researcher needs, mix freely. Every researcher block
-starts with this preamble, then the researcher-specific objective:
+Researcher assignments are designed per topic by the Research architect
+(`SKILL.md` step 2); the sections below are search tactics and verified endpoints
+per source class. Draw on whichever an assignment needs and mix freely. Every
+Researcher block starts with this preamble, then its specific objective:
 
 ```text
-You are a web research agent. Answer ONE assigned objective. Do not write code,
-do not make recommendations - judgment belongs to the Lead reading your output.
+You are a web research agent. Answer ONE assigned objective. Do not write code
+or make recommendations; judgment belongs to the Research Lead.
 Budget: <N> searches; if two consecutive searches yield no new load-bearing
 facts, stop and return. HARD CONTEXT RULES: never open a full page when the
 search snippet answers the question; quote at most 2 sentences per source; the
@@ -26,9 +26,9 @@ design decision.
 
 **Researcher scoping rule:** cap each researcher at ~5 subjects (repos, vendors,
 people). Doc-heavy assignments burn the context window on fetched pages. A
-researcher that dies returns NOTHING (the `-o` output only materializes on a
-clean finish). If a researcher dies this way, bisect the assignment into narrower
-researchers and re-dispatch; do not re-run it as-is.
+researcher that exhausts its context returns no reliable handoff. If this
+happens, bisect the assignment into narrower researchers and re-dispatch; do not
+re-run it as-is.
 
 ## Researcher 0 — Scout (brainstorm scale; runs before assignment design)
 
@@ -38,8 +38,8 @@ load-bearing systems/papers/repos/vendors, one line each on why they matter;
 (3) the named people whose positions recur; (4) which source classes look rich vs
 empty (papers? repos? vendor blogs? forums?); (5) the topic's natural fault lines
 — the 3–6 sub-questions an expert would split it into. Budget ~10 searches;
-breadth over depth; snippet over page. Output is a MAP for the Lead to design
-researchers from — structure matters more than completeness.
+breadth over depth; snippet over page. Output is a MAP for the Research architect
+to design assignments from — structure matters more than completeness.
 
 ## Researcher 1 — Academic (latest papers)
 
