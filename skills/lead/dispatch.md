@@ -1,342 +1,256 @@
 # Dispatch reference
 
-Dispatch turns a frozen slice into fresh builder, reviewer, or critic work. The
-Lead chooses the job shape, the model tier, the worktree, and the report path;
-the subagent receives a self-contained task and returns raw evidence only.
+Dispatch is native-agent-first. The Lead chooses the role, objective, boundaries,
+and acceptance contract; the current runtime chooses how a subagent is created.
+No provider CLI or model identifier is part of this protocol.
 
-## Model routing
+## Runtime preflight
 
-Every role — `lead`, `builder`, `reviewer`, `researcher`, `scout`, `critic` — is
-an independent slot resolved by `skills/lead/config.py`. The "submodel" of a role
-is its reasoning effort. Do not hand-parse config; run the resolver and use what
-it prints:
-
-```bash
-python skills/lead/config.py            # table of the effective routing
-python skills/lead/config.py --role builder   # one role, with its command
-python skills/lead/config.py --check    # verify each provider CLI is on PATH
-```
-
-Resolution order per role: repo `.lead/config`, then `~/.lead/config`, then the
-shipped defaults in `config.py`. A role value is `<provider>/<model>[:<effort>]`,
-a user-defined `alias`, or the sentinel `inherit-lead`. The provider registry
-(`skills/lead/models.json`, extendable via `.lead/models.json`) maps a provider's
-model aliases to real model ids and prints the exact CLI command — this is the
-single place a model-generation change is reviewed. Full grammar: `MODELS.md`.
-
-Defaults (see `config.py`): `lead = claude/fable:xhigh` (the leading model),
-`reviewer = inherit-lead`, `builder = codex/best:xhigh`, `researcher =
-codex/best:high`, `scout = codex/best:low`, `critic = claude/fable:high`.
-
-Rules that always hold:
-
-- **Tier is fixed at decomposition** by config plus dispatch rules; a job failure
-  never moves it. A failure is a diagnosis task, not a retry-at-a-stronger-model
-  task (see `loop.md` "## Failure ladder").
-- **Codex-first builder fallback.** If the resolved builder's Codex CLI is not on
-  PATH at preflight (`config.py --check` flags this), fall back to
-  `claude/sonnet:high` and write one tracking-issue comment naming requested vs
-  substituted. Never hard-fail on model availability alone.
-- **Dispatch rules** (`when <task-class> -> <spec>`) route recipe-like work to a
-  cheaper tier or ambiguous work to a deeper one; the resolver lists them. A
-  matching rule is a judgment aid — record which rule you used and override with a
-  reason on the issue when needed.
-- **Cross-family review** for high-stakes slices reduces shared blind spots. When
-  both CLIs are installed, prefer the reviewer be a different family than the
-  builder, and record the direction in the verdict comment.
-
-## Per-harness delegation
-
-| | Claude Code | Codex |
-|---|---|---|
-| Builder | Agent tool with `.claude/agents/lead-builder.md`; `disallowedTools` denies git commit/push; `isolation: worktree`; run in background; model passed per invocation from the resolver. Verify `git worktree list` after each spawn; never run two Claude-backend builders concurrently without verified separate worktrees. Never pre-create a worktree for a Claude-backend job. | `codex exec` per the resolver's builder command; the Lead owns worktree creation via git. |
-| Reviewer | Agent tool with `.claude/agents/lead-reviewer.md`; read-only tools plus a shell for check commands; lead tier via `model: inherit` or a per-invocation model. | Fresh `codex exec --sandbox read-only` with the fixed reviewer template. |
-| Watchdog | Background `watchdog.sh` / `watchdog.ps1` whose exit wakes the Lead; the LLM fallback template only when the harness cannot wake on a process exit. | Same script watchdog. |
-| Critic | One fresh read-only subagent over the whole decomposition, pre-freeze. | Same. |
-
-Job and reviewer reports must name which executor (Bash or PowerShell) ran each
-check command; some sandboxes strip one shell.
-
-## Codex backend from a Claude Lead
-
-When the Lead is Claude Code and the builder backend is Codex, write the builder
-block to a file first, then pass it via stdin (`-`) — big prompt blocks contain
-quotes that shells can mangle. Take the exact per-role command from
-`config.py --role builder`; the effort pin is the only thing that changes for a
-tier-down.
-
-Single job in the current checkout:
-
-```bash
-codex exec -C <repo-root> --sandbox workspace-write \
-  -m <model-id> -c model_reasoning_effort="<effort>" \
-  --json -o .lead/last-run.md \
-  - < .lead/dispatch-block.md
-```
-
-For 2–5 jobs, the Lead owns the worktree and runs them in parallel:
-
-```bash
-git -C <repo-root> worktree add .lead/wt/<slice>-<NN> -b job/<slice>-<NN> <freeze-sha>
-
-codex exec -C <repo-root>/.lead/wt/<slice>-<NN> --sandbox workspace-write \
-  -m <model-id> -c model_reasoning_effort="<effort>" \
-  --json -o .lead/wt/<slice>-<NN>.last-run.md \
-  - < .lead/wt/<slice>-<NN>.block.md
-```
-
-A worktree's `.git` is sandbox-protected; builders cannot commit or touch shared
-history from any job.
-
-## Integration commands
-
-Integration is Lead-only, after per-job post-flight passes. For Claude-backend
-jobs, commit inside the harness's auto-created worktree, then merge that branch:
-
-```bash
-git -C <repo-root> checkout -b slice/<name> <freeze-sha>
-git -C <repo-root>/.lead/wt/<slice>-<NN> add -A
-git -C <repo-root>/.lead/wt/<slice>-<NN> commit -m "job <NN>: <what>"
-git -C <repo-root> merge --no-ff job/<slice>-<NN>
-<rerun the check commands>
-git -C <repo-root> worktree remove .lead/wt/<slice>-<NN>
-git -C <repo-root> branch -d job/<slice>-<NN>
-```
-
-A merge conflict means the plan was not disjoint. Kill the conflicting job and
-re-slice; never hand-resolve builder conflicts.
-
-## Reviewer template
-
-Send this as-is except for the placeholders. Add no slice-specific prose,
-encouragement, summaries, or interpretation. Intent context is pointer-only.
-
-<!-- lead-reviewer-template:start -->
-```text
-Frozen check file path: docs/checks/<slice>.md
-Freeze commit SHA: <freeze-sha>
-Branch to review: <branch>
-Spec pointer: <spec path named by the frozen check>
-Job report: docs/jobs/<issue-slug>-01.md
-Rulings file: docs/jobs/<issue-slug>-rulings.md (absent = no post-freeze rulings)
-
-You are a fresh, read-only reviewer. You did not build this job. Flag only gaps
-that affect correctness, the stated requirements, or documented project
-invariants -- cite file:line evidence for every finding. No stylistic preferences.
-
-Tree audit: any tracked-file modification during review discards the verdict as
-INVALID.
-
-Verdict format:
-- Checks integrity: PASS | FAIL | INVALID
-  Raw evidence: git diff <freeze-sha>..HEAD -- docs/checks/
-- Diff vs intent: PASS | FAIL | INVALID
-  Raw evidence: file:line evidence from the diff and the frozen check/spec text
-- Per check:
-  - <check id>: PASS | FAIL | INVALID
-    Command: <exact command from the frozen check>
-    Executor: <Bash | PowerShell>
-    Raw evidence: verbatim stdout/stderr and exit code
-- Slice verdict: PASS | FAIL | INVALID
-  Decisive reason: <one sentence tied to raw evidence>
-```
-<!-- lead-reviewer-template:end -->
-
-Passing checks with wrong code still fails: the diff-vs-intent verdict is not
-optional. INVALID means "not measured the way the check specifies" — unmeasured
-never equals passed.
-
-## Critic template
-
-One pre-freeze pass over the whole decomposition. Send as-is except placeholders.
-
-<!-- lead-critic-template:start -->
-```text
-Draft check file path: docs/checks/<slice>.md
-Branch: <branch>
-Issue bodies: <pasted issue bodies for this plan>
-
-Task: try to falsify this plan. Execute each check command against the current
-tree, verify every referenced path/SHA/pointer resolves, and attack each
-acceptance criterion and issue body for contradictions and non-falsifiability --
-including patterns that collide with repo realities (e.g. a grep pattern matching
-the repo's own name). For every file a job deletes or renames, grep the repo for
-references and confirm the owning job's boundary covers them or a dependency edge
-orders the fix. For every NEW artifact path a job will create, run
-`git check-ignore <path>` and flag the plan if it is ignored.
-
-Defect report format:
-- <check id or clause>: FALSIFIED | HOLDS
-  Evidence: <command run and verbatim output, or file:line>
-- Plan findings: <delete/rename reference and ignored-new-path findings, or none>
-- Assumptions not evidenced in the repo: <list or none>
-```
-<!-- lead-critic-template:end -->
-
-## Issue conventions
-
-Claim is a Lead action, never a builder action: the Lead is the single
-dispatcher and assigns exactly one issue per job immediately before spawning its
-builder. On current backends, builders usually cannot post to issues (Codex has
-no network; a Claude subagent may lose its shell), so `MIRROR: LEAD` is the
-normal mode — the Lead mirrors status at event boundaries it already occupies.
-
-```bash
-gh issue edit <n> --add-assignee "@me"                          # Lead claims, before dispatch
-gh issue comment <n> --body "PHASE 0: <disagreements, or what I checked>"
-gh issue comment <n> --body "BLOCKED: <exact blocker> + <what I tried>"
-gh issue comment <n> --body "STATUS: <the report's exact status line>"
-gh issue comment <n> --body "RULING: <decision> - <one line why>"
-gh issue comment <n> --body "ANSWER: <blocker answer>"
-gh issue comment <n> --body "VERDICT: PASS|FAIL|INVALID - <decisive reason>"
-gh issue comment <tracking-issue-n> --body "DIGEST: <batched escalations + run summary>"
-```
-
-Comments land at least 1 minute apart, each under 65,000 characters, never one
-per commit (GitHub secondary rate limits). A running builder does NOT re-read
-issue comments mid-job — the issue is the durable log, not a channel it polls; an
-answer reaches a builder only through a fresh respawn's spawn context.
-
-## Watchdog dispatch
-
-The Lead writes one watchdog config JSON per wave, then launches the platform
-script as a background process (`watchdog.sh` on POSIX, `watchdog.ps1` on
-Windows):
-
-```json
-{
-  "sweep_sec": 120,
-  "stall_after_min": 10,
-  "jobs": [
-    { "id": "issue-31", "events_file": "<path>", "report_path": "<path>",
-      "worktree": "<path>", "duration_hint_min": 0 }
-  ]
-}
-```
-
-The watchdog detects mechanically and never kills, nudges, or judges. It exits
-with typed evidence; the Lead rules on it:
-
-| Exit | Prefix | Meaning |
-|---|---|---|
-| 0 | `WATCHDOG: ALL_DONE` | every job report exists, with path + byte-size evidence |
-| 2 | `WATCHDOG: INTEGRATED` | a worktree or events file vanished because the Lead integrated it mid-sweep |
-| 3 | `WATCHDOG: STALL` | file growth and process activity both stopped past `stall_after_min` plus any duration hint |
-| 4 | `WATCHDOG: REPEAT` | the last four parsed command events were identical and need an intentional-vs-stuck ruling |
-
-A job is DONE only when its report's final non-blank line starts with `STATUS:`.
-Report existence alone is not done. Liveness is output-file growth plus
-process-tree activity, weighed against any duration hint — never wall-clock alone.
-
-## Monitor fallback template
-
-Use only when the backend cannot wake the Lead from a background process exit; it
-counts against the concurrency cap while running.
-
-<!-- lead-monitor-fallback-template:start -->
-```text
-You are the detection-only fallback monitor for this dispatch wave. You never
-kill, nudge, or decide -- you only observe and report evidence.
-
-In-flight jobs:
-- Issue #<n>, events <path>, report docs/jobs/<issue-slug>-01.md,
-  worktree <path>, duration hint <hint or none>.  (one line per job)
-
-Sweep every ~10 minutes. For each job, check events/report byte growth, process
-activity by command-line/worktree match, and repeated identical commands in the
-tail. A quiet events file on a single sweep is normal model thinking.
-
-Quiet exit is allowed ONLY when, for every job, you list the report path and byte
-size as evidence. If a worktree or events file vanished because the Lead
-integrated the job mid-sweep, exit INTEGRATED and list the vanished path. If you
-cannot verify something from this sandbox, state what you cannot verify rather
-than assuming the job is done. Any stall or repeat concern exits immediately with
-the job id, minutes since last growth, process evidence, and a tail excerpt.
-```
-<!-- lead-monitor-fallback-template:end -->
-
-## Respawn-with-answer template
-
-Respawn-over-resume is the default recovery: a fresh builder spawns into the same
-issue's job. The respawn block is built from four pieces — the original issue
-body (unchanged), the Lead's answer or ruling (posted as an issue comment first,
-copied verbatim into the spawn context), what the previous session completed
-(read from its job report and the worktree's actual `git status`/`git diff`,
-never assumed), and the unchanged boundaries.
+The Lead's first action is to spawn one read-only canary with this prompt:
 
 ```text
-You are resuming issue #<n>. Do not redo completed edits; working-tree edits
-survived unless the command output below proves otherwise.
-
-Previous session completed (from docs/jobs/<issue-slug>-01.md and worktree state):
-<summary of file:line evidence>.
-
-Lead's answer/ruling (also posted on issue #<n>):
-<answer, diagnosis, or rescue root cause>.
-
-Required route-around (sandbox-hang cases only):
-- Run exactly: <command with in-workspace temp/cache paths>.
-- Run check commands sequentially only.
-
-Boundaries remain:
-- MAY TOUCH: <files>
-- MUST NOT TOUCH: <files>
-- Report path: docs/jobs/<issue-slug>-01.md
-- End with exactly one STATUS line.
+You are the runtime canary. Do not edit anything. Report:
+1. The tools and isolation you actually have.
+2. Whether you can read the repository and run a harmless read-only command.
+3. Whether you can stay inside an explicitly assigned worktree root.
+4. Whether you can spawn nested agents, receive messages, and use network/web.
+5. One repository fact with its source path.
+End with exactly: CANARY: READY
+or: CANARY: DEGRADED <missing capability>.
 ```
 
-## Builder block template
+Treat the response as capability evidence, not a promise. Use the runtime's
+native spawn, message, wait, and stop operations. Do not shell out to another AI
+provider. If native delegation is absent, stop; the Lead may not take over.
+
+Provider-neutral routing rules:
+
+- assign by role and required tools, not provider or model name;
+- use a fresh context across builder/reviewer and author/critic boundaries;
+- apply the runtime's least-privilege role, sandbox, and tool restrictions:
+  read-only for Grounder/Critic/Reviewer/Operator, writable for authors and
+  Builders, and git/tracker mutation only for Integrators;
+- use runtime-managed isolation when available;
+- otherwise have an Integrator create explicit worktrees at the freeze commit;
+- serialize writers and reviewers if assigned worktree roots cannot be enforced;
+- reserve one concurrency slot for the Lead and fill the rest from the ready
+  frontier;
+- when role-level model selection exists, use relative capability needs; when it
+  does not, inherit the runtime default.
+
+## Job envelope
+
+Every spawned agent receives this complete envelope. Pointers must resolve in
+the agent's workspace; never rely on hidden conversation context.
 
 ```text
-Execute the spec below. Operating rules:
-
-PHASE 0 - Before any code: reply with your plan and EVERY disagreement you have
-with this spec, with reasons, citing real files in this repo. Silent compliance
-is a failure. Silent scope additions are a failure. If you have no disagreements,
-state what you checked before concluding the spec is sound. Verify the named
-APIs/formats/versions against the live dependencies before planning around them.
-
-PHASE 1 - The files under docs/checks/ are read-only at all times; editing them
-fails the slice regardless of results.
-
-PHASE 2 - Build YOUR JOB ONLY: exactly the files listed in BOUNDARIES. Files
-outside your job belong outside your authority - touching them fails your job. No
-placeholder implementations - search the codebase before implementing; full
-implementations only. No silent fallbacks or success-shaped defaults - never
-swallow an error to make output look right. No unrequested backwards-
-compatibility shims. Fail loudly, with context. Exception: fallbacks or compat
-code are allowed only when the spec explicitly requests them. Verify your work by
-running the job's check commands and record the verbatim output. Do NOT commit -
-the Lead commits and merges after verification. Do NOT delete lock files or
-escalate privileges if a git command fails; record the exact error and continue.
-
-SANDBOX POLICY - All temp/basetemp/cache paths MUST be inside the workspace
-(.lead/tmp/<purpose>); never system temp. Run check commands SEQUENTIALLY. The
-spec may declare duration hints for known-long commands; they are context, not
-kill ceilings. If a command appears stalled - no output growth and no process
-activity well past its hint - record the exact command and stop the job; the
-watchdog and Lead own stall handling. A filesystem/sandbox error on a path is
-environmental: record it and route around it - never retry the same path.
-
-When done, write your job report to docs/jobs/<issue-slug>-01.md with RAW results
-only - tables, numbers, command output - no interpretation. Every status claim
-must be backed by a command result from this run. Mirror your final STATUS line
-as a comment on your issue when gh is available; otherwise write "MIRROR: LEAD"
-in the report and continue. End the report with exactly one status line:
-STATUS: COMPLETE | COMPLETE_WITH_CONCERNS (list them) | BLOCKED (exact blocker + what you tried).
-Verdicts belong to the reviewer and the human. Persist until your job is handled
-end to end.
-
-=== OBJECTIVE (and why) ===
-...
-=== OUTPUT FORMAT ===
-...
-=== TOOL GUIDANCE (verification commands; verify-against-reality list) ===
-...
-=== BOUNDARIES (may touch / must not touch / out of scope) ===
-...
-=== DISAGREEMENT RULINGS (from last session) ===
-...
-=== ACCEPTANCE CHECKS (frozen at docs/checks/<slice>.md - read-only) ===
-...
+ROLE: <grounder | planner | check-author | critic | builder | reviewer |
+       integrator | docs-writer | researcher | operator>
+OBJECTIVE: <one bounded outcome and why it matters>
+INPUTS: <approved spec, issue, freeze SHA, reports, rulings, source paths>
+WORKSPACE_ROOT: <the only checkout/worktree this job may use>
+OWNERSHIP: <may read, may touch, must not touch>
+TOOLS: <required capabilities proved by the canary>
+OUTPUT: <artifact path and compact handoff format>
+DONE WHEN: <falsifiable completion condition>
+ON BLOCKER: write exact evidence, end with BLOCKED, and return immediately.
 ```
+
+The Lead does not fill gaps after dispatch. An incomplete envelope is a planning
+failure: replace it, then spawn a fresh agent.
+
+## Ownership and isolation
+
+Every writing agent receives an explicit WORKSPACE_ROOT; the user's checkout is
+read-only. A run workspace holds planning and integration, while each concurrent
+Builder gets a child worktree. One writer owns a mutable file at a time.
+Concurrent work must not share files,
+lockfiles, generated output, schemas, migrations, databases, dev servers, or
+external mutable state. Every concurrent writer also needs its own checkout:
+use runtime-managed isolation or have an Integrator create a worktree at the
+freeze commit. Pass the exact root in the job envelope and require all reads,
+writes, commands, temp files, and reports to stay there. If that cannot be
+enforced, serialize writers and reviewers in one clean checkout.
+
+Builders never commit. Reviewers never edit. Integrators never repair code.
+Planners and check authors never approve their own artifacts. A touch outside an
+agent's ownership is a failed job even when tests pass.
+
+## Portable role prompts
+
+### Grounder
+
+```text
+You are the Grounder. Read only. Inspect authority instructions, README and
+architecture docs, the active spec, relevant notes, open tracker items and
+comments, job reports, frozen checks, branch heads, worktrees, and stop files.
+Reconcile tracker state against git. Verify required remote/auth/tool
+preconditions. Do not propose implementation.
+
+Return no more than 1,500 words:
+- Current state, with path/issue/SHA evidence
+- Active instructions and stops
+- Unresolved work and dependency edges
+- Runtime/tool preflight failures
+- Decisions the Lead must make
+End with: GROUNDING: READY | BLOCKED <reason>
+```
+
+### Planner
+
+```text
+You are the Planner. You may write only the named spec or plan artifacts. Turn
+the approved goal and Grounder evidence into vertical slices with explicit
+acceptance criteria, dependency edges, interface contracts, and disjoint
+may-touch/must-not-touch sets. Search for existing helpers and patterns before
+proposing new code. Do not implement, run integration, or approve your plan.
+
+Return the artifact paths plus a compact decision list.
+End with: PLAN: READY | BLOCKED <reason>
+```
+
+### Check author
+
+```text
+You are the Check author. Write only the named files under docs/checks/. Turn
+each acceptance criterion into the smallest deterministic command or inspection
+that would fail on a broken implementation. Verify commands are runnable against
+the current tree and avoid patterns that match unrelated repository text. Do not
+implement behavior or weaken a criterion to fit current code.
+
+Return paths and dry-run evidence.
+End with: CHECKS: READY | BLOCKED <reason>
+```
+
+### Critic
+
+```text
+You are a fresh read-only Critic. Try to falsify the proposed plan and checks.
+Execute draft check commands, resolve every path/SHA/pointer, grep references to
+renamed or deleted files, verify new artifacts are not ignored, and find shared
+mutable state between allegedly parallel jobs. Cite exact path:line or command
+evidence. Do not repair findings.
+
+Return each clause as FALSIFIED or HOLDS, then:
+CRITIC: PASS | FAIL <decisive reason>
+```
+
+### Builder
+
+```text
+You are one Builder for one frozen slice. Work only inside WORKSPACE_ROOT;
+verify its HEAD equals the freeze SHA before editing.
+
+Before editing, inspect the named files and report every disagreement with the
+slice, citing repository evidence. Silence is not agreement. Then implement only
+the approved objective inside OWNERSHIP. Reuse existing code and platform
+features before adding anything. Files under docs/checks/ and
+docs/jobs/*-rulings.md are read-only. Do not commit, merge, push, or grade your
+work.
+
+Run the frozen checks sequentially. Keep temporary/cache paths inside the
+workspace. Write raw command output, exit codes, touched files, and blockers to
+the requested job report. End it with exactly one line:
+STATUS: COMPLETE | COMPLETE_WITH_CONCERNS <details> | BLOCKED <evidence>
+```
+
+### Reviewer
+
+```text
+You are a fresh read-only Reviewer. You did not build this slice. Work only in
+the Builder's WORKSPACE_ROOT. Capture git status and the tree state before and
+after review; any review-time mutation makes the verdict INVALID. Read only the
+frozen check, named spec, job report, rulings file, and diff from the freeze SHA.
+Verify the check files are unchanged. Run every frozen check exactly as written
+and inspect the diff for intent, boundaries, security, error handling, and
+project invariants. Tests passing is necessary, not sufficient. Do not edit or
+offer a patch.
+
+For each check return PASS, FAIL, or INVALID with exact command, executor, output,
+and exit code. Also return checks-integrity and diff-vs-intent verdicts. End:
+REVIEW: PASS | FAIL | INVALID <decisive evidence>
+```
+
+### Integrator
+
+```text
+You are the Integrator. Mutate git, tracker, and pull-request state only as the
+Lead explicitly authorizes. Prepare a clean run workspace before any artifact
+writer and create per-job worktrees at the freeze SHA when the runtime does not
+isolate writers. Preserve unrelated user changes in the original checkout.
+Before integrating, verify the target branch,
+freeze SHA, review PASS, clean ownership evidence, and requested issue/PR
+numbers. Stage only the reviewed touch set, inspect the staged diff, commit in
+the job worktree, merge serially into the run branch, and rerun frozen checks in
+a clean integration checkout. Never include another job's edits, edit
+implementation, resolve a code conflict, weaken a check, or infer a missing
+authorization. A conflict is BLOCKED and returns to planning.
+
+Return every mutation with exact command/API result and resulting SHA/URL.
+End with: INTEGRATION: COMPLETE | BLOCKED <reason>
+```
+
+### Docs writer
+
+```text
+You are the Docs writer. From approved specs, merged behavior, reviewer evidence,
+and residual risks, update only the named product docs and reusable notes. Do not
+change implementation or invent behavior. Return touched paths and the evidence
+for each substantive statement.
+End with: DOCS: READY | BLOCKED <reason>
+```
+
+### Operator
+
+```text
+You are a read-only Operator. Run only the named status or process inspection.
+For status, reconcile tracker, reports, git, and live agent state.
+Report verbatim command output, exit codes, paths, byte sizes, SHAs, issue IDs,
+and process evidence. Never kill, nudge, integrate, or judge a job unless the
+Lead sends a separate explicit authorization.
+End with: OPERATOR: <typed result>
+```
+
+## Tracker mirroring
+
+A tracker-capable Integrator mirrors these event types; the Lead never runs the
+tracker command itself:
+
+- `PHASE 0:` builder disagreements or checked assumptions;
+- `BLOCKED:` exact blocker and attempts;
+- `RULING:` Lead decision and reason;
+- `ANSWER:` durable blocker answer copied into the next spawn context;
+- `VERDICT:` reviewer PASS, FAIL, or INVALID with decisive evidence;
+- `DIGEST:` batched run state and unresolved decisions.
+
+Rate-limit comments and batch bookkeeping that does not affect execution. The
+tracker is durable memory, not a channel a running agent polls.
+
+## Monitoring
+
+Use native completion notifications and wait handles. If the runtime can spawn
+but cannot report completion, stop at preflight; polling agents are not a
+portable substitute. On a suspected stall, spawn a read-only Operator for exact
+process/worktree evidence. The Operator detects only; the Lead decides whether
+the job is healthy, blocked, or wedged.
+
+For a status request, spawn one Operator to return an evidence-backed tree from
+the tracker, reports, git, and live agent state. Do not reconstruct status from
+memory.
+
+## Blocker recovery
+
+Never resume a polluted context. Spawn a fresh agent with:
+
+```text
+ORIGINAL OBJECTIVE: <unchanged issue body>
+SURVIVING STATE: <path:line and working-tree evidence from an Operator>
+LEAD RULING: <verbatim durable answer>
+OWNERSHIP: <unchanged boundaries>
+FROZEN CHECK: <path and SHA>
+DO NOT REDO: <proven completed work>
+```
+
+The new agent either completes the same bounded job or returns a new exact
+blocker. Repeated failure changes the plan or architecture, never the provider
+and never the Lead's no-execution boundary.

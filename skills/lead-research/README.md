@@ -4,8 +4,9 @@
   <a href="SKILL.md"><img src="../../assets/skill-banners/lead-research.webp" alt="lead-research — research and strategy skill" width="100%"></a>
 </p>
 
-Map a topic cheaply, design parallel research assignments, verify claims
-against sources, and produce a decision-oriented report.
+Run provider-neutral research through native subagents: map a topic, design
+parallel assignments, verify claims independently, and produce an audited,
+decision-oriented report without the Research Lead searching or writing it.
 
 ## Install
 
@@ -21,7 +22,8 @@ Install it into the current repository instead:
 npx @tamng0905/builder-essential-skills --skill lead-research --project
 ```
 
-Restart Claude Code or Codex, then ask it to research a topic, compare
-technology choices, or investigate the state of the art.
+Restart your agent runtime, then ask it to research a topic, compare technology
+choices, or investigate the state of the art. Native subagent delegation is
+required; no provider/model config is needed.
 
 See the full workflow in [SKILL.md](SKILL.md).

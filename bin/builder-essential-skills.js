@@ -8,7 +8,6 @@ const packageRoot = path.resolve(__dirname, "..");
 const packageName = require(path.join(packageRoot, "package.json")).name;
 const npxCommand = `npx ${packageName}`;
 const skillsSource = path.join(packageRoot, "skills");
-const agentsSource = path.join(packageRoot, ".claude", "agents");
 
 function printHelp() {
   console.log(`Install Builder's Essential Skills.
@@ -22,11 +21,11 @@ Options:
   -h, --help     Show this help message
 
 User install locations:
-  Claude Code  ~/.claude/skills and ~/.claude/agents
+  Claude Code  ~/.claude/skills
   Codex        $CODEX_HOME/skills (or ~/.codex/skills)
 
 Project install locations:
-  .claude/skills, .claude/agents, and .codex/skills in the current directory
+  .claude/skills and .codex/skills in the current directory
 `);
 }
 
@@ -87,23 +86,6 @@ function removePythonCaches(root) {
   }
 }
 
-function installAgents(destination) {
-  if (!fs.existsSync(agentsSource)) {
-    return;
-  }
-
-  fs.mkdirSync(destination, { recursive: true });
-  for (const entry of fs.readdirSync(agentsSource, { withFileTypes: true })) {
-    if (!entry.isFile()) {
-      continue;
-    }
-
-    const destinationPath = path.join(destination, entry.name);
-    fs.cpSync(path.join(agentsSource, entry.name), destinationPath);
-    console.log(`Installed agent ${entry.name} to ${destinationPath}`);
-  }
-}
-
 function main() {
   const { project, skill } = parseArgs(process.argv.slice(2));
   const availableSkills = fs
@@ -124,9 +106,6 @@ function main() {
 
   installDirectory(skillsSource, path.join(claudeRoot, "skills"), "Claude", skill);
   installDirectory(skillsSource, path.join(codexRoot, "skills"), "Codex", skill);
-  if (!skill || skill === "lead") {
-    installAgents(path.join(claudeRoot, "agents"));
-  }
 
   console.log("\nRestart Claude Code or Codex to load the installed skills.");
 }

@@ -80,3 +80,10 @@ convention for the parler skills).
 - venv: `uv venv` + `uv pip install` (fallback python3 -m venv); no Vault/fbpkg/proxy.
 - share: `sp trace` writes trace.json.gz; open at public https://ui.perfetto.dev
   (replaces everstore/clowder/internalfb upload). `sp open` opens the UI.
+
+# Make `lead` and `lead-research` provider-neutral orchestrators
+
+- [x] Replace provider/model commands with native subagent capability routing.
+- [x] Enforce a zero-direct-execution Lead: agents write, run, review, and integrate.
+- [x] Update package docs/install behavior and add one regression check.
+- [x] Validate both skills, run repository tests, and self-review the diff.

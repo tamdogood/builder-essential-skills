@@ -5,7 +5,8 @@ const path = require("node:path");
 const { execFileSync, spawnSync } = require("node:child_process");
 const { test } = require("node:test");
 
-const cli = path.resolve(__dirname, "..", "bin", "builder-essential-skills.js");
+const packageRoot = path.resolve(__dirname, "..");
+const cli = path.join(packageRoot, "bin", "builder-essential-skills.js");
 
 test("prints help without installing anything", () => {
   const result = spawnSync(process.execPath, [cli, "--help"], {
@@ -56,14 +57,14 @@ test("installs only the selected skill", () => {
     );
     assert.equal(
       fs.existsSync(path.join(projectRoot, ".claude", "agents", "lead-builder.md")),
-      true,
+      false,
     );
   } finally {
     fs.rmSync(projectRoot, { recursive: true, force: true });
   }
 });
 
-test("installs skills and agents into the current project", () => {
+test("installs skills into the current project", () => {
   const projectRoot = fs.mkdtempSync(path.join(os.tmpdir(), "builders-essential-skills-"));
 
   try {
@@ -79,7 +80,7 @@ test("installs skills and agents into the current project", () => {
     );
     assert.equal(
       fs.existsSync(path.join(projectRoot, ".claude", "agents", "lead-builder.md")),
-      true,
+      false,
     );
     assert.equal(
       fs.existsSync(path.join(projectRoot, ".codex", "skills", "write-blog", "SKILL.md")),
@@ -146,4 +147,25 @@ test("installs skills and agents into the current project", () => {
   } finally {
     fs.rmSync(projectRoot, { recursive: true, force: true });
   }
+});
+
+test("lead skills use native agents without provider routing", () => {
+  const lead = fs.readFileSync(path.join(packageRoot, "skills", "lead", "SKILL.md"), "utf8");
+  const research = fs.readFileSync(
+    path.join(packageRoot, "skills", "lead-research", "SKILL.md"),
+    "utf8",
+  );
+  const workflow = [
+    lead,
+    research,
+    fs.readFileSync(path.join(packageRoot, "skills", "lead", "dispatch.md"), "utf8"),
+    fs.readFileSync(path.join(packageRoot, "skills", "lead", "research.md"), "utf8"),
+  ].join("\n");
+
+  assert.match(lead, /The Lead must never:[\s\S]*write or edit code/);
+  assert.match(research, /The Research Lead must never search the web/);
+  assert.match(workflow, /native (?:agent|delegation)/i);
+  assert.doesNotMatch(workflow, /codex exec|claude -p|config\.py|models\.json/i);
+  assert.equal(fs.existsSync(path.join(packageRoot, "skills", "lead", "config.py")), false);
+  assert.equal(fs.existsSync(path.join(packageRoot, "skills", "lead", "models.json")), false);
 });
