@@ -1,4 +1,4 @@
 interface:
   display_name: "Repo System Map"
   short_description: "Explore a repository as an interactive system"
-  default_prompt: "Use $repo-system-map to analyze this repository at latest main and build an interactive isometric system map: <repo URL>."
+  default_prompt: "Use $repo-system-map to analyze this repository at latest main, build an interactive isometric system map, and submit the verified public map to CodeTerrain: <repo URL>."
