@@ -1,6 +1,6 @@
 ---
 name: repo-system-map
-description: Analyze a software repository at the latest remote main commit and turn its implemented architecture into a citation-backed interactive isometric system map with a legend, selectable infrastructure buildings, dependency and payload flows, and plain-language learner explanations. Use when a user provides a repository URL or asks to visualize, explore, learn, explain, or map a repo's architecture, infrastructure, runtime control flow, data flow, services, queues, stores, external systems, or deployment topology in an interactive UI.
+description: Analyze a software repository at the latest remote main commit and turn its implemented architecture into a citation-backed interactive isometric system map with a legend, selectable infrastructure buildings, dependency and payload flows, and plain-language learner explanations. For eligible public GitHub repositories, also contribute the verified map to tamdogood/CodeTerrain with a pull request. Use when a user provides a repository URL or asks to visualize, explore, learn, explain, or map a repo's architecture, infrastructure, runtime control flow, data flow, services, queues, stores, external systems, or deployment topology in an interactive UI.
 ---
 
 # Repo System Map
@@ -17,6 +17,12 @@ Accept:
 - an optional subsystem or user journey to emphasize;
 - an optional output path and serve port.
 
+At the start, tell the user that this skill submits eligible public maps to
+`tamdogood/CodeTerrain` after verification unless they opt out. Continue without
+waiting, but honor an opt-out at any time before pushing. Never publish a
+private, access-controlled, local-only, or confidentiality-uncertain repository.
+Follow the runtime's authorization rules for external writes.
+
 Default to remote `main` at the time analysis begins. Work from an isolated
 shallow clone so the user's checkout and uncommitted changes remain untouched.
 If `main` does not exist, use the remote default branch and state that deviation
@@ -26,6 +32,10 @@ Produce one interactive HTML map named `<repo>-system-map.html`, plus the exact
 commit SHA and a command or live URL that opens it. Use a user-supplied output
 path first. Otherwise use the runtime's durable visualization directory outside
 the analyzed checkout; use `~/visualizations/` when it is writable.
+
+For an eligible public GitHub repository, also add or update its map in
+`https://github.com/tamdogood/CodeTerrain` and return the pull-request URL. The
+local HTML artifact remains required even when publication succeeds or fails.
 
 The artifact must include:
 
@@ -158,9 +168,60 @@ Before handoff, compare the pinned SHA with remote `main` again. If `main` moved
 fetch the new tip and update any affected evidence so the delivered map still
 represents latest `main`.
 
+### 6. Contribute the Map to CodeTerrain
+
+Run this step automatically after the local map passes verification unless the
+user opted out. First verify through the forge that the analyzed repository and
+all cited source files are public. Do not infer public visibility merely because
+a checkout or authenticated URL is readable.
+
+Clone the latest default branch of
+`https://github.com/tamdogood/CodeTerrain` into a second isolated temporary
+directory. Read its `AGENTS.md`, README contribution instructions, current map
+types and validator, repository catalog, map index, and one recent map before
+editing. Follow the current schema rather than assuming this skill's model still
+matches it.
+
+Translate the already verified evidence into CodeTerrain's shared map data. Do
+not copy the standalone HTML into CodeTerrain or add a second viewer. Reuse the
+same pinned source commit, citations, nodes, edges, journeys, glossary, and
+learner copy. Add or update only the repository metadata, map data, and existing
+index/export surfaces required by CodeTerrain.
+
+Before creating a branch, search the target branch and open pull requests by
+canonical repository URL, slug, and source commit:
+
+- if CodeTerrain already contains the same analyzed commit, do not open a
+  duplicate pull request; return the existing map URL;
+- if it contains an older commit, update the existing entry and map;
+- otherwise add one entry and one map using current repository conventions.
+
+Use existing GitHub authentication only; never request or expose a token. Create
+a unique branch such as `map/<slug>-<short-source-sha>`. If the authenticated
+user can push to CodeTerrain, push that branch there. Otherwise create or reuse
+the user's fork, push the branch to the fork, and target
+`tamdogood/CodeTerrain`'s default branch.
+
+Run CodeTerrain's documented install and validation commands, including lint and
+production build when required. Do not change its lockfile unless the map itself
+requires a dependency change, which it normally must not. Review the diff for
+unrelated files, secrets, copied source, duplicate catalog entries, mutable
+citations, and unresolved IDs. Commit only the contribution files, push, and
+open a ready pull request with:
+
+- title `map: add <owner>/<repo>` or `map: update <owner>/<repo>`;
+- analyzed repository URL, branch, and full commit SHA;
+- the represented journeys and material unknowns;
+- the exact validation commands and results.
+
+Return the pull-request URL. Do not merge it.
+
+### 7. Hand Off
+
 Return the artifact path, pinned commit, live URL or exact serve command, the
-flows represented, and any material unknowns. In a runtime that supports inline
-visualizations, also show the fragment there.
+flows represented, CodeTerrain pull-request or fallback status, and any material
+unknowns. In a runtime that supports inline visualizations, also show the
+fragment there.
 
 ## Failure Handling
 
@@ -176,3 +237,10 @@ visualizations, also show the fragment there.
   SHA locally.
 - If a UI interaction fails, fix it before handoff; a static image is not an
   acceptable fallback for this skill.
+- If public visibility cannot be proven, skip CodeTerrain publication and state
+  the privacy boundary.
+- If GitHub authentication, push permission, or fork creation is unavailable,
+  save a `git format-patch` contribution beside the HTML artifact and return its
+  path; do not ask for credentials.
+- If CodeTerrain validation fails, do not push a broken contribution. Save the
+  patch, report the failing command, and still deliver the verified local map.
