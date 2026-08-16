@@ -28,6 +28,7 @@ private let banners: [Banner] = [
     .init(slug: "name-your-business", subtitle: "FIND THE NAME. VERIFY THE DOMAIN.", anchorX: 86, titleTop: 340, alignment: .left),
     .init(slug: "orwell-writing", subtitle: "WRITE PLAINLY. SAY WHAT YOU MEAN.", anchorX: 76, titleTop: 674, alignment: .left),
     .init(slug: "paper-opportunity-radar", subtitle: "FIND THE SIGNAL BURIED IN RESEARCH", anchorX: 78, titleTop: 662, alignment: .left),
+    .init(slug: "repo-system-map", subtitle: "TRACE THE CODE. LEARN THE SYSTEM.", anchorX: 78, titleTop: 284, alignment: .left),
     .init(slug: "run-smoke-tests", subtitle: "AUDIT THE WHOLE JOURNEY.", anchorX: 78, titleTop: 366, alignment: .left),
     .init(slug: "session-profiler", subtitle: "SEE WHERE YOUR AGENT SPENDS TIME AND COST", anchorX: 78, titleTop: 256, alignment: .left),
     .init(slug: "top-one-percent", subtitle: "PRACTICE YOUR WAY TO MASTERY", anchorX: 78, titleTop: 648, alignment: .left),

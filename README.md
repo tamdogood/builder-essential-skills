@@ -128,7 +128,9 @@ repository. Restart Claude Code or Codex after installation.
     <td width="50%" valign="top">
       <a href="skills/name-your-business/SKILL.md"><img src="assets/skill-banners/name-your-business.webp" alt="name-your-business — fast naming and selective live validation skill" width="100%"></a>
     </td>
-    <td width="50%" valign="top"></td>
+    <td width="50%" valign="top">
+      <a href="skills/repo-system-map/SKILL.md"><img src="assets/skill-banners/repo-system-map.webp" alt="repo-system-map — interactive repository architecture learning skill" width="100%"></a>
+    </td>
   </tr>
 </table>
 

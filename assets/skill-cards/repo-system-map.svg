@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Repo System Map skill card</title>
+  <desc id="desc">A dark atelier card with an isometric infrastructure grid and connected buildings, representing an interactive, code-cited repository map.</desc>
+  <defs>
+    <linearGradient id="background" x1="70" y1="35" x2="1130" y2="730" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#17171B"/>
+      <stop offset="0.55" stop-color="#0A0C0E"/>
+      <stop offset="1" stop-color="#111518"/>
+    </linearGradient>
+    <radialGradient id="mapGlow" cx="0" cy="0" r="1" gradientTransform="translate(922 236) rotate(145) scale(390 300)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#68548D" stop-opacity="0.38"/>
+      <stop offset="0.55" stop-color="#B18C54" stop-opacity="0.13"/>
+      <stop offset="1" stop-color="#0A0C0E" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="route" x1="760" y1="330" x2="1080" y2="135" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#78A9B8"/>
+      <stop offset="0.5" stop-color="#D6B06D"/>
+      <stop offset="1" stop-color="#8069A6"/>
+    </linearGradient>
+    <filter id="softGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="760" rx="34" fill="url(#background)"/>
+  <rect width="1200" height="760" rx="34" fill="url(#mapGlow)"/>
+  <rect x="24" y="24" width="1152" height="712" rx="25" fill="none" stroke="#826E9B" stroke-opacity="0.46"/>
+  <path d="M72 552C274 704 500 714 706 626C884 550 1006 422 1130 256" fill="none" stroke="#9BB4B7" stroke-opacity="0.2" stroke-width="1.5"/>
+  <circle cx="934" cy="238" r="196" fill="#6C5790" fill-opacity="0.1" filter="url(#softGlow)"/>
+
+  <text x="72" y="91" fill="#BFB39E" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="20" letter-spacing="3">BUILDER'S ESSENTIAL SKILLS</text>
+  <text x="1086" y="91" fill="#D7C5A3" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="25" text-anchor="end">18</text>
+
+  <text x="72" y="184" fill="#F2E9DA" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="55" font-weight="650">repo-system-map</text>
+  <text x="72" y="234" fill="#C4BCB1" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="25">Trace real control and data paths through a repository,</text>
+  <text x="72" y="270" fill="#C4BCB1" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="25">then explore the system and learn its terms.</text>
+
+  <g transform="translate(752 126)" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M16 212 170 123l170 98-154 89Z" fill="#15191B" stroke="#6F7E83" stroke-width="2"/>
+    <g fill="none" stroke="#556268" stroke-opacity="0.7">
+      <path d="m47 194 154 89M78 176l154 89M109 158l154 89M140 140l154 89"/>
+      <path d="m47 230 154-89M78 248l154-89M109 266l154-89M140 284l154-89"/>
+    </g>
+    <path d="M74 222 142 183 220 228 291 187" fill="none" stroke="url(#route)" stroke-width="5"/>
+    <circle cx="142" cy="183" r="7" fill="#E0C790"/>
+    <circle cx="220" cy="228" r="7" fill="#82ADBA"/>
+
+    <g stroke="#D4B16F" stroke-width="2.5">
+      <path d="m63 185 31-18 31 18-31 18Z" fill="#DCC9A6"/>
+      <path d="m63 185 31 18v45l-31-18Z" fill="#7C684A"/>
+      <path d="m125 185-31 18v45l31-18Z" fill="#A28B63"/>
+      <path d="m81 167 13-27 13 27" fill="#BEA77F"/>
+    </g>
+    <g stroke="#87A9B2" stroke-width="2.5">
+      <path d="m152 160 38-22 38 22-38 22Z" fill="#BFCAC6"/>
+      <path d="m152 160 38 22v61l-38-22Z" fill="#52676C"/>
+      <path d="m228 160-38 22v61l38-22Z" fill="#789097"/>
+      <path d="M170 149v-31l20-12 20 12v31" fill="#273238"/>
+    </g>
+    <g stroke="#9B83B8" stroke-width="2.5">
+      <ellipse cx="270" cy="174" rx="32" ry="18" fill="#C9BDCF"/>
+      <path d="M238 174v52c0 10 14 18 32 18s32-8 32-18v-52" fill="#5F526B"/>
+      <path d="M238 200c0 10 14 18 32 18s32-8 32-18" fill="none"/>
+    </g>
+    <path d="M291 187h28" stroke="#D6B06D" stroke-width="5"/>
+    <path d="m318 187-12-8v16Z" fill="#D6B06D" stroke="none"/>
+  </g>
+
+  <rect x="72" y="352" width="1056" height="1" fill="#A797B7" fill-opacity="0.28"/>
+  <text x="72" y="407" fill="#A89982" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="700" letter-spacing="2">DISCIPLINE</text>
+  <text x="72" y="451" fill="#F0E8DB" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="28">Architecture learning</text>
+  <text x="514" y="407" fill="#A89982" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="700" letter-spacing="2">PROMISE</text>
+  <text x="514" y="451" fill="#F0E8DB" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="28">Code paths you can explore</text>
+
+  <rect x="72" y="548" width="830" height="68" rx="10" fill="#141718" stroke="#687F85"/>
+  <text x="98" y="591" fill="#CFE0DD" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="19">$repo-system-map Map this repository.</text>
+  <circle cx="1055" cy="582" r="31" fill="#91AFB0"/>
+  <path d="m1044 582 8 8 16-18" fill="none" stroke="#101514" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Repo System Map"
+  short_description: "Explore a repository as an interactive system"
+  default_prompt: "Use $repo-system-map to analyze this repository at latest main and build an interactive isometric system map: <repo URL>."
