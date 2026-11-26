@@ -1,0 +1,4 @@
+interface:
+  display_name: "Learn by Reproducing"
+  short_description: "Learn ML through evidence-based paper reproduction"
+  default_prompt: "Use $learn-by-reproducing to turn this ML paper into one integrated learning and reproduction note, explaining critical decisions, experiments, and practical uses of the outputs."

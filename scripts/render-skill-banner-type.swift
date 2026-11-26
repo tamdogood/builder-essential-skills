@@ -16,6 +16,7 @@ private struct Banner {
 }
 
 private let banners: [Banner] = [
+    .init(slug: "learn-by-reproducing", subtitle: "UNDERSTAND THE DECISIONS. TEST THE IDEAS.", anchorX: 78, titleTop: 648, alignment: .left),
     .init(slug: "async-learning-teacher", subtitle: "TURN SAVED MATERIAL INTO UNDERSTANDING", anchorX: 96, titleTop: 236, alignment: .left),
     .init(slug: "build-scenario-tests", subtitle: "COMPILE BEHAVIOR INTO PROOF.", anchorX: 78, titleTop: 374, alignment: .left),
     .init(slug: "code-standards", subtitle: "MAKE SMALL CHANGES. KEEP CHECKS GREEN.", anchorX: 1530, titleTop: 310, alignment: .right),
