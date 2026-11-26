@@ -29,7 +29,7 @@
   <circle cx="954" cy="222" r="205" fill="#675493" fill-opacity="0.1" filter="url(#softGlow)"/>
 
   <text x="72" y="91" fill="#BFAE92" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="20" letter-spacing="3">BUILDER'S ESSENTIAL SKILLS</text>
-  <text x="1086" y="91" fill="#D7C3A0" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="25" text-anchor="end">18</text>
+  <text x="1086" y="91" fill="#D7C3A0" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="25" text-anchor="end">19</text>
 
   <text x="72" y="188" fill="#F1E8D8" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="54" font-weight="650" letter-spacing="-1.8">Learn by Reproducing</text>
   <text x="72" y="237" fill="#BDB4A9" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="25">Understand the decisions in an ML paper,</text>
