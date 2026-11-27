@@ -132,10 +132,22 @@ repository. Restart Claude Code or Codex after installation.
       <a href="skills/repo-system-map/SKILL.md"><img src="assets/skill-banners/repo-system-map.webp" alt="repo-system-map — interactive repository architecture learning skill" width="100%"></a>
     </td>
   </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <a href="skills/learn-by-reproducing/SKILL.md"><img src="assets/skill-banners/learn-by-reproducing.webp" alt="learn-by-reproducing — learn ML through evidence-based paper reproduction" width="100%"></a>
+    </td>
+    <td width="50%" valign="top"></td>
+  </tr>
 </table>
 
 Every skill lives in `skills/<name>/SKILL.md`. Some also ship scripts,
 reference material, or agent definitions that support the workflow.
+
+[Learn by Reproducing](skills/learn-by-reproducing/README.md) turns an ML paper
+into one integrated learning and reproduction note with derivations, critical
+decisions, solved examples, controlled labs, ML-engineering transfer, and
+practical uses of the outputs.
+[View its skill card](assets/skill-cards/learn-by-reproducing.svg).
 
 ## Why this exists
 

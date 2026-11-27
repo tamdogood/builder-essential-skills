@@ -87,3 +87,17 @@ convention for the parler skills).
 - [x] Enforce a zero-direct-execution Lead: agents write, run, review, and integrate.
 - [x] Update package docs/install behavior and add one regression check.
 - [x] Validate both skills, run repository tests, and self-review the diff.
+
+# Add `learn-by-reproducing` skill
+
+- [x] Author a paper-reproduction workflow centered on ML understanding and one integrated learning/reproduction note.
+- [x] Add progressive decision/experiment guidance, a portable VAEP example, and agent metadata.
+- [x] Wire the research grouping, root README, SVG card, and cinematic banner using the repository's typography renderer.
+- [x] Validate the skill, links, installer/package inclusion, SVG/banner, repository tests, and patch.
+- Risks: original results versus adaptations, stale dataset claims, and mistaking generated instructions for executed experiments. No model runs or remote publication are part of this package.
+
+## Deepen the ML-engineering lessons
+
+- [x] Require finished worked lessons, numerical checks, failure diagnosis, and cross-domain transfer in the integrated note.
+- [x] Add an engineering-depth reference distinguishing reproduction core, engineering extensions, and adjacent study.
+- [x] Align the skill README and VAEP worked reference with concrete optimization, evaluation, ranking, and systems labs.
