@@ -6,6 +6,8 @@
 
 Turn an ML paper into a project that teaches you why the method works, which decisions matter, and what you can use its outputs for. Keep concepts, derivations, implementation steps, experiments, and readiness checks in **one integrated reproduction note**.
 
+For an ML engineer who wants more depth, the skill writes finished lessons rather than a list of topics to study: intermediate derivations, solved numerical examples, counterexamples, controlled labs, and transfer to other engineering problems. It distinguishes the reproduction core from engineering extensions and adjacent study.
+
 ## Use it
 
 After adding this skill to your checkout, install it into a project with:
@@ -46,6 +48,10 @@ adaptation from an exact reproduction.
 - Controlled baselines, ablations, failure analysis, and readiness gates.
 - A useful capstone with traceable evidence and a record of what you actually demonstrated.
 
+For example, a probabilistic-learning lesson can derive `d(loss)/d(logit) = p - y`, calculate one gradient update, check it by finite differences, and then connect the result to a neural classifier's output layer. A systems lesson traces table shapes and join keys, tests full-match versus chunked feature parity, and profiles conversion separately from model prediction. Neither is satisfied by an instruction to “learn optimization” or “study MLOps.”
+
+The learning evidence is a calculation, a controlled experiment, a diagnosed failure, and a changed-context explanation. The skill does not claim a topic is mastered because a notebook ran or a lesson was generated.
+
 For narrow questions, the skill answers directly and updates the same note. Asking for a guide does not imply that model training has run. Unavailable original data is treated as a constraint, not hidden behind plausible rankings.
 
-Read the [workflow](SKILL.md), [learning-project reference](references/learning-project.md), or [VAEP example](references/vaep-example.md). The example's settings are not defaults for other papers. The deterministic [SVG card](../../assets/skill-cards/learn-by-reproducing.svg) accompanies the banner.
+Read the [workflow](SKILL.md), [learning-project reference](references/learning-project.md), [engineering-depth reference](references/engineering-depth.md), or [VAEP example](references/vaep-example.md). The example's settings are not defaults for other papers. The deterministic [SVG card](../../assets/skill-cards/learn-by-reproducing.svg) accompanies the banner.

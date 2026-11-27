@@ -34,6 +34,10 @@ In v1.5.3, the horizon parameter ten includes the current action plus offsets 1â
 
 ## Useful capstone
 
+For a deeper ML-engineering request, build substantial lessons around the reproduction rather than adding a list of topics. Derive logistic-loss gradients and run a finite-difference toy check; explain a simplified regularized boosting update; compare models with paired match-level uncertainty; distinguish fitted-model explanations from causal claims; test full-match versus chunked history/value parity; and diagnose season/provider shift before choosing calibration or retraining. Mark these as core teaching or proposed extensions, not extra results of the original paper.
+
+Transfer the mechanism to another problem: overlapping action labels to delayed conversions, per-90 rates to engagement per selected exposure, sequence boundaries to session features, and probability quality to expected-value ranking. Include the changed assumption so the connection is more than an analogy. Start with one solved example and one small lab, then expand as the learner supplies evidence.
+
 Build a midfielder shortlist within a declared competition and evaluation window. Include minutes, passing/carrying/shooting contribution per 90, action volume, mean value/action, intervals, model version, and dated supporting sequences. Inspect both high-value actions and random actions so the report is not just a highlight reel.
 
 Use it to prioritize video review or compare observed contribution profiles. Do not infer best unchosen passes, off-ball ability, market price, or guaranteed transfer performance from retrospective credit. For form tracking, keep the scoring model fixed or rerate all compared windows after an update.

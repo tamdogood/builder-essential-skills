@@ -14,7 +14,7 @@ Help the learner implement a paper's method and defend its important ML decision
 - For an existing project, revise the existing note and resume from observed evidence rather than regenerating the plan.
 - For a narrow concept or question about output usefulness, answer it directly, then update the relevant part of the note. Do not substitute a new roadmap or a quiz for the answer.
 
-This skill focuses on reproduction as deliberate ML practice. A paper summary alone, a broad career curriculum, or literature-based opportunity scouting is a different task.
+This skill focuses on reproduction as deliberate ML practice. When asked to widen ML-engineering knowledge, use the paper as an anchor for a broader, dependency-aware set of lessons and transfer labs. A paper summary alone or literature-based opportunity scouting is a different task.
 
 ## Establish the contract from available context
 
@@ -36,6 +36,8 @@ Use the user's existing reproduction note or README. If none exists, create one 
 
 Read [references/learning-project.md](references/learning-project.md) when building or materially revising the note. It contains the decision template, experiment controls, and evidence gates. Use [references/vaep-example.md](references/vaep-example.md) only for VAEP or a relevant worked example; its domain-specific settings are not defaults for other papers.
 
+For requests for deep learning, maximum learning, or wider ML-engineering capability, also read [references/engineering-depth.md](references/engineering-depth.md). Do not respond with a topic checklist or a template for the learner to fill in. Deliver substantive lessons and worked reasoning in the integrated note itself.
+
 The note should let the learner follow this thread:
 
 1. **Usefulness:** what the outputs mean, who could use them, a concrete application, and unsupported interpretations.
@@ -46,6 +48,24 @@ The note should let the learner follow this thread:
 6. **Capstone and record:** a useful result, reproducibility details, discrepancies, learner evidence, and the next practice task.
 
 Adapt depth to the learner. Explain relevant math from first principles, define notation, work a small example, and invite a changed example. Preserve nuance rather than filling the note with an encyclopedic list of unrelated ML topics.
+
+## Make depth concrete
+
+Begin from the learner's likely experience and a short optional diagnostic; do not make answering a quiz a prerequisite to receiving the requested explanation. For an experienced engineer, provide a concise foundation bridge and spend depth on assumptions, derivations, failure modes, and transfer.
+
+For each central learning unit, supply an actual explanation, not just an instruction to “understand” a concept:
+
+- Define the capability, prerequisites, notation, tensor/table shapes, and units where relevant.
+- Derive the key relationship through intermediate steps and explain what each step assumes. If a derivation is not useful, trace a concrete data/control flow instead.
+- Solve a numerical or executable example, including the expected answer and interpretation; label invented data.
+- Compare a credible alternative and show a failure case or counterexample.
+- Specify a lab: inputs, hypothesis, exact intervention, fixed factors, measurements, sanity checks, and a result artifact. Separate deterministic expected answers from empirical outcomes that remain unknown.
+- Explain transfer to a distinct ML-engineering problem, what carries over, and what breaks.
+- Give an independent changed-case task, feedback/answer guidance, and observable readiness criteria.
+
+For broad requests, map the connected capabilities before writing lessons: statistical formulation, optimization and modeling, evaluation and uncertainty, data/feature engineering, ranking/decision use, and systems/operation. Mark them as **reproduction core**, **engineering extension**, or **adjacent study**. Prioritize the paper's core, then the extensions that bridge the learner's gaps. Do not imply one paper teaches all of ML or make every topic a prerequisite for the first successful run.
+
+Use named, prerequisite-aware labs and an evidence table so the learner can navigate a long note. Explain why each lab earns its place. Provide finished core teaching now; reserve optional architectures or infrastructure for a concrete research question. Avoid equating more pages, more models, or more compute with more learning.
 
 ## Teach consequential choices
 
@@ -68,5 +88,6 @@ A component metric improvement does not automatically validate a downstream deci
 - Verify cited paper/code/data choices and local links; check math examples and any code actually added.
 - Confirm the integrated note distinguishes original choices, adaptations, unknowns, and measured results.
 - Confirm one smallest next task is actionable today; do not claim competence before assessing evidence.
+- For depth requests, check that the central units contain worked teaching, an executable or precisely specified lab, feedback, and cross-domain transfer. A syllabus with only nouns and questions fails this check.
 - For implementation, run the project's appropriate checks and report material limits. Do not add unrelated infrastructure to make the reproduction look complete.
 - Return the integrated note/project path, what changed, key unresolved constraints, and verification scope. Do not publish, purchase data, or contact authors merely because this skill was invoked.

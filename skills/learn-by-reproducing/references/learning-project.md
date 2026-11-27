@@ -99,3 +99,4 @@ Use these as manual behavior checks when adapting this skill. They are evaluatio
 | “The original data is unavailable” | Offer a method reproduction on suitable alternatives and mark exact matching unavailable | Invent the original setup or promise published numbers |
 | “I only want to understand this loss” | Explain and work an example directly, update the same relevant section | Restart an entire curriculum or quiz before answering |
 | “I ran this experiment and got a worse result” | Diagnose the first supported failure, update evidence and next drill | Hide the result, rerun everything, or claim a stronger model must win |
+| “This is too vague; widen my ML-engineering knowledge” | Write substantive worked lessons and concrete transfer labs, organized by prerequisites in the same note | Add more topic names, unexplained equations, or a separate generic curriculum |

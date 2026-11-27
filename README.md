@@ -145,7 +145,8 @@ reference material, or agent definitions that support the workflow.
 
 [Learn by Reproducing](skills/learn-by-reproducing/README.md) turns an ML paper
 into one integrated learning and reproduction note with derivations, critical
-decisions, controlled experiments, and practical uses of the outputs.
+decisions, solved examples, controlled labs, ML-engineering transfer, and
+practical uses of the outputs.
 [View its skill card](assets/skill-cards/learn-by-reproducing.svg).
 
 ## Why this exists
